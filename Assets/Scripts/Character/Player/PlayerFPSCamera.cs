@@ -19,6 +19,11 @@ namespace AG
         [SerializeField]
         private float maximumPivot = 80.0f;
 
+        [SerializeField]
+        private float standingYPosition = 1.7f;
+        [SerializeField]
+        private float crouchingYPosition = 1.2f;
+
         [Header("Camera Values")]
         [SerializeField]
         private float upAndDownLookAngle = 0.0f;
@@ -33,6 +38,15 @@ namespace AG
             if(!player.IsOwner)
             {
                 return;
+            }
+
+            if(player.playerNetworkManager.isCrouching.Value)
+            {
+                cameraPivotTransform.localPosition = Vector3.up * crouchingYPosition;
+            }
+            else
+            {
+                cameraPivotTransform.localPosition = Vector3.up * standingYPosition;
             }
 
             transform.Rotate(0, PlayerInputManager.instance.cameraHorizontalInput * Time.deltaTime * leftAndRightRotationSpeed, 0);

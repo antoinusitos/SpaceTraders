@@ -27,7 +27,10 @@ namespace AG
         [Header("PLAYER ACTION INPUT")]
         [SerializeField]
         private bool dodgeInput = false;
+        [SerializeField]
         private bool sprintInput = false;
+        [SerializeField]
+        private bool crouchInput = false;
 
         private void Awake()
         {
@@ -73,6 +76,8 @@ namespace AG
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
                 playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
+                playerControls.PlayerActions.Crouch.performed += i => crouchInput = true;
+                playerControls.PlayerActions.Crouch.canceled += i => crouchInput = false;
             }
 
             playerControls.Enable();
@@ -109,6 +114,7 @@ namespace AG
             HandleCameraMovementInput();
             HandleDodgeInput();
             HandleSprinting();
+            HandleCrouching();
         }
 
         private void HandlePlayerMovementInput()
@@ -161,6 +167,18 @@ namespace AG
             else
             {
                 player.playerNetworkManager.isSprinting.Value = false;
+            }
+        }
+
+        private void HandleCrouching()
+        {
+            if (crouchInput)
+            {
+                player.playerNetworkManager.isCrouching.Value = true;
+            }
+            else
+            {
+                player.playerNetworkManager.isCrouching.Value = false;
             }
         }
     }

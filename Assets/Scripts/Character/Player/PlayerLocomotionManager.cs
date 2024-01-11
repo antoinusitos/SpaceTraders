@@ -28,6 +28,8 @@ namespace AG
         private float rotationSpeed = 15.0f;
         [SerializeField]
         private int sprintingStaminaCost = 2;
+        [SerializeField]
+        private float crouchingSpeed = 1.0f;
 
         [Header("Dodge")]
         private Vector3 rollDirection = Vector3.zero;
@@ -45,7 +47,9 @@ namespace AG
         {
             base.Update();
 
-            if(player.IsOwner)
+            player.animator.SetBool("IsCrouching", player.playerNetworkManager.isCrouching.Value);
+
+            if (player.IsOwner)
             {
                 player.characterNetworkManager.verticalMovement.Value = verticalMovement;
                 player.characterNetworkManager.horizontalMovement.Value = horizontalMovement;
@@ -91,6 +95,10 @@ namespace AG
             if(player.playerNetworkManager.isSprinting.Value)
             {
                 player.characterController.Move(moveDirection * spritingSpeed * Time.deltaTime);
+            }
+            else if(player.playerNetworkManager.isCrouching.Value)
+            {
+                player.characterController.Move(moveDirection * crouchingSpeed * Time.deltaTime);
             }
             else
             {

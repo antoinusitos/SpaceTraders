@@ -4,8 +4,8 @@ namespace AG
 {
     public class PlayerFPSCamera : MonoBehaviour
     {
-        public static PlayerFPSCamera instance = null;
-        public PlayerManager player = null;
+        private PlayerManager player = null;
+
         [SerializeField]
         private Transform cameraPivotTransform = null;
 
@@ -25,18 +25,16 @@ namespace AG
 
         private void Awake()
         {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            player = GetComponent<PlayerManager>();
         }
 
         private void Update()
         {
+            if(!player.IsOwner)
+            {
+                return;
+            }
+
             transform.Rotate(0, PlayerInputManager.instance.cameraHorizontalInput * Time.deltaTime * leftAndRightRotationSpeed, 0);
 
             upAndDownLookAngle -= PlayerInputManager.instance.cameraVerticalInput * Time.deltaTime * upAndDownRotationSpeed;

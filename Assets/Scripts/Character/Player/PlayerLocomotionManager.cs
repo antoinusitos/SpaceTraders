@@ -57,7 +57,7 @@ namespace AG
                 horizontalMovement = player.characterNetworkManager.horizontalMovement.Value;
                 moveAmount = player.characterNetworkManager.moveAmount.Value;
 
-                player.playerAnimatorManager.UpdateAnimatorValuesParamaters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+                player.playerAnimatorManager.UpdateAnimatorValuesParamaters(horizontalMovement, verticalMovement, player.playerNetworkManager.isSprinting.Value);
             }
         }
 

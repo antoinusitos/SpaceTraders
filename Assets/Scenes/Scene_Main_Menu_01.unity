@@ -3201,6 +3201,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6941774129531652885, guid: 605eccaf46669014d9371fa55f79b5de, type: 3}
   m_PrefabInstance: {fileID: 1272094147}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1283349091 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8855029116034793214, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
+  m_PrefabInstance: {fileID: 3197055640306267657}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49af2a980dd1fb24fb1aba85c8cd0d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1332056251
 GameObject:
   m_ObjectHideFlags: 0
@@ -5085,6 +5096,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 708896229029960687, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708896229029960687, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708896229029960687, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708896229029960687, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3806471494573128766, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
       propertyPath: m_Name
       value: PlayerUIManager
@@ -5100,6 +5127,22 @@ PrefabInstance:
     - target: {fileID: 4389549336034531972, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714459556484923561, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1283349091}
+    - target: {fileID: 4714459556484923561, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TEST
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714459556484923561, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AG.PlayerUIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714459556484923561, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5735433089362152251, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
       propertyPath: m_RootOrder
@@ -5243,6 +5286,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+      propertyPath: NetworkConfig.PlayerPrefab
+      value: 
+      objectReference: {fileID: 2290232846266426329, guid: a9e3c2250ad2dd741950723a35584ec2, type: 3}
+    - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+      propertyPath: NetworkConfig.EnableSceneManagement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[0].Prefab
+      value: 
+      objectReference: {fileID: 2290232846266426329, guid: a9e3c2250ad2dd741950723a35584ec2, type: 3}
     - target: {fileID: 6627812288056202965, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -5290,6 +5349,10 @@ PrefabInstance:
     - target: {fileID: 6627812288056202966, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
       propertyPath: m_Name
       value: WorldNetworkManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627812288056202967, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+      propertyPath: ConnectionData.Port
+      value: 7777
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}

@@ -18,8 +18,7 @@ namespace AG
         private bool loadGame = false;
 
         [Header("World Scene Index")]
-        [SerializeField]
-        private int worldSceneIndex = 1;
+        private int worldSceneIndex = 2;
 
         [Header("Save Data Writer")]
         private SaveFileDataWriter saveFileDataWriter = null;

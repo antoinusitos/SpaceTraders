@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: -4952435655887539372}
   - component: {fileID: 2694097700828908967}
   - component: {fileID: -8939535779446090410}
-  - component: {fileID: 7493901563243054034}
+  - component: {fileID: -170173479195586859}
   - component: {fileID: 9001118035689036007}
   - component: {fileID: 1309940169189299779}
   - component: {fileID: -336291202855328821}
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaRegenerationAmount: 2
   staminaRegenerationDelay: 2
---- !u!114 &7493901563243054034
+--- !u!114 &-170173479195586859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,12 +343,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f852691e6e0ee545986e326186b3be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   cameraPivotTransform: {fileID: 4279305288495144300}
   leftAndRightRotationSpeed: 50
   upAndDownRotationSpeed: 50
-  minimumPivot: -89
-  maximumPivot: 89
+  minimumPivot: -80
+  maximumPivot: 80
   upAndDownLookAngle: 0
 --- !u!143 &9001118035689036007
 CharacterController:

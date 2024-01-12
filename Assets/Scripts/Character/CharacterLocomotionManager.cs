@@ -32,6 +32,12 @@ namespace AG
         protected virtual void Update()
         {
             HandleGroundCheck();
+
+            if(!character.IsOwner)
+            {
+                return;
+            }
+
             if(character.isGrounded)
             {
                 if(yVelocity.y < 0)
@@ -49,7 +55,7 @@ namespace AG
                     yVelocity.y = fallStartYVelocity;
                 }
                 inAirTimer += Time.deltaTime;
-                character.animator.SetFloat("InAirTimer", inAirTimer);
+                character.characterNetworkManager.inAirTimer.Value = inAirTimer;
 
                 yVelocity.y += gravityForce * Time.deltaTime;
             }

@@ -250,6 +250,8 @@ namespace AG
                 return;
             }
 
+            player.playerNetworkManager.isCrouching.Value = false;
+
             player.playerAnimatorManager.PlayTargetActionAnimation("JumpStart", false);
 
             player.isJumping = true;

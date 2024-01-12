@@ -11,7 +11,7 @@ namespace AG
 
         [Header("Stamine Regeneration")]
         [SerializeField]
-        private float staminaRegenerationAmount = 2;
+        private float staminaRegenerationAmount = 5;
         private float staminaRegenerationTimer = 0;
         private float staminaTickTimer = 0;
         [SerializeField]
@@ -54,13 +54,13 @@ namespace AG
             {
                 if (character.characterNetworkManager.currentStamina.Value < character.characterNetworkManager.maxStamina.Value)
                 {
-                    staminaTickTimer += Time.deltaTime;
+                    character.characterNetworkManager.currentStamina.Value += staminaRegenerationAmount * Time.deltaTime;
+                    /*staminaTickTimer += Time.deltaTime;
 
                     if (staminaTickTimer >= 0.1f)
                     {
                         staminaTickTimer = 0;
-                        character.characterNetworkManager.currentStamina.Value += staminaRegenerationAmount;
-                    }
+                    }*/
                 }
             }
         }

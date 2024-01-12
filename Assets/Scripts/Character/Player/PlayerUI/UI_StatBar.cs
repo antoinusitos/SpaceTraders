@@ -14,7 +14,7 @@ namespace AG
             slider = GetComponent<Slider>();
         }
 
-        public virtual void SetStat(int newValue)
+        public virtual void SetStat(float newValue)
         {
             slider.value = newValue;
         }

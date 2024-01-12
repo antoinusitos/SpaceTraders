@@ -186,6 +186,11 @@ namespace AG
                 return;
             }
 
+            if(player.isJumping)
+            {
+                return;
+            }
+
             if(moveAmount >= 0.5f)
             {
                 player.playerNetworkManager.isSprinting.Value = true;

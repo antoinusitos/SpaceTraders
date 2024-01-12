@@ -163,13 +163,13 @@ MonoBehaviour:
   isPerformingAction: 0
   canRotate: 1
   canMove: 1
-  applyRootMotion: 0
   isJumping: 0
   isGrounded: 0
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
   playerStatsManager: {fileID: 0}
+  playerFPSCamera: {fileID: 0}
   fpsObject: {fileID: 3694494309956016473}
   tpsObject: {fileID: 3866544574285331375}
 --- !u!114 &-2750498004255283751
@@ -200,6 +200,8 @@ MonoBehaviour:
   isSprinting:
     m_InternalValue: 0
   isCrouching:
+    m_InternalValue: 0
+  inAirTimer:
     m_InternalValue: 0
   endurance:
     m_InternalValue: 1
@@ -288,6 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a6a4e82a192f349bde2156b508077b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravityForce: -5.55
   groundCheckSphereRadius: 0.3
   groundLayer:
     serializedVersion: 2
@@ -306,6 +309,8 @@ MonoBehaviour:
   crouchingSpeed: 1
   dodgeStaminaCost: 25
   jumpStaminaCost: 25
+  jumpHeight: 4
+  jumpForwardSpeed: 5
 --- !u!114 &-4952435655887539372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195b165de1330d344aab32a8baa0a8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaRegenerationAmount: 2
+  staminaRegenerationAmount: 3
   staminaRegenerationDelay: 2
 --- !u!114 &-170173479195586859
 MonoBehaviour:

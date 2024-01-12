@@ -39,28 +39,27 @@ namespace AG
         }
 
         [ServerRpc]
-        public void NotifyTheServerOfActionAnimationServerRpc(ulong clientID, string animationID, bool applyRootMotion)
+        public void NotifyTheServerOfActionAnimationServerRpc(ulong clientID, string animationID)
         {
             if(IsServer)
             {
-                PlayActionAnimationForAllClientsClientRpc(clientID, animationID, applyRootMotion);
+                PlayActionAnimationForAllClientsClientRpc(clientID, animationID);
             }
         }
 
         [ClientRpc]
-        public void PlayActionAnimationForAllClientsClientRpc(ulong clientID, string animationID, bool applyRootMotion)
+        public void PlayActionAnimationForAllClientsClientRpc(ulong clientID, string animationID)
         {
             if(clientID == NetworkManager.Singleton.LocalClientId)
             {
                 return;
             }
 
-            PerformActionAnimationFromServer(animationID, applyRootMotion);
+            PerformActionAnimationFromServer(animationID);
         }
 
-        private void PerformActionAnimationFromServer(string animationID, bool applyRootMotion)
+        private void PerformActionAnimationFromServer(string animationID)
         {
-            character.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(animationID, character.characterAnimatorManager.crossFadeTime);
         }
     }

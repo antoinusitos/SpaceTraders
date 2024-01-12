@@ -18,7 +18,7 @@ namespace AG
         private bool loadGame = false;
 
         [Header("World Scene Index")]
-        private int worldSceneIndex = 2;
+        private int worldSceneIndex = 1;
 
         [Header("Save Data Writer")]
         private SaveFileDataWriter saveFileDataWriter = null;

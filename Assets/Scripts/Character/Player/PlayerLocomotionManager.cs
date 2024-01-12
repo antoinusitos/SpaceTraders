@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AG
 {
@@ -36,6 +37,16 @@ namespace AG
         [SerializeField]
         private float dodgeStaminaCost = 25;
 
+        [Header("Jump")]
+        [SerializeField]
+        private float jumpStaminaCost = 25;
+        [SerializeField]
+        private float jumpHeight = 4.0f;
+        [SerializeField]
+        private float jumpForwardSpeed = 5.0f;
+        private float freeFallSpeed = 2.0f;
+        private Vector3 jumpDirection = Vector3.zero;
+
         protected override void Awake()
         {
             base.Awake();
@@ -69,6 +80,8 @@ namespace AG
         {
             HandleGroundedMovement();
             HandleRotation();
+            HandleJumpingMovement();
+            HandleFreeFallMovement();
         }
 
         private void GetMovementValues()
@@ -110,6 +123,28 @@ namespace AG
                 {
                     player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
                 }
+            }
+        }
+
+        private void HandleJumpingMovement()
+        {
+            if(player.isJumping)
+            {
+                player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
+            }
+        }
+
+        private void HandleFreeFallMovement()
+        {
+            if(!player.isGrounded)
+            {
+                Vector3 freeFallDirection = Vector3.zero;
+
+                freeFallDirection = player.playerFPSCamera.transform.forward * PlayerInputManager.instance.verticalInput;
+                freeFallDirection += player.playerFPSCamera.transform.right * PlayerInputManager.instance.horizontalInput;
+                freeFallDirection.y = 0;
+
+                player.characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
             }
         }
 
@@ -196,6 +231,53 @@ namespace AG
             }
 
             player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
+        }
+
+        public void AttemptToPerformJump()
+        {
+            if (player.isPerformingAction)
+            {
+                return;
+            }
+
+            if(player.isJumping)
+            {
+                return;
+            }
+
+            if (!player.isGrounded)
+            {
+                return;
+            }
+
+            player.playerAnimatorManager.PlayTargetActionAnimation("JumpStart", false);
+
+            player.isJumping = true;
+
+            jumpDirection = player.playerFPSCamera.transform.forward * PlayerInputManager.instance.verticalInput;
+            jumpDirection += player.playerFPSCamera.transform.right * PlayerInputManager.instance.horizontalInput;
+            jumpDirection.y = 0;
+
+            if(jumpDirection != Vector3.zero)
+            {
+                if (player.playerNetworkManager.isSprinting.Value)
+                {
+                    jumpDirection *= 1;
+                }
+                else if (PlayerInputManager.instance.moveAmount > 0.5f)
+                {
+                    jumpDirection *= 0.5f;
+                }
+                else if (PlayerInputManager.instance.moveAmount < 0.5f)
+                {
+                    jumpDirection *= 0.25f;
+                }
+            }
+        }
+
+        public void ApplyJumpingVelocity()
+        {
+            yVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravityForce);
         }
     }
 }

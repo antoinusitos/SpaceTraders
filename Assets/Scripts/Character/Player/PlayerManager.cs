@@ -15,6 +15,8 @@ namespace AG
         public PlayerNetworkManager playerNetworkManager = null;
         [HideInInspector]
         public PlayerStatsManager playerStatsManager = null;
+        [HideInInspector]
+        public PlayerFPSCamera playerFPSCamera = null;
 
         [SerializeField]
         private GameObject fpsObject = null;
@@ -29,6 +31,7 @@ namespace AG
             playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
             playerNetworkManager = GetComponent<PlayerNetworkManager>();
             playerStatsManager = GetComponent<PlayerStatsManager>();
+            playerFPSCamera = GetComponentInChildren<PlayerFPSCamera>();
         }
 
         private void Start()

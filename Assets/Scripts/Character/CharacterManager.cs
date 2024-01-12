@@ -20,7 +20,8 @@ namespace AG
         public bool isPerformingAction = false;
         public bool canRotate = true;
         public bool canMove = true;
-        public bool applyRootMotion = false;
+        public bool isJumping = false;
+        public bool isGrounded = false;
 
         protected virtual void Awake()
         {
@@ -34,6 +35,8 @@ namespace AG
 
         protected virtual void Update()
         {
+            animator.SetBool("IsGrounded", isGrounded);
+
             if(IsOwner)
             {
                 characterNetworkManager.networkPosition.Value = transform.position;

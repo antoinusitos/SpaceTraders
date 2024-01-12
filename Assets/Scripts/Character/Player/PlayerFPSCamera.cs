@@ -40,6 +40,11 @@ namespace AG
                 return;
             }
 
+            if(!player.canRotate)
+            {
+                return;
+            }
+
             if(player.playerNetworkManager.isCrouching.Value)
             {
                 cameraPivotTransform.localPosition = Vector3.up * crouchingYPosition;

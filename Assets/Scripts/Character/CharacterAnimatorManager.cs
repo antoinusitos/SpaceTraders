@@ -39,17 +39,15 @@ namespace AG
         public virtual void PlayTargetActionAnimation(
             string targetAnimation, 
             bool isPerformingAction, 
-            bool applyRootMotion = true, 
             bool canRotate = false, 
             bool canMove = false)
         {
-            character.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, crossFadeTime);
             character.isPerformingAction = isPerformingAction;
             character.canRotate = canRotate;
             character.canMove = canMove;
 
-            character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
+            character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation);
         }
     }
 }

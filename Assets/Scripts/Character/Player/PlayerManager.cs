@@ -56,9 +56,11 @@ namespace AG
             if (newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
             {
                 WorldPlayerStartsManager playerStartsManager = FindObjectOfType<WorldPlayerStartsManager>();
-                if(playerStartsManager)
+                if (playerStartsManager)
                 {
-                    transform.position = playerStartsManager.playersStarts[0].position;
+                    characterController.enabled = false;
+                    transform.position = playerStartsManager.playersStarts[2].position;
+                    characterController.enabled = true;
                 }
             }
         }
@@ -95,6 +97,8 @@ namespace AG
 
             if(IsOwner)
             {
+                transform.position = Vector3.up;
+
                 PlayerCamera.instance.player = this;
                 PlayerInputManager.instance.player = this;
                 WorldSaveGameManager.instance.player = this;
@@ -119,16 +123,16 @@ namespace AG
         {
             currentCharacterData.sceneIndex = SceneManager.GetActiveScene().buildIndex;
             currentCharacterData.characterName = playerNetworkManager.characterName.Value.ToString();
-            currentCharacterData.yPosition = transform.position.y;
-            currentCharacterData.xPosition = transform.position.x;
-            currentCharacterData.zPosition = transform.position.z;
+            //currentCharacterData.yPosition = transform.position.y;
+            //currentCharacterData.xPosition = transform.position.x;
+            //currentCharacterData.zPosition = transform.position.z;
         }
 
         public void LoadGameDataFromCurrentCharacterData(ref CharacterSaveData currentCharacterData)
         {
             playerNetworkManager.characterName.Value = currentCharacterData.characterName;
             Vector3 position = new Vector3(currentCharacterData.xPosition, currentCharacterData.yPosition, currentCharacterData.zPosition);
-            transform.position = position;
+            //transform.position = position;
         }
     }
 }

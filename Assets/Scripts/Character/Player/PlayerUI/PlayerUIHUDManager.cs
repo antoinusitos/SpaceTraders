@@ -12,24 +12,22 @@ namespace AG
 
         [SerializeField]
         private UI_StatBar staminaBar = null;
+        [SerializeField]
+        private UI_StatBar healthBar = null;
+
+        public void SetNewHealthValue(float oldValue, float newValue)
+        {
+            healthBar.SetStat(newValue);
+        }
+
+        public void SetMaxHealthValue(int maxHealth)
+        {
+            healthBar.SetMaxStat(maxHealth);
+        }
 
         public void SetNewStaminaValue(float oldValue, float newValue)
         {
             staminaBar.SetStat(newValue);
-        }
-
-        public void SetMaxStaminaValue(int maxStamina)
-        {
-            staminaBar.SetMaxStat(maxStamina);
-        }
-
-        private void Update()
-        {
-            if(!player)
-            {
-                return;
-            }
-
             if (player.characterNetworkManager.currentStamina.Value >= player.characterNetworkManager.maxStamina.Value)
             {
                 staminaBar.gameObject.SetActive(false);
@@ -38,6 +36,19 @@ namespace AG
             {
                 staminaBar.gameObject.SetActive(true);
             }
+        }
+
+        public void SetMaxStaminaValue(int maxStamina)
+        {
+            staminaBar.SetMaxStat(maxStamina);
+        }
+
+        public void RefreshHUD()
+        {
+            healthBar.gameObject.SetActive(false);
+            healthBar.gameObject.SetActive(true);
+            staminaBar.gameObject.SetActive(false);
+            staminaBar.gameObject.SetActive(true);
         }
     }
 }

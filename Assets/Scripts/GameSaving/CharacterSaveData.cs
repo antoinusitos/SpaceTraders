@@ -20,5 +20,9 @@ namespace AG
         public float xPosition = 0;
         public float yPosition = 0;
         public float zPosition = 0;
+
+        [Header("Stats")]
+        public int vitality = 1;
+        public int endurance = 1;
     }
 }

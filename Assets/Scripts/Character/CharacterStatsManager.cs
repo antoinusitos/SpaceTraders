@@ -13,13 +13,26 @@ namespace AG
         [SerializeField]
         private float staminaRegenerationAmount = 5;
         private float staminaRegenerationTimer = 0;
-        private float staminaTickTimer = 0;
         [SerializeField]
         private float staminaRegenerationDelay = 2.0f;
 
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
+        }
+
+        protected virtual void Start()
+        {
+
+        }
+
+        public int CalculateHealthBasedOnVitalityLevel(int vitality)
+        {
+            float health = 0;
+
+            health = vitality * 15;
+
+            return Mathf.RoundToInt(health);
         }
 
         public int CalculateStaminaBasedOnEnduranceLevel(int endurance)
@@ -55,12 +68,6 @@ namespace AG
                 if (character.characterNetworkManager.currentStamina.Value < character.characterNetworkManager.maxStamina.Value)
                 {
                     character.characterNetworkManager.currentStamina.Value += staminaRegenerationAmount * Time.deltaTime;
-                    /*staminaTickTimer += Time.deltaTime;
-
-                    if (staminaTickTimer >= 0.1f)
-                    {
-                        staminaTickTimer = 0;
-                    }*/
                 }
             }
         }

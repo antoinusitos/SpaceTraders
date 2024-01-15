@@ -65,7 +65,6 @@ GameObject:
   - component: {fileID: 5399082835740992468}
   - component: {fileID: 5399082835744458580}
   - component: {fileID: 5399082835743349692}
-  - component: {fileID: 5399082835750748764}
   - component: {fileID: 5399082835739200214}
   m_Layer: 0
   m_Name: door_2_right
@@ -139,26 +138,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &5399082835750748764
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5399082835741328236}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 791a433f9653b904dade303d1345882f, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!65 &5399082835739200214
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -183,7 +162,6 @@ GameObject:
   - component: {fileID: 5399082835740986708}
   - component: {fileID: 5399082835744395900}
   - component: {fileID: 5399082835743281348}
-  - component: {fileID: 5399082835750752556}
   - component: {fileID: 5399082835739167558}
   m_Layer: 0
   m_Name: door_2_left
@@ -257,26 +235,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &5399082835750752556
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5399082835741358176}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: c4e7e92b29579c940be181092de59dc1, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!65 &5399082835739167558
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -305,6 +263,7 @@ GameObject:
   - component: {fileID: 5399082835739278516}
   - component: {fileID: 5399082835741467854}
   - component: {fileID: 5399082835741467853}
+  - component: {fileID: 5399082835513774454}
   m_Layer: 0
   m_Name: Automatic_door_2
   m_TagString: Untagged
@@ -426,12 +385,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6edf7b666a4c1e48844ca1a21b35fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorLeft: {fileID: 5399082835741358176}
-  doorRight: {fileID: 5399082835741328236}
-  leftDoorClosePosition: 0
-  leftDoorOpenPosition: -1.85
-  rightDoorClosePosition: 3.88
-  rightDoorOpenPosition: 5.45
+  startLocked: 0
+  networkCharacterNearby:
+    m_InternalValue: 0
+  networkLocked:
+    m_InternalValue: 0
 --- !u!114 &5399082835741467853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,3 +406,19 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!54 &5399082835513774454
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399082835741419198}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

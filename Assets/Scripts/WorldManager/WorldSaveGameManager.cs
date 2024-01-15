@@ -9,8 +9,6 @@ namespace AG
     {
         public static WorldSaveGameManager instance = null;
 
-        public static int TEMPWORLDINDEX = 2;
-
         public PlayerManager player = null;
 
         [Header("Save/Load")]
@@ -20,7 +18,7 @@ namespace AG
         private bool loadGame = false;
 
         [Header("World Scene Index")]
-        private int worldSceneIndex = TEMPWORLDINDEX;
+        private int worldSceneIndex = 2;
 
         [Header("Save Data Writer")]
         private SaveFileDataWriter saveFileDataWriter = null;

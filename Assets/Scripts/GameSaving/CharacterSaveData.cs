@@ -8,7 +8,7 @@ namespace AG
     public class CharacterSaveData
     {
         [Header("Scene Index")]
-        public int sceneIndex = WorldSaveGameManager.TEMPWORLDINDEX;
+        public int sceneIndex = 2;
 
         [Header("Character Name")]
         public string characterName = "";

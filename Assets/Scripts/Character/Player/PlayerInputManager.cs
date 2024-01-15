@@ -184,6 +184,7 @@ namespace AG
             {
                 player.playerNetworkManager.isCrouching.Value = false;
             }
+            player.playerLocomotionManager.UpdateDetectionObjectToCrouch();
         }
 
         private void HandleJumpInput()

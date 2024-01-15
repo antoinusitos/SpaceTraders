@@ -125,6 +125,7 @@ Transform:
   m_Children:
   - {fileID: 4279305288495144300}
   - {fileID: 4531581517155918101}
+  - {fileID: 8226796125995731275}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -205,9 +206,15 @@ MonoBehaviour:
     m_InternalValue: 0
   endurance:
     m_InternalValue: 1
+  vitality:
+    m_InternalValue: 1
   currentStamina:
     m_InternalValue: 0
   maxStamina:
+    m_InternalValue: 0
+  currentHealth:
+    m_InternalValue: 0
+  maxHealth:
     m_InternalValue: 0
   characterName:
     m_InternalValue:
@@ -311,6 +318,10 @@ MonoBehaviour:
   jumpStaminaCost: 25
   jumpHeight: 4
   jumpForwardSpeed: 5
+  detectionObject: {fileID: 8226796125995731275}
+  detectionRadius: 0.5
+  crouchDetectionSize: 0.65
+  standingDetectionSize: 1
 --- !u!114 &-4952435655887539372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +514,61 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &3242883072264665260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8226796125995731275}
+  - component: {fileID: 2083627601874133098}
+  - component: {fileID: 4441599054960666208}
+  m_Layer: 6
+  m_Name: DetectionCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8226796125995731275
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242883072264665260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.65, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1478124123918186851}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2083627601874133098
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242883072264665260}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!136 &4441599054960666208
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242883072264665260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &3694494309956016473
 GameObject:
   m_ObjectHideFlags: 0

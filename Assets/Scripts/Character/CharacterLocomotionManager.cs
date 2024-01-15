@@ -70,6 +70,11 @@ namespace AG
 
         protected void OnDrawGizmosSelected()
         {
+            if(!character)
+            {
+                return;
+            }
+
             Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
         }
     }

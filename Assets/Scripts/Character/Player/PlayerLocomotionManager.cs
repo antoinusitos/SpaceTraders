@@ -47,6 +47,16 @@ namespace AG
         private float freeFallSpeed = 2.0f;
         private Vector3 jumpDirection = Vector3.zero;
 
+        [Header("Jump")]
+        [SerializeField]
+        private Transform detectionObject = null;
+        [SerializeField]
+        private float detectionRadius = 0.5f;
+        [SerializeField]
+        private float crouchDetectionSize = 0.65f;
+        [SerializeField]
+        private float standingDetectionSize = 1.0f;
+
         protected override void Awake()
         {
             base.Awake();
@@ -285,6 +295,25 @@ namespace AG
         public void ApplyJumpingVelocity()
         {
             yVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravityForce);
+        }
+
+        public void UpdateDetectionObjectToCrouch()
+        {
+            Vector3 targetPos = Vector3.zero;
+            Vector3 targetSize = Vector3.one * detectionRadius;
+
+            if (player.playerNetworkManager.isCrouching.Value)
+            {
+                targetPos = Vector3.up * crouchDetectionSize;
+                targetSize.y  = crouchDetectionSize;
+            }
+            else
+            {
+                targetPos = Vector3.up * standingDetectionSize;
+                targetSize.y = standingDetectionSize;
+            }
+            detectionObject.transform.localPosition = targetPos;
+            detectionObject.transform.localScale = targetSize;
         }
     }
 }

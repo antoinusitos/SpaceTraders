@@ -56,6 +56,10 @@ namespace AG
         private float crouchDetectionSize = 0.65f;
         [SerializeField]
         private float standingDetectionSize = 1.0f;
+        [SerializeField]
+        private float characterControllersCrouchDetectionSize = 1.17f;
+        [SerializeField]
+        private float characterControllerstandingDetectionSize = 1.8f;
 
         protected override void Awake()
         {
@@ -306,11 +310,13 @@ namespace AG
             {
                 targetPos = Vector3.up * crouchDetectionSize;
                 targetSize.y  = crouchDetectionSize;
+                GetComponent<CharacterController>().height = characterControllersCrouchDetectionSize;
             }
             else
             {
                 targetPos = Vector3.up * standingDetectionSize;
                 targetSize.y = standingDetectionSize;
+                GetComponent<CharacterController>().height = characterControllerstandingDetectionSize;
             }
             detectionObject.transform.localPosition = targetPos;
             detectionObject.transform.localScale = targetSize;

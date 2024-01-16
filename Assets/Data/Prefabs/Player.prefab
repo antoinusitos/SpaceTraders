@@ -322,6 +322,8 @@ MonoBehaviour:
   detectionRadius: 0.5
   crouchDetectionSize: 0.65
   standingDetectionSize: 1
+  characterControllersCrouchDetectionSize: 0.9
+  characterControllerstandingDetectionSize: 1.8
 --- !u!114 &-4952435655887539372
 MonoBehaviour:
   m_ObjectHideFlags: 0

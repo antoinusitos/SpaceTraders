@@ -176,6 +176,11 @@ namespace AG
 
         private void HandleCrouchInput()
         {
+            if(!player)
+            {
+                return;
+            }
+
             if (crouchInput)
             {
                 player.playerNetworkManager.isCrouching.Value = true;

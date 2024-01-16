@@ -16,6 +16,8 @@ namespace AG
         [HideInInspector]
         public float moveAmount = 0.0f;
 
+        private CharacterController characterController = null;
+
         [Header("Movement Settings")]
         private Vector3 moveDirection = Vector3.zero;
         private Vector3 targetRotationDirection = Vector3.zero;
@@ -66,6 +68,7 @@ namespace AG
             base.Awake();
 
             player = GetComponent<PlayerManager>();
+            characterController = GetComponent<CharacterController>();
         }
 
         protected override void Update()
@@ -310,13 +313,13 @@ namespace AG
             {
                 targetPos = Vector3.up * crouchDetectionSize;
                 targetSize.y  = crouchDetectionSize;
-                GetComponent<CharacterController>().height = characterControllersCrouchDetectionSize;
+                characterController.height = characterControllersCrouchDetectionSize;
             }
             else
             {
                 targetPos = Vector3.up * standingDetectionSize;
                 targetSize.y = standingDetectionSize;
-                GetComponent<CharacterController>().height = characterControllerstandingDetectionSize;
+                characterController.height = characterControllerstandingDetectionSize;
             }
             detectionObject.transform.localPosition = targetPos;
             detectionObject.transform.localScale = targetSize;

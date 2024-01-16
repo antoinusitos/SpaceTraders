@@ -8,11 +8,6 @@ namespace AG
         [SerializeField]
         private AutomaticDoor automaticDoor = null;
 
-        private void Start()
-        {
-            GetComponent<NetworkObject>().Spawn();
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             if (!IsServer)

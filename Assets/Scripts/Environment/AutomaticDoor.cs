@@ -10,12 +10,11 @@ namespace AG
         public NetworkVariable<bool> networkCharacterNearby = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public NetworkVariable<bool> networkLocked = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-        private void Start()
+        private void Awake()
         {
             networkCharacterNearby.OnValueChanged += OnValueChanged;
-            GetComponent<NetworkObject>().Spawn();
 
-            if(IsServer)
+            if (IsServer)
             {
                 networkLocked.Value = startLocked;
             }
@@ -60,6 +59,11 @@ namespace AG
         public void ForceOpening()
         {
             networkCharacterNearby.Value = true;
+        }
+
+        public void ForceClosing()
+        {
+            networkCharacterNearby.Value = false;
         }
 
         public void SetLockState(bool locked)

@@ -21,6 +21,12 @@ namespace AG
         private GameObject questTextPrefab = null;
         private List<UI_QuestText> QuestTexts = new List<UI_QuestText>();
 
+        [SerializeField]
+        private TextMeshProUGUI factiontext = null;
+
+        [SerializeField]
+        private GameObject waitForPlayersText = null;
+
         public void SetNewHealthValue(float oldValue, float newValue)
         {
             healthBar.SetStat(newValue);
@@ -89,6 +95,17 @@ namespace AG
                     return;
                 }
             }
+        }
+
+        public void ShowFaction(Factions faction)
+        {
+            factiontext.gameObject.SetActive(faction != Factions.NONE);
+            factiontext.text = faction.ToString();
+        }
+
+        public void ShowWaitingPlayers(bool mustShow)
+        {
+            waitForPlayersText.SetActive(mustShow);
         }
     }
 }

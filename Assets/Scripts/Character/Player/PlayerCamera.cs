@@ -39,6 +39,9 @@ namespace AG
         private float cameraZPosition = 0.0f;
         private float targetCameraZPosition = 0.0f;
 
+        private PlayerManager[] playerList = null;
+        private int playerIndex = 0;
+
         private void Awake()
         {
             if(instance == null)
@@ -57,6 +60,12 @@ namespace AG
             cameraZPosition = cameraObject.transform.localPosition.z;
         }
 
+        public void SetupCamera()
+        {
+            playerList = FindObjectsOfType<PlayerManager>();
+            cameraObject.gameObject.SetActive(true);
+        }
+
         public void HandleAllCameraActions()
         {
             if (player == null)
@@ -64,9 +73,23 @@ namespace AG
                 return;
             }
 
+            HandleChangePlayerFollowed();
             HandleFollowTarget();
             HandleRotations();
             HandleCollisions();
+        }
+
+        private void HandleChangePlayerFollowed()
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                playerIndex++;
+                if(playerIndex >= playerList.Length)
+                {
+                    playerIndex = 0;
+                }
+                player = playerList[playerIndex];
+            }
         }
 
         private void HandleFollowTarget()

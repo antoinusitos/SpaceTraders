@@ -52,11 +52,7 @@ namespace AG
 
             if(newValue <= 0)
             {
-                characterAnimatorManager.PlayTargetActionAnimation("Death", true);
-
-                isDead = true;
-                canMove = false;
-                canRotate = false;
+                OnDeath();
             }
         }
 
@@ -89,6 +85,16 @@ namespace AG
         protected virtual void LateUpdate()
         {
 
+        }
+
+        protected virtual void OnDeath()
+        {
+            characterAnimatorManager.PlayTargetActionAnimation("Death", true);
+
+            isDead = true;
+            canMove = false;
+            canRotate = false;
+            PlayerCamera.instance.SetupCamera();
         }
     }
 }

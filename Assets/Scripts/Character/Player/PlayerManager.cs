@@ -91,7 +91,10 @@ namespace AG
 
             base.LateUpdate();
 
-            //PlayerCamera.instance.HandleAllCameraActions();
+            if(isDead)
+            {
+                PlayerCamera.instance.HandleAllCameraActions();
+            }
         }
 
         public override void OnNetworkSpawn()
@@ -115,7 +118,7 @@ namespace AG
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
 
                 tpsObject.SetActive(false);
-                PlayerCamera.instance.gameObject.SetActive(false);
+                PlayerCamera.instance.cameraObject.gameObject.SetActive(false);
             }
             else
             {
@@ -158,6 +161,14 @@ namespace AG
             {
                 PlayerUIManager.instance.playerUIHUDManager.AddQuest(quest);
             }
+        }
+
+        protected override void OnDeath()
+        {
+            base.OnDeath();
+
+            tpsObject.SetActive(true);
+            fpsObject.SetActive(false);
         }
     }
 }

@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: -4952435655887539372}
   - component: {fileID: 2694097700828908967}
   - component: {fileID: -8939535779446090410}
+  - component: {fileID: 6905032924395521654}
   - component: {fileID: -170173479195586859}
   - component: {fileID: 9001118035689036007}
   - component: {fileID: 1309940169189299779}
@@ -166,6 +167,7 @@ MonoBehaviour:
   canMove: 1
   isJumping: 0
   isGrounded: 0
+  isDead: 0
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
@@ -366,6 +368,20 @@ MonoBehaviour:
   staminaRegenerationDelay: 2
   vitalityMultiplier: 10
   enduranceMultiplier: 10
+--- !u!114 &6905032924395521654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290232846266426329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ea7dacd4ec16f46bee7f8ed7a906f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectToTest: {fileID: 11400000, guid: 56e657a7a39a32c48ba99e22c55b85f7, type: 2}
+  processEffect: 0
 --- !u!114 &-170173479195586859
 MonoBehaviour:
   m_ObjectHideFlags: 0

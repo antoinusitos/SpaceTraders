@@ -75,6 +75,11 @@ namespace AG
         {
             base.Update();
 
+            if (player.isDead)
+            {
+                return;
+            }
+
             player.animator.SetBool("IsCrouching", player.playerNetworkManager.isCrouching.Value);
 
             if (player.IsOwner)
@@ -95,10 +100,17 @@ namespace AG
 
         public void HandleAllMovement()
         {
-            HandleGroundedMovement();
-            HandleRotation();
-            HandleJumpingMovement();
-            HandleFreeFallMovement();
+            if(!player.isDead)
+            {
+                HandleGroundedMovement();
+                HandleRotation();
+                HandleJumpingMovement();
+                HandleFreeFallMovement();
+            }
+            else
+            {
+                //TODO : Handle ghost movement
+            }
         }
 
         private void GetMovementValues()

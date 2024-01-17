@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.TextCore.Text;
+using System;
 
 namespace AG
 {
@@ -23,6 +24,7 @@ namespace AG
         public bool canMove = true;
         public bool isJumping = false;
         public bool isGrounded = false;
+        public bool isDead = false;
 
         protected virtual void Awake()
         {
@@ -32,6 +34,30 @@ namespace AG
             animator = GetComponent<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
             characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+
+            characterNetworkManager.currentHealth.OnValueChanged += OnCurrentHealthChange;
+        }
+
+        private void OnCurrentHealthChange(float previousValue, float newValue)
+        {
+            if(!IsOwner)
+            {
+                return;
+            }
+
+            if(newValue <= 0)
+            {
+                characterAnimatorManager.PlayTargetActionAnimation("Death", true);
+
+                isDead = true;
+                canMove = false;
+                canRotate = false;
+            }
         }
 
         protected virtual void Update()

@@ -16,6 +16,8 @@ namespace AG
         [HideInInspector]
         public PlayerStatsManager playerStatsManager = null;
         [HideInInspector]
+        public PlayerEffectsManager playerEffectManager = null;
+        [HideInInspector]
         public PlayerFPSCamera playerFPSCamera = null;
 
         [SerializeField]
@@ -31,6 +33,7 @@ namespace AG
             playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
             playerNetworkManager = GetComponent<PlayerNetworkManager>();
             playerStatsManager = GetComponent<PlayerStatsManager>();
+            playerEffectManager = GetComponent<PlayerEffectsManager>();
             playerFPSCamera = GetComponentInChildren<PlayerFPSCamera>();
         }
 

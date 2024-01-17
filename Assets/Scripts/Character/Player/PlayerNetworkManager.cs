@@ -55,5 +55,14 @@ namespace AG
                 PlayerUIManager.instance.playerUIHUDManager.ShowWaitingPlayers(false);
             }
         }
+
+        [ClientRpc]
+        public void SyncQuestClientRpc(int questID)
+        {
+            if (IsOwner)
+            {
+                player.AddQuest(questID);
+            }
+        }
     }
 }

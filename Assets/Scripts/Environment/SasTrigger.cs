@@ -33,7 +33,10 @@ namespace AG
                         GameManager.instance.StartGame();
                     }
                 }
-                PlayerUIManager.instance.playerUIHUDManager.ShowWaitingPlayers(true);
+                if(playerManager.IsOwner)
+                {
+                    PlayerUIManager.instance.playerUIHUDManager.ShowWaitingPlayers(true);
+                }
             }
         }
 

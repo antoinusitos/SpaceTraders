@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace AG
 {
@@ -31,13 +30,15 @@ namespace AG
             }
         }
 
-        private void Start()
+        public override void OnNetworkSpawn()
         {
+            base.OnNetworkSpawn();
+
             if (IsServer)
             {
                 NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
 
-                //TEMP
+                //TEMP for 1 player
                 if (NetworkManager.Singleton.ConnectedClientsList.Count == playersToStart)
                 {
                     startingDoor.SetLockState(false);
@@ -46,9 +47,21 @@ namespace AG
             }
         }
 
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectedCallback;
+        }
+
         private void OnClientConnectedCallback(ulong obj)
         {
-            if(NetworkManager.Singleton.ConnectedClientsList.Count + 1 == playersToStart)
+            if (!IsServer)
+            {
+                return;
+            }
+
+            if (NetworkManager.Singleton.ConnectedClientsList.Count == playersToStart)
             {
                 startingDoor.SetLockState(false);
                 startingDoor.ForceOpening();

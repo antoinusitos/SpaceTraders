@@ -10,7 +10,7 @@ namespace AG
         public NetworkVariable<bool> networkCharacterNearby = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public NetworkVariable<bool> networkLocked = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-        private void Awake()
+        private void Start()
         {
             networkCharacterNearby.OnValueChanged += OnValueChanged;
 

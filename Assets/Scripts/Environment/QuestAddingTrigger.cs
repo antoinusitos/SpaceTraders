@@ -1,26 +1,28 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace AG
 {
-    public class QuestAddingTrigger : MonoBehaviour
+    public class QuestAddingTrigger : NetworkBehaviour
     {
         [SerializeField]
         private int questID = -1;
 
         private void OnTriggerEnter(Collider other)
         {
-            //TODO : sync the quest on the network for all clients
-
-            PlayerManager playerManager = other.GetComponent<PlayerManager>();
-            if (playerManager)
+            if (IsServer)
             {
-                Quest quest = WorldQuestManager.instance.GetQuestWithID(questID);
-                if (quest != null)
+                PlayerManager playerManager = other.GetComponent<PlayerManager>();
+                if (playerManager)
                 {
-                    PlayerUIManager.instance.playerUIHUDManager.AddQuest(quest);
+                    PlayerNetworkManager[] playerNetworkManagers = FindObjectsOfType<PlayerNetworkManager>();
+                    for (int i = 0; i < playerNetworkManagers.Length; i++)
+                    {
+                        playerNetworkManagers[i].SyncQuestClientRpc(questID);
+                    }
                 }
             }
         }

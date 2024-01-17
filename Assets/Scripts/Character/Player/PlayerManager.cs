@@ -147,5 +147,14 @@ namespace AG
             playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
             PlayerUIManager.instance.playerUIHUDManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
         }
+
+        public void AddQuest(int questID)
+        {
+            Quest quest = WorldQuestManager.instance.GetQuestWithID(questID);
+            if (quest != null)
+            {
+                PlayerUIManager.instance.playerUIHUDManager.AddQuest(quest);
+            }
+        }
     }
 }

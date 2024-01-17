@@ -1,13 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace AG
 {
-    public class WorldSaveGameManager : MonoBehaviour
+    public class WorldSaveGameManager : NetworkBehaviour
     {
         public static WorldSaveGameManager instance = null;
+
+#if UNITY_EDITOR
+        public UnityEditor.SceneAsset SceneAsset;
+        private void OnValidate()
+        {
+            if (SceneAsset != null)
+            {
+                m_SceneName = SceneAsset.name;
+            }
+        }
+#endif
+        [SerializeField]
+        private string m_SceneName;
 
         public PlayerManager player = null;
 
@@ -226,7 +240,8 @@ namespace AG
         private void NewGame()
         {
             SaveGame();
-            StartCoroutine(LoadWorldScene());
+            //StartCoroutine(LoadWorldScene());
+            LoadWorldScene();
         }
 
         public void LoadGame()
@@ -241,7 +256,8 @@ namespace AG
 
             currentCharacterData = saveFileDataWriter.LoadSaveFile();
 
-            StartCoroutine(LoadWorldScene());
+            //StartCoroutine(LoadWorldScene());
+            LoadWorldScene();
         }
 
         public void SaveGame()
@@ -309,12 +325,20 @@ namespace AG
 
         }
 
-        public IEnumerator LoadWorldScene()
+        /*public IEnumerator LoadWorldScene()
         {
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
+            NetworkManager.SceneManager.LoadScene("HUB", LoadSceneMode.Single);
             player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
 
             yield return null;
+        }*/
+
+        public void LoadWorldScene()
+        {
+            NetworkManager.SceneManager.LoadScene(m_SceneName, LoadSceneMode.Single);
+            player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
+
+            //yield return null;
         }
 
         public int GetWorldSceneIndex()

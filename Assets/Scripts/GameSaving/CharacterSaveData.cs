@@ -22,7 +22,7 @@ namespace AG
         public float zPosition = 0;
 
         [Header("Stats")]
-        public int vitality = 1;
-        public int endurance = 1;
+        public int vitality = 4;
+        public int endurance = 10;
     }
 }

@@ -239,6 +239,7 @@ namespace AG
 
         private void NewGame()
         {
+            player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
             SaveGame();
             //StartCoroutine(LoadWorldScene());
             LoadWorldScene();
@@ -335,8 +336,8 @@ namespace AG
 
         public void LoadWorldScene()
         {
-            NetworkManager.SceneManager.LoadScene(m_SceneName, LoadSceneMode.Single);
             player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
+            NetworkManager.SceneManager.LoadScene(m_SceneName, LoadSceneMode.Single);
 
             //yield return null;
         }

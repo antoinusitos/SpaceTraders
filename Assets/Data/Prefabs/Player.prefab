@@ -285,6 +285,8 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  faction:
+    m_InternalValue: 0
 --- !u!114 &2466988530071546831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +314,7 @@ MonoBehaviour:
   runningSpeed: 4.5
   spritingSpeed: 6.5
   rotationSpeed: 15
-  sprintingStaminaCost: 2
+  sprintingStaminaCost: 10
   crouchingSpeed: 1
   dodgeStaminaCost: 25
   jumpStaminaCost: 25
@@ -360,8 +362,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195b165de1330d344aab32a8baa0a8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaRegenerationAmount: 3
+  staminaRegenerationAmount: 8
   staminaRegenerationDelay: 2
+  vitalityMultiplier: 10
+  enduranceMultiplier: 10
 --- !u!114 &-170173479195586859
 MonoBehaviour:
   m_ObjectHideFlags: 0

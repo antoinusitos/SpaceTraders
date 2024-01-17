@@ -16,6 +16,11 @@ namespace AG
         [SerializeField]
         private float staminaRegenerationDelay = 2.0f;
 
+        [SerializeField]
+        private float vitalityMultiplier = 10;
+        [SerializeField]
+        private float enduranceMultiplier = 10;
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
@@ -30,7 +35,7 @@ namespace AG
         {
             float health = 0;
 
-            health = vitality * 15;
+            health = vitality * vitalityMultiplier;
 
             return Mathf.RoundToInt(health);
         }
@@ -39,7 +44,7 @@ namespace AG
         {
             float stamina = 0;
 
-            stamina = endurance * 10;
+            stamina = endurance * enduranceMultiplier;
 
             return Mathf.RoundToInt(stamina);
         }

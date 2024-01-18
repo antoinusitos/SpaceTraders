@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 2694097700828908967}
   - component: {fileID: -8939535779446090410}
   - component: {fileID: 6905032924395521654}
+  - component: {fileID: -9081441167464491988}
   - component: {fileID: -170173479195586859}
   - component: {fileID: 9001118035689036007}
   - component: {fileID: 1309940169189299779}
@@ -172,6 +173,7 @@ MonoBehaviour:
   playerLocomotionManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
   playerStatsManager: {fileID: 0}
+  playerEffectManager: {fileID: 0}
   playerFPSCamera: {fileID: 0}
   fpsObject: {fileID: 3694494309956016473}
   tpsObject: {fileID: 3866544574285331375}
@@ -382,6 +384,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectToTest: {fileID: 11400000, guid: 56e657a7a39a32c48ba99e22c55b85f7, type: 2}
   processEffect: 0
+--- !u!114 &-9081441167464491988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290232846266426329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 379f937f8385b314180009140e6c0e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: []
+  testItemID: -1
+  giveItem: 0
+  useItem: 0
 --- !u!114 &-170173479195586859
 MonoBehaviour:
   m_ObjectHideFlags: 0

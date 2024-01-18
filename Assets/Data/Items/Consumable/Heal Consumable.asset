@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a359ec977da39f4c992f034856d86c3, type: 3}
   m_Name: Heal Consumable
   m_EditorClassIdentifier: 
-  itemID: -1
+  itemID: 0
   itemName: Heal Potion
+  itemSprite: {fileID: 21300000, guid: 65f0e363b74cf5845ab8c3fbc14f39ac, type: 3}
   itemType: 1
   itemQuantity: 1
   itemPrefab: {fileID: 8162054982966370348, guid: f7a3dbc2ca11b7545b472bbe61b8b27f, type: 3}

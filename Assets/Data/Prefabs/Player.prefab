@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 6905032924395521654}
   - component: {fileID: -9081441167464491988}
   - component: {fileID: 1032923358018761724}
+  - component: {fileID: 43868813111958480}
   - component: {fileID: -170173479195586859}
   - component: {fileID: 9001118035689036007}
   - component: {fileID: 1309940169189299779}
@@ -166,12 +167,14 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterInventoryManager: {fileID: 0}
   characterCraftManager: {fileID: 0}
+  characterInteractionManager: {fileID: 0}
   isPerformingAction: 0
   canRotate: 1
   canMove: 1
   isJumping: 0
   isGrounded: 0
   isDead: 0
+  isInMenu: 0
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
@@ -417,6 +420,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testCraftID: -1
   craftItem: 0
+--- !u!114 &43868813111958480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290232846266426329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c7845ff12557c64d918db1fe534e3a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 2
 --- !u!114 &-170173479195586859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f852691e6e0ee545986e326186b3be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 2754036065542721738}
   cameraPivotTransform: {fileID: 4279305288495144300}
   leftAndRightRotationSpeed: 50
   upAndDownRotationSpeed: 50

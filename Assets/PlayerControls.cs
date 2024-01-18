@@ -281,6 +281,42 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae2fc1d4-150e-47bb-b65b-f89b0785c1f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuickUse1"",
+                    ""type"": ""Button"",
+                    ""id"": ""777520fd-147c-4a4f-b86e-e22ed66d3ebb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuickUse2"",
+                    ""type"": ""Button"",
+                    ""id"": ""d63cbe6c-350b-48b5-aff6-7900433e9454"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuickUse3"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd7314e7-ff32-4733-be02-08726e800f8b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -382,6 +418,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""CraftMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbadd10f-c379-4837-b3d8-c3d1650d673a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb45af45-08e1-4469-af65-168c47029195"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""QuickUse1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1310d766-2968-4710-b118-55a1a59246e6"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""QuickUse2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06013e1c-9457-4c6c-87bd-302bc63dc906"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""QuickUse3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -440,6 +520,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_Crouch = m_PlayerActions.FindAction("Crouch", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_CraftMenu = m_PlayerActions.FindAction("CraftMenu", throwIfNotFound: true);
+        m_PlayerActions_Interaction = m_PlayerActions.FindAction("Interaction", throwIfNotFound: true);
+        m_PlayerActions_QuickUse1 = m_PlayerActions.FindAction("QuickUse1", throwIfNotFound: true);
+        m_PlayerActions_QuickUse2 = m_PlayerActions.FindAction("QuickUse2", throwIfNotFound: true);
+        m_PlayerActions_QuickUse3 = m_PlayerActions.FindAction("QuickUse3", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_X = m_UI.FindAction("X", throwIfNotFound: true);
@@ -573,6 +657,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Crouch;
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_CraftMenu;
+    private readonly InputAction m_PlayerActions_Interaction;
+    private readonly InputAction m_PlayerActions_QuickUse1;
+    private readonly InputAction m_PlayerActions_QuickUse2;
+    private readonly InputAction m_PlayerActions_QuickUse3;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -582,6 +670,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_PlayerActions_Crouch;
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @CraftMenu => m_Wrapper.m_PlayerActions_CraftMenu;
+        public InputAction @Interaction => m_Wrapper.m_PlayerActions_Interaction;
+        public InputAction @QuickUse1 => m_Wrapper.m_PlayerActions_QuickUse1;
+        public InputAction @QuickUse2 => m_Wrapper.m_PlayerActions_QuickUse2;
+        public InputAction @QuickUse3 => m_Wrapper.m_PlayerActions_QuickUse3;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -606,6 +698,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @CraftMenu.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCraftMenu;
                 @CraftMenu.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCraftMenu;
                 @CraftMenu.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCraftMenu;
+                @Interaction.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInteraction;
+                @Interaction.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInteraction;
+                @Interaction.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInteraction;
+                @QuickUse1.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse1;
+                @QuickUse1.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse1;
+                @QuickUse1.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse1;
+                @QuickUse2.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse2;
+                @QuickUse2.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse2;
+                @QuickUse2.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse2;
+                @QuickUse3.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse3;
+                @QuickUse3.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse3;
+                @QuickUse3.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse3;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -625,6 +729,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @CraftMenu.started += instance.OnCraftMenu;
                 @CraftMenu.performed += instance.OnCraftMenu;
                 @CraftMenu.canceled += instance.OnCraftMenu;
+                @Interaction.started += instance.OnInteraction;
+                @Interaction.performed += instance.OnInteraction;
+                @Interaction.canceled += instance.OnInteraction;
+                @QuickUse1.started += instance.OnQuickUse1;
+                @QuickUse1.performed += instance.OnQuickUse1;
+                @QuickUse1.canceled += instance.OnQuickUse1;
+                @QuickUse2.started += instance.OnQuickUse2;
+                @QuickUse2.performed += instance.OnQuickUse2;
+                @QuickUse2.canceled += instance.OnQuickUse2;
+                @QuickUse3.started += instance.OnQuickUse3;
+                @QuickUse3.performed += instance.OnQuickUse3;
+                @QuickUse3.canceled += instance.OnQuickUse3;
             }
         }
     }
@@ -677,6 +793,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCraftMenu(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
+        void OnQuickUse1(InputAction.CallbackContext context);
+        void OnQuickUse2(InputAction.CallbackContext context);
+        void OnQuickUse3(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

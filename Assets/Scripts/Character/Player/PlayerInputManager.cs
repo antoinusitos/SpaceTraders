@@ -35,6 +35,14 @@ namespace AG
         private bool jumpInput = false;
         [SerializeField]
         private bool craftMenuInput = false;
+        [SerializeField]
+        private bool interactionInput = false;
+        [SerializeField]
+        private bool quickUsed1Input = false;
+        [SerializeField]
+        private bool quickUsed2Input = false;
+        [SerializeField]
+        private bool quickUsed3Input = false;
 
         private void Awake()
         {
@@ -84,6 +92,10 @@ namespace AG
                 //playerControls.PlayerActions.Crouch.canceled += i => crouchInput = false;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.CraftMenu.performed += i => craftMenuInput = true;
+                playerControls.PlayerActions.Interaction.performed += i => interactionInput = true;
+                playerControls.PlayerActions.QuickUse1.performed += i => quickUsed1Input = true;
+                playerControls.PlayerActions.QuickUse2.performed += i => quickUsed2Input = true;
+                playerControls.PlayerActions.QuickUse3.performed += i => quickUsed3Input = true;
             }
 
             playerControls.Enable();
@@ -123,6 +135,8 @@ namespace AG
             HandleCrouchInput();
             HandleJumpInput();
             HandleCraftMenuInput();
+            HandleInteractionInput();
+            HandleQuickUseInput();
         }
 
         private void HandlePlayerMovementInput()
@@ -215,6 +229,35 @@ namespace AG
                 craftMenuInput = false;
 
                 player.OpenCraftMenu();
+            }
+        }
+
+        private void HandleInteractionInput()
+        {
+            if(interactionInput)
+            {
+                interactionInput = false;
+
+                player.characterInteractionManager.TryToInteract();
+            }
+        }
+
+        private void HandleQuickUseInput()
+        {
+            if(quickUsed1Input)
+            {
+                quickUsed1Input = false;
+                player.characterInventoryManager.TryToUseItem(0);
+            }
+            else if (quickUsed2Input)
+            {
+                quickUsed2Input = false;
+                player.characterInventoryManager.TryToUseItem(1);
+            }
+            else if(quickUsed3Input)
+            {
+                quickUsed3Input = false;
+                player.characterInventoryManager.TryToUseItem(2);
             }
         }
     }

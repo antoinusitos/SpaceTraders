@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System.Linq;
 
 namespace AG
 {
@@ -66,6 +67,34 @@ namespace AG
         private void PerformActionAnimationFromServer(string animationID)
         {
             character.animator.CrossFade(animationID, character.characterAnimatorManager.crossFadeTime);
+        }
+
+        [ServerRpc]
+        private void DespawnItemServerRpc(ulong item)
+        {
+            DespawnItem(item);
+        }
+
+        public void DespawnItem(ulong item)
+        {
+            if (NetworkManager.Singleton.IsServer)
+            {
+                DespawnItem_Implementation(item);
+            }
+            else
+            {
+                DespawnItemServerRpc(item);
+            }
+        }
+
+        private void DespawnItem_Implementation(ulong item)
+        {
+            NetworkObject foundObject = null;
+            NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(item, out foundObject);
+            if(foundObject)
+            {
+                foundObject.Despawn(true);
+            }
         }
     }
 }

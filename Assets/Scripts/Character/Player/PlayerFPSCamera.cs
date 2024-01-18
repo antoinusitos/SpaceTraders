@@ -6,6 +6,8 @@ namespace AG
     {
         private PlayerManager player = null;
 
+        public Camera playerCamera = null;
+
         [SerializeField]
         private Transform cameraPivotTransform = null;
 

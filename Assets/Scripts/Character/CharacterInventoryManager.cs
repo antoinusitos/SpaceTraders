@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AG
@@ -8,7 +9,9 @@ namespace AG
     {
         private CharacterManager character = null;
 
-        public List<ItemDefinition> inventory = new List<ItemDefinition>();
+        public ItemDefinition[] inventory = null;
+        protected int maxInventorySize = 3;
+        public List<ItemDefinition> scrapInventory = new List<ItemDefinition>();
 
         [Header("DEBUG")]
         [SerializeField]
@@ -21,6 +24,7 @@ namespace AG
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
+            inventory = new ItemDefinition[3];
         }
 
         private void Update()
@@ -37,86 +41,130 @@ namespace AG
             if (useItem)
             {
                 useItem = false;
-                UseItemWithID(testItemID);
+                UseItemWithID(0);
             }
         }
 
-        public void AddItem(ItemDefinition item)
+        public bool AddItem(ItemDefinition item)
         {
-            for (int i = 0; i < inventory.Count; i++)
+            if(item.itemType == ItemType.SCRAP)
             {
-                if (inventory[i].itemID == item.itemID)
+                return AffectInScrapInventory(item);
+            }
+            else
+            {
+                return AffectInInventory(item);
+            }
+        }
+
+        private bool AffectInInventory(ItemDefinition item)
+        {
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                if (inventory[i] == null)
                 {
-                    inventory[i].itemQuantity += item.itemQuantity;
-                    return;
+                    inventory[i] = item;
+                    PlayerUIManager.instance.playerUIInventoryManager.AffectSpriteToItem(item.itemSprite, i);
+                    return true;
                 }
             }
 
-            inventory.Add(Instantiate(item));
+            return false;
         }
 
-        public void AddItem(Item item)
+        private bool AffectInScrapInventory(ItemDefinition item)
         {
-            AddItem(item.itemDefinition);
+            for(int i = 0; i < scrapInventory.Count; i++)
+            {
+                if (scrapInventory[i].itemID == item.itemID)
+                {
+                    scrapInventory[i].itemQuantity += item.itemQuantity;
+                    return true;
+                }
+            }
+            scrapInventory.Add(Instantiate(item));
+            return true;
         }
 
-        public void UseItemWithID(int itemID)
+        public bool AddItem(Item item)
         {
-            for (int i = 0; i < inventory.Count; i++)
+            return AddItem(item.itemDefinition);
+        }
+
+        public void UseItemWithID(int itemIndex)
+        {
+            if(inventory[itemIndex] == null)
+            {
+                return;
+            }
+
+            if (inventory[itemIndex].itemType == ItemType.CONSUMABLE)
+            {
+                GameObject spawnedPrefab = Instantiate(inventory[itemIndex].itemPrefab);
+                if (spawnedPrefab)
+                {
+                    Item item = spawnedPrefab.GetComponent<Item>();
+                    if (item)
+                    {
+                        item.itemOwner = character;
+                        item.itemDefinition = inventory[itemIndex];
+                        item.UseItem();
+                        PlayerUIManager.instance.playerUIInventoryManager.AffectSpriteToItem(null, itemIndex);
+                        inventory[itemIndex] = null;
+                        Destroy(spawnedPrefab);
+                    }
+                }
+            }
+        }
+
+        public void RemoveItemWithID(int itemID)
+        {
+            for (int i = 0; i < inventory.Length; i++)
             {
                 if (inventory[i].itemID == itemID)
                 {
-                    if (inventory[i].itemType == ItemType.CONSUMABLE)
+                    inventory[i] = null;
+                    return;
+                }
+            }
+        }
+
+        public void RemoveScrapWithID(int itemID, int quantity)
+        {
+            for (int i = 0; i < scrapInventory.Count; i++)
+            {
+                if (scrapInventory[i].itemID == itemID)
+                {
+                    scrapInventory[i].itemQuantity -= quantity;
+                    if (scrapInventory[i].itemQuantity <= 0)
                     {
-                        GameObject spawnedPrefab = Instantiate(inventory[i].itemPrefab);
-                        if (spawnedPrefab)
-                        {
-                            Item item = spawnedPrefab.GetComponent<Item>();
-                            if (item)
-                            {
-                                item.itemOwner = character;
-                                item.itemDefinition = inventory[i];
-                                item.UseItem();
-                                inventory[i].itemQuantity--;
-                                if (inventory[i].itemQuantity <= 0)
-                                {
-                                    inventory.RemoveAt(i);
-                                }
-                                Destroy(spawnedPrefab);
-                            }
-                        }
+                        scrapInventory.RemoveAt(i);
                     }
                     return;
                 }
             }
         }
 
-        public void RemoveItemWithID(int itemID, int quantity)
+        public int GetScrapQuantityWithID(int itemID)
         {
-            for (int i = 0; i < inventory.Count; i++)
+            for (int i = 0; i < scrapInventory.Count; i++)
             {
-                if (inventory[i].itemID == itemID)
+                if (scrapInventory[i].itemID == itemID)
                 {
-                    inventory[i].itemQuantity -= quantity;
-                    if (inventory[i].itemQuantity <= 0)
-                    {
-                        inventory.RemoveAt(i);
-                    }
-                    return;
-                }
-            }
-        }
-
-        public int GetItemQuantityWithID(int itemID)
-        {
-            for (int i = 0; i < inventory.Count; i++)
-            {
-                if (inventory[i].itemID == itemID)
-                {
-                    return inventory[i].itemQuantity;
+                    return scrapInventory[i].itemQuantity;
                 }
             }
             return 0;
+        }
+
+        public void TryToUseItem(int index)
+        {
+            if (inventory[index] == null)
+            {
+                return;
+            }
+
+            UseItemWithID(index);
         }
     }
 }

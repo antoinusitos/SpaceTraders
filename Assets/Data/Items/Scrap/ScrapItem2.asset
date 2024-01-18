@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a359ec977da39f4c992f034856d86c3, type: 3}
   m_Name: ScrapItem2
   m_EditorClassIdentifier: 
-  itemID: -1
+  itemID: 2
   itemName: Scrapt Item 2
+  itemSprite: {fileID: 21300000, guid: 144aa74618b85974a9a50f612c2fa8fd, type: 3}
   itemType: 3
   itemQuantity: 1
   itemPrefab: {fileID: 636345921484421429, guid: 33124c6befaf7c745b92c0783bd98091, type: 3}

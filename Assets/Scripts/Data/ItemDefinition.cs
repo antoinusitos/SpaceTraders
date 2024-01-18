@@ -9,6 +9,7 @@ namespace AG
     {
         public int itemID = -1;
         public string itemName = "";
+        public Sprite itemSprite = null;
         public ItemType itemType = ItemType.NONE;
         public int itemQuantity = 0;
         public GameObject itemPrefab = null;

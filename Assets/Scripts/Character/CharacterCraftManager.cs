@@ -36,7 +36,7 @@ namespace AG
         {
             for (int i = 0; i < craft.neededItems.Length; i++)
             {
-                if (character.characterInventoryManager.GetItemQuantityWithID(craft.neededItems[i].itemID) < craft.neededItems[i].itemQuantity)
+                if (character.characterInventoryManager.GetScrapQuantityWithID(craft.neededItems[i].itemID) < craft.neededItems[i].itemQuantity)
                 {
                     return false;
                 }
@@ -48,7 +48,7 @@ namespace AG
         {
             for(int i = 0; i < craft.neededItems.Length; i++)
             {
-                if (character.characterInventoryManager.GetItemQuantityWithID(craft.neededItems[i].itemID) < craft.neededItems[i].itemQuantity)
+                if (character.characterInventoryManager.GetScrapQuantityWithID(craft.neededItems[i].itemID) < craft.neededItems[i].itemQuantity)
                 {
                     return;
                 }
@@ -61,7 +61,7 @@ namespace AG
         {
             for (int i = 0; i < craft.neededItems.Length; i++)
             {
-                character.characterInventoryManager.RemoveItemWithID(craft.neededItems[i].itemID, craft.neededItems[i].itemQuantity);
+                character.characterInventoryManager.RemoveScrapWithID(craft.neededItems[i].itemID, craft.neededItems[i].itemQuantity);
             }
 
             character.characterInventoryManager.AddItem(WorldItemsManager.instance.GetItemWithID(craft.createdItemID));

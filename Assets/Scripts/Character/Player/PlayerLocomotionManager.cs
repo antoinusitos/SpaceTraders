@@ -49,7 +49,7 @@ namespace AG
         private float freeFallSpeed = 2.0f;
         private Vector3 jumpDirection = Vector3.zero;
 
-        [Header("Jump")]
+        [Header("Crouch")]
         [SerializeField]
         private Transform detectionObject = null;
         [SerializeField]
@@ -62,6 +62,7 @@ namespace AG
         private float characterControllersCrouchDetectionSize = 1.17f;
         [SerializeField]
         private float characterControllerstandingDetectionSize = 1.8f;
+        private bool crouchState = false;
 
         protected override void Awake()
         {
@@ -76,6 +77,11 @@ namespace AG
             base.Update();
 
             if (player.isDead)
+            {
+                return;
+            }
+
+            if (player.isInMenu)
             {
                 return;
             }
@@ -106,10 +112,6 @@ namespace AG
                 HandleRotation();
                 HandleJumpingMovement();
                 HandleFreeFallMovement();
-            }
-            else
-            {
-                //TODO : Handle ghost movement
             }
         }
 
@@ -204,7 +206,7 @@ namespace AG
 
         public void HandleSprinting()
         {
-            if(player.isPerformingAction)
+            if(player.isPerformingAction || player.isInMenu)
             {
                 player.playerNetworkManager.isSprinting.Value = false;
             }
@@ -284,6 +286,11 @@ namespace AG
                 return;
             }
 
+            if(player.isInMenu)
+            {
+                return;
+            }
+
             player.playerNetworkManager.isCrouching.Value = false;
 
             player.playerAnimatorManager.PlayTargetActionAnimation("JumpStart", false);
@@ -335,6 +342,11 @@ namespace AG
             }
             detectionObject.transform.localPosition = targetPos;
             detectionObject.transform.localScale = targetSize;
+        }
+
+        public void SwitchCrouchState()
+        {
+            player.playerNetworkManager.isCrouching.Value = !player.playerNetworkManager.isCrouching.Value;
         }
     }
 }

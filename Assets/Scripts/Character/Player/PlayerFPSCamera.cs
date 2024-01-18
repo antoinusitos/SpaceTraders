@@ -54,6 +54,11 @@ namespace AG
                 cameraPivotTransform.localPosition = Vector3.up * standingYPosition;
             }
 
+            if (player.isInMenu)
+            {
+                return;
+            }
+
             transform.Rotate(0, PlayerInputManager.instance.cameraHorizontalInput * Time.deltaTime * leftAndRightRotationSpeed, 0);
 
             upAndDownLookAngle -= PlayerInputManager.instance.cameraVerticalInput * Time.deltaTime * upAndDownRotationSpeed;

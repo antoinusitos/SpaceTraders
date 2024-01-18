@@ -77,7 +77,10 @@ namespace AG
                 return;
             }
 
-            playerLocomotionManager.HandleAllMovement();
+            if (!isInMenu)
+            {
+                playerLocomotionManager.HandleAllMovement();
+            }
 
             playerStatsManager.RegenerateStamina();
         }
@@ -109,6 +112,8 @@ namespace AG
                 PlayerInputManager.instance.player = this;
                 WorldSaveGameManager.instance.player = this;
                 PlayerUIManager.instance.playerUIHUDManager.player = this;
+                PlayerUIManager.instance.playerUICraftManager.player = this;
+                PlayerUIManager.instance.playerUICraftManager.gameObject.SetActive(false);
 
                 playerNetworkManager.vitality.OnValueChanged += playerNetworkManager.SetNewMaxHealthValue;
                 playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxStaminaValue;
@@ -169,6 +174,17 @@ namespace AG
 
             tpsObject.SetActive(true);
             fpsObject.SetActive(false);
+            PlayerUIManager.instance.playerUIHUDManager.gameObject.SetActive(false);
+        }
+
+        public void OpenCraftMenu()
+        {
+            isInMenu = !isInMenu;
+            PlayerUIManager.instance.playerUICraftManager.gameObject.SetActive(isInMenu);
+            if(isInMenu)
+            {
+                PlayerUIManager.instance.playerUICraftManager.UpdateCanCraft();
+            }
         }
     }
 }

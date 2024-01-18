@@ -9,6 +9,8 @@ namespace AG
     {
         public CharacterManager itemOwner = null;
 
+        public int linkedItemId = -1;
+
         [HideInInspector]
         public ItemDefinition itemDefinition = null;
 

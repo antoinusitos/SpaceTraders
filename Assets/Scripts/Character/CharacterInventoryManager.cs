@@ -90,5 +90,33 @@ namespace AG
                 }
             }
         }
+
+        public void RemoveItemWithID(int itemID, int quantity)
+        {
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                if (inventory[i].itemID == itemID)
+                {
+                    inventory[i].itemQuantity -= quantity;
+                    if (inventory[i].itemQuantity <= 0)
+                    {
+                        inventory.RemoveAt(i);
+                    }
+                    return;
+                }
+            }
+        }
+
+        public int GetItemQuantityWithID(int itemID)
+        {
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                if (inventory[i].itemID == itemID)
+                {
+                    return inventory[i].itemQuantity;
+                }
+            }
+            return 0;
+        }
     }
 }

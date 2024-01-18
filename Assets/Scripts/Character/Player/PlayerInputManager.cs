@@ -33,6 +33,8 @@ namespace AG
         private bool crouchInput = false;
         [SerializeField]
         private bool jumpInput = false;
+        [SerializeField]
+        private bool craftMenuInput = false;
 
         private void Awake()
         {
@@ -79,8 +81,9 @@ namespace AG
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
                 playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
                 playerControls.PlayerActions.Crouch.performed += i => crouchInput = true;
-                playerControls.PlayerActions.Crouch.canceled += i => crouchInput = false;
+                //playerControls.PlayerActions.Crouch.canceled += i => crouchInput = false;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+                playerControls.PlayerActions.CraftMenu.performed += i => craftMenuInput = true;
             }
 
             playerControls.Enable();
@@ -119,6 +122,7 @@ namespace AG
             HandleSprintInput();
             HandleCrouchInput();
             HandleJumpInput();
+            HandleCraftMenuInput();
         }
 
         private void HandlePlayerMovementInput()
@@ -181,13 +185,15 @@ namespace AG
                 return;
             }
 
+            if(player.isInMenu)
+            {
+                return;
+            }
+            
             if (crouchInput)
             {
-                player.playerNetworkManager.isCrouching.Value = true;
-            }
-            else
-            {
-                player.playerNetworkManager.isCrouching.Value = false;
+                crouchInput = false;
+                player.playerLocomotionManager.SwitchCrouchState();
             }
             player.playerLocomotionManager.UpdateDetectionObjectToCrouch();
         }
@@ -199,6 +205,16 @@ namespace AG
                 jumpInput = false;
 
                 player.playerLocomotionManager.AttemptToPerformJump();
+            }
+        }
+
+        private void HandleCraftMenuInput()
+        {
+            if (craftMenuInput)
+            {
+                craftMenuInput = false;
+
+                player.OpenCraftMenu();
             }
         }
     }

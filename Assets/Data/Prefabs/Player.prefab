@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: -8939535779446090410}
   - component: {fileID: 6905032924395521654}
   - component: {fileID: -9081441167464491988}
+  - component: {fileID: 1032923358018761724}
   - component: {fileID: -170173479195586859}
   - component: {fileID: 9001118035689036007}
   - component: {fileID: 1309940169189299779}
@@ -163,6 +164,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   characterNetworkManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
+  characterInventoryManager: {fileID: 0}
+  characterCraftManager: {fileID: 0}
   isPerformingAction: 0
   canRotate: 1
   canMove: 1
@@ -400,6 +403,20 @@ MonoBehaviour:
   testItemID: -1
   giveItem: 0
   useItem: 0
+--- !u!114 &1032923358018761724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290232846266426329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acdbf3a859df414893b50638ca1b952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testCraftID: -1
+  craftItem: 0
 --- !u!114 &-170173479195586859
 MonoBehaviour:
   m_ObjectHideFlags: 0

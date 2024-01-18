@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &910271786963724580
+--- !u!1 &8825232436212837116
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 910271786963724570}
-  - component: {fileID: 910271786963724581}
+  - component: {fileID: 5541201200629270544}
+  - component: {fileID: 2163737304796595691}
   m_Layer: 0
-  m_Name: WorldItemsManager
+  m_Name: WorldCraftManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &910271786963724570
+--- !u!4 &5541201200629270544
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910271786963724580}
+  m_GameObject: {fileID: 8825232436212837116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,21 +32,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &910271786963724581
+--- !u!114 &2163737304796595691
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910271786963724580}
+  m_GameObject: {fileID: 8825232436212837116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18df9fe1d9b18384eaf6aa04dc5a7cec, type: 3}
+  m_Script: {fileID: 11500000, guid: 597f9a0d289748f48b6eb40dbd24e476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allItems:
-  - {fileID: 11400000, guid: 21935220aaca128488d36077582724da, type: 2}
-  - {fileID: 11400000, guid: aca414d4025d91042bc297f52c3d29da, type: 2}
-  - {fileID: 11400000, guid: 7770480d8e2bf2a4eb8dc791c3969af0, type: 2}
-  - {fileID: 11400000, guid: 067b07eccdc93264289abb6633adc8d6, type: 2}
-  - {fileID: 11400000, guid: 90a0d8b9ecad20e42bd7c78991bce11e, type: 2}
+  allCrafts:
+  - {fileID: 11400000, guid: f6f4ee79d48686048871b495f62bd3de, type: 2}

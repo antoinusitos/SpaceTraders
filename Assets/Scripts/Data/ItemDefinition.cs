@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AG
 {
-    [CreateAssetMenu(menuName = "Items/Consumable/Heal Consumable")]
+    [CreateAssetMenu(menuName = "Items/Item Definition")]
     public class ItemDefinition : ScriptableObject
     {
         public int itemID = -1;
@@ -18,7 +18,7 @@ namespace AG
     {
         NONE,
         CONSUMABLE,
-        WEAPON,
-        SCRAP
+        EQUIPPABLE,
+        SCRAP,
     }
 }

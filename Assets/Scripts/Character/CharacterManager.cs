@@ -17,6 +17,10 @@ namespace AG
         public CharacterNetworkManager characterNetworkManager = null;
         [HideInInspector]
         public CharacterAnimatorManager characterAnimatorManager = null;
+        [HideInInspector]
+        public CharacterInventoryManager characterInventoryManager = null;
+        [HideInInspector]
+        public CharacterCraftManager characterCraftManager = null;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -25,6 +29,7 @@ namespace AG
         public bool isJumping = false;
         public bool isGrounded = false;
         public bool isDead = false;
+        public bool isInMenu = false;
 
         protected virtual void Awake()
         {
@@ -34,6 +39,8 @@ namespace AG
             animator = GetComponent<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
             characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
+            characterInventoryManager = GetComponent<CharacterInventoryManager>();
+            characterCraftManager = GetComponent<CharacterCraftManager>();
         }
 
         public override void OnNetworkSpawn()
@@ -94,7 +101,9 @@ namespace AG
             isDead = true;
             canMove = false;
             canRotate = false;
+            isInMenu = false;
             PlayerCamera.instance.SetupCamera();
+            PlayerUIManager.instance.CloseMenus();
         }
     }
 }

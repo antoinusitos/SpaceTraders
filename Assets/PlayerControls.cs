@@ -272,6 +272,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CraftMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""071e674a-1fa1-4196-8d22-116c4ef5c219"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -362,6 +371,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff4ca6a7-13b3-4b30-bdcc-b298fb90cc3b"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CraftMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -419,6 +439,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
         m_PlayerActions_Crouch = m_PlayerActions.FindAction("Crouch", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerActions_CraftMenu = m_PlayerActions.FindAction("CraftMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_X = m_UI.FindAction("X", throwIfNotFound: true);
@@ -551,6 +572,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Sprint;
     private readonly InputAction m_PlayerActions_Crouch;
     private readonly InputAction m_PlayerActions_Jump;
+    private readonly InputAction m_PlayerActions_CraftMenu;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -559,6 +581,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_PlayerActions_Sprint;
         public InputAction @Crouch => m_Wrapper.m_PlayerActions_Crouch;
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
+        public InputAction @CraftMenu => m_Wrapper.m_PlayerActions_CraftMenu;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -580,6 +603,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
+                @CraftMenu.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCraftMenu;
+                @CraftMenu.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCraftMenu;
+                @CraftMenu.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnCraftMenu;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -596,6 +622,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @CraftMenu.started += instance.OnCraftMenu;
+                @CraftMenu.performed += instance.OnCraftMenu;
+                @CraftMenu.canceled += instance.OnCraftMenu;
             }
         }
     }
@@ -647,6 +676,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnCraftMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -16,6 +16,8 @@ namespace AG
 
         [HideInInspector]
         public PlayerUIHUDManager playerUIHUDManager = null;
+        [HideInInspector]
+        public PlayerUICraftManager playerUICraftManager = null;
 
         private void Awake()
         {
@@ -29,6 +31,7 @@ namespace AG
             }
 
             playerUIHUDManager = GetComponentInChildren<PlayerUIHUDManager>();
+            playerUICraftManager = GetComponentInChildren<PlayerUICraftManager>();
         }
 
         private void Start()
@@ -44,6 +47,11 @@ namespace AG
                 NetworkManager.Singleton.Shutdown();
                 NetworkManager.Singleton.StartClient();
             }
+        }
+
+        public void CloseMenus()
+        {
+            playerUICraftManager.gameObject.SetActive(false);
         }
     }
 }

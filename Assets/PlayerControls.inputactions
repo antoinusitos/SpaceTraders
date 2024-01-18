@@ -250,6 +250,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CraftMenu",
+                    "type": "Button",
+                    "id": "071e674a-1fa1-4196-8d22-116c4ef5c219",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -338,6 +347,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ff4ca6a7-13b3-4b30-bdcc-b298fb90cc3b",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CraftMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -14,7 +14,7 @@ namespace AG
 
         private void OnTriggerEnter(Collider other)
         {
-            if (GameManager.instance.networkGameStarted.Value)
+            if (WorldGameManager.instance.networkGameStarted.Value)
             {
                 return;
             }
@@ -26,11 +26,11 @@ namespace AG
                 {
                     playersInTrigger++;
 
-                    if (playersInTrigger >= GameManager.instance.playersToStart)
+                    if (playersInTrigger >= WorldGameManager.instance.playersToStart)
                     {
                         doorToLock.ForceClosing();
                         doorToLock.SetLockState(true);
-                        GameManager.instance.StartGame();
+                        WorldGameManager.instance.StartGame();
                     }
                 }
                 if(playerManager.IsOwner)
@@ -42,7 +42,7 @@ namespace AG
 
         private void OnTriggerExit(Collider other)
         {
-            if (GameManager.instance.networkGameStarted.Value)
+            if (WorldGameManager.instance.networkGameStarted.Value)
             {
                 return;
             }

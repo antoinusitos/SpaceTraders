@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace AG
 {
-    public class GameManager : NetworkBehaviour
+    public class WorldGameManager : NetworkBehaviour
     {
-        public static GameManager instance = null;
+        public static WorldGameManager instance = null;
 
         public int playersToStart = 4;
         public NetworkVariable<bool> networkGameStarted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -39,11 +39,16 @@ namespace AG
                 NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
 
                 //TEMP for 1 player
-                if (NetworkManager.Singleton.ConnectedClientsList.Count == playersToStart)
-                {
-                    startingDoor.SetLockState(false);
-                    startingDoor.ForceOpening();
-                }
+                Invoke("CheckSoloPlayer", 1);
+            }
+        }
+
+        private void CheckSoloPlayer()
+        {
+            if (NetworkManager.Singleton.ConnectedClientsList.Count == playersToStart)
+            {
+                startingDoor.SetLockState(false);
+                startingDoor.ForceOpening();
             }
         }
 
@@ -88,6 +93,7 @@ namespace AG
             for (int i = 0; i < playerNetworkManagers.Length; i++)
             {
                 playerNetworkManagers[i].HideWaitingPlayerClientRpc();
+                playerNetworkManagers[i].faction.Value = Factions.CREW;
             }
 
             yield return new WaitForSeconds(3);

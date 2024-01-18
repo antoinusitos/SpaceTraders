@@ -5244,6 +5244,10 @@ PrefabInstance:
       propertyPath: m_FirstSelected
       value: 
       objectReference: {fileID: 829725747}
+    - target: {fileID: 1255655545017975222, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2294589278708207076, guid: b3e4fabbcf119cb4d8491a8f55eba381, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5600,6 +5604,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2290232846266426329, guid: a9e3c2250ad2dd741950723a35584ec2, type: 3}
     - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+      propertyPath: NetworkConfig.NetworkTransport
+      value: 
+      objectReference: {fileID: 6627812289827993696}
+    - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
       propertyPath: NetworkConfig.EnableSceneManagement
       value: 1
       objectReference: {fileID: 0}
@@ -5652,11 +5660,35 @@ PrefabInstance:
       value: WorldNetworkManager
       objectReference: {fileID: 0}
     - target: {fileID: 6627812288056202967, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627812288056202967, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
       propertyPath: ConnectionData.Port
       value: 7777
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+--- !u!1 &6627812289827993695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6627812288056202966, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+  m_PrefabInstance: {fileID: 6627812289827993694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6627812289827993696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6627812289827993695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44dd247a00edbfa44b77868d755af6ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steamAppId: 480
+  targetSteamId: 0
+  userSteamId: 0
 --- !u!1001 &6941774129993769066
 PrefabInstance:
   m_ObjectHideFlags: 0

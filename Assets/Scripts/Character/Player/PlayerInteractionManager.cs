@@ -10,6 +10,9 @@ namespace AG
     {
         private PlayerManager player = null;
 
+        [SerializeField]
+        private LayerMask interactionMask;
+
         private void Awake()
         {
             player = GetComponent<PlayerManager>();
@@ -18,12 +21,12 @@ namespace AG
         public override void TryToInteract()
         {
             RaycastHit hit;
-            if (Physics.Raycast(player.playerFPSCamera.playerCamera.transform.position, player.playerFPSCamera.playerCamera.transform.forward, out hit, interactionDistance))
+            if (Physics.Raycast(player.playerFPSCamera.playerCamera.transform.position, player.playerFPSCamera.playerCamera.transform.forward, out hit, interactionDistance, interactionMask))
             {
                 Interactable interactable = hit.transform.GetComponent<Interactable>();
                 if(interactable)
                 {
-                    if(interactable.GetType().IsSubclassOf(typeof(Item)))
+                    if(interactable.GetType().IsSubclassOf(typeof(Item)) || interactable.GetType() == typeof(Item))
                     {
                         Item item = (Item)interactable;
 

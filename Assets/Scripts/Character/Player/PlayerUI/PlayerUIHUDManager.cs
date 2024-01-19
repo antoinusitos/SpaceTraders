@@ -27,6 +27,13 @@ namespace AG
         [SerializeField]
         private GameObject waitForPlayersText = null;
 
+        [SerializeField]
+        private TextMeshProUGUI flashLightBatteriesNumberText = null;
+        [SerializeField]
+        private UI_StatBar flashlightBatterieBar = null;
+        [SerializeField]
+        private UI_StatBar flashlightRefillBar = null;
+
         public void SetNewHealthValue(float oldValue, float newValue)
         {
             healthBar.SetStat(newValue);
@@ -106,6 +113,31 @@ namespace AG
         public void ShowWaitingPlayers(bool mustShow)
         {
             waitForPlayersText.SetActive(mustShow);
+        }
+
+        public void UpdateFlashLightBatteriesNumber(int newValue)
+        {
+            flashLightBatteriesNumberText.text = newValue.ToString();
+        }
+
+        public void UpdateFlashLightBatterie(float currentValue, float maxValue)
+        {
+            flashlightBatterieBar.SetMaxStat(Mathf.RoundToInt(maxValue));
+            flashlightBatterieBar.SetStat(currentValue);
+        }
+
+        public void UpdateRefillSlider(float currentValueRatio)
+        {
+            if(currentValueRatio > 0)
+            {
+                flashlightRefillBar.gameObject.SetActive(true);
+            }
+            else
+            {
+                flashlightRefillBar.gameObject.SetActive(false);
+            }
+            flashlightRefillBar.SetMaxStat(1);
+            flashlightRefillBar.SetStat(currentValueRatio);
         }
     }
 }

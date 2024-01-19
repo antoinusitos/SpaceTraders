@@ -21,5 +21,6 @@ namespace AG
         CONSUMABLE,
         EQUIPPABLE,
         SCRAP,
+        FLASHLIGHTBATTERY
     }
 }

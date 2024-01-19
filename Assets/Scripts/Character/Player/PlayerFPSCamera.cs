@@ -66,6 +66,8 @@ namespace AG
             upAndDownLookAngle -= PlayerInputManager.instance.cameraVerticalInput * Time.deltaTime * upAndDownRotationSpeed;
             upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
             cameraPivotTransform.localRotation = Quaternion.Euler(upAndDownLookAngle, 0, 0);
+
+            player.playerNetworkManager.cameraUpDownAngle.Value = upAndDownLookAngle;
         }
     }
 }

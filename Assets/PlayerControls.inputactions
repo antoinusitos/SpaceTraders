@@ -295,6 +295,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Flashlight",
+                    "type": "Button",
+                    "id": "f347e319-7fe8-4635-b28b-d2c579778881",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RefillFlashLight",
+                    "type": "Button",
+                    "id": "e6896ba4-fd5b-40af-8677-940b63e8f6d3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -438,6 +456,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "QuickUse3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7d85846-3ca0-4ab9-8335-ff9d5977bd44",
+                    "path": "<Keyboard>/i",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flashlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e306367d-9422-4ce9-a0ba-3d7261e7add9",
+                    "path": "<Keyboard>/i",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RefillFlashLight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

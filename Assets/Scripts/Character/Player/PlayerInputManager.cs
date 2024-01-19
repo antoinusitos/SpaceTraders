@@ -43,6 +43,10 @@ namespace AG
         private bool quickUsed2Input = false;
         [SerializeField]
         private bool quickUsed3Input = false;
+        [SerializeField]
+        private bool flashlightInput = false;
+        [SerializeField]
+        private bool refillFlashlightInput = false;
 
         private void Awake()
         {
@@ -96,6 +100,10 @@ namespace AG
                 playerControls.PlayerActions.QuickUse1.performed += i => quickUsed1Input = true;
                 playerControls.PlayerActions.QuickUse2.performed += i => quickUsed2Input = true;
                 playerControls.PlayerActions.QuickUse3.performed += i => quickUsed3Input = true;
+                playerControls.PlayerActions.Flashlight.performed += i => flashlightInput = true;
+                playerControls.PlayerActions.RefillFlashLight.performed += i => refillFlashlightInput = true;
+                playerControls.PlayerActions.RefillFlashLight.canceled += i => refillFlashlightInput = false;
+                
             }
 
             playerControls.Enable();
@@ -137,6 +145,8 @@ namespace AG
             HandleCraftMenuInput();
             HandleInteractionInput();
             HandleQuickUseInput();
+            HandleFlashLightInput();
+            HandleRefillFlashLightInput();
         }
 
         private void HandlePlayerMovementInput()
@@ -258,6 +268,27 @@ namespace AG
             {
                 quickUsed3Input = false;
                 player.characterInventoryManager.TryToUseItem(2);
+            }
+        }
+
+        private void HandleFlashLightInput()
+        {
+            if(flashlightInput)
+            {
+                flashlightInput = false;
+                player.characterNetworkManager.flashlightOn.Value = !player.characterNetworkManager.flashlightOn.Value;
+            }
+        }
+
+        private void HandleRefillFlashLightInput()
+        {
+            if(refillFlashlightInput)
+            {
+                player.playerInventoryManager.ActivateBatterieRefill();
+            }
+            else
+            {
+                player.playerInventoryManager.StopBatterieRefill();
             }
         }
     }

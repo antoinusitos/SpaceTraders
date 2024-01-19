@@ -24,5 +24,10 @@ namespace AG
                 player.transform.rotation *= player.animator.deltaRotation;
             }*/
         }
+
+        public void UpdateUpDownAngle(float newValue)
+        {
+            player.animator.SetFloat("UpDownAngle", newValue);
+        }
     }
 }

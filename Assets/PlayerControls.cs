@@ -317,6 +317,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Flashlight"",
+                    ""type"": ""Button"",
+                    ""id"": ""f347e319-7fe8-4635-b28b-d2c579778881"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RefillFlashLight"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6896ba4-fd5b-40af-8677-940b63e8f6d3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -462,6 +480,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""QuickUse3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7d85846-3ca0-4ab9-8335-ff9d5977bd44"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flashlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e306367d-9422-4ce9-a0ba-3d7261e7add9"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RefillFlashLight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -524,6 +564,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_QuickUse1 = m_PlayerActions.FindAction("QuickUse1", throwIfNotFound: true);
         m_PlayerActions_QuickUse2 = m_PlayerActions.FindAction("QuickUse2", throwIfNotFound: true);
         m_PlayerActions_QuickUse3 = m_PlayerActions.FindAction("QuickUse3", throwIfNotFound: true);
+        m_PlayerActions_Flashlight = m_PlayerActions.FindAction("Flashlight", throwIfNotFound: true);
+        m_PlayerActions_RefillFlashLight = m_PlayerActions.FindAction("RefillFlashLight", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_X = m_UI.FindAction("X", throwIfNotFound: true);
@@ -661,6 +703,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_QuickUse1;
     private readonly InputAction m_PlayerActions_QuickUse2;
     private readonly InputAction m_PlayerActions_QuickUse3;
+    private readonly InputAction m_PlayerActions_Flashlight;
+    private readonly InputAction m_PlayerActions_RefillFlashLight;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -674,6 +718,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @QuickUse1 => m_Wrapper.m_PlayerActions_QuickUse1;
         public InputAction @QuickUse2 => m_Wrapper.m_PlayerActions_QuickUse2;
         public InputAction @QuickUse3 => m_Wrapper.m_PlayerActions_QuickUse3;
+        public InputAction @Flashlight => m_Wrapper.m_PlayerActions_Flashlight;
+        public InputAction @RefillFlashLight => m_Wrapper.m_PlayerActions_RefillFlashLight;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -710,6 +756,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @QuickUse3.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse3;
                 @QuickUse3.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse3;
                 @QuickUse3.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnQuickUse3;
+                @Flashlight.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnFlashlight;
+                @Flashlight.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnFlashlight;
+                @Flashlight.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnFlashlight;
+                @RefillFlashLight.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRefillFlashLight;
+                @RefillFlashLight.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRefillFlashLight;
+                @RefillFlashLight.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRefillFlashLight;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -741,6 +793,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @QuickUse3.started += instance.OnQuickUse3;
                 @QuickUse3.performed += instance.OnQuickUse3;
                 @QuickUse3.canceled += instance.OnQuickUse3;
+                @Flashlight.started += instance.OnFlashlight;
+                @Flashlight.performed += instance.OnFlashlight;
+                @Flashlight.canceled += instance.OnFlashlight;
+                @RefillFlashLight.started += instance.OnRefillFlashLight;
+                @RefillFlashLight.performed += instance.OnRefillFlashLight;
+                @RefillFlashLight.canceled += instance.OnRefillFlashLight;
             }
         }
     }
@@ -797,6 +855,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnQuickUse1(InputAction.CallbackContext context);
         void OnQuickUse2(InputAction.CallbackContext context);
         void OnQuickUse3(InputAction.CallbackContext context);
+        void OnFlashlight(InputAction.CallbackContext context);
+        void OnRefillFlashLight(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

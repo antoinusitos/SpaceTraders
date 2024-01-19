@@ -13,6 +13,8 @@ namespace AG
         protected int maxInventorySize = 3;
         public List<ItemDefinition> scrapInventory = new List<ItemDefinition>();
 
+        protected int flashlightBatteriesNumber = 0;
+
         [Header("DEBUG")]
         [SerializeField]
         private int testItemID = -1;
@@ -27,7 +29,7 @@ namespace AG
             inventory = new ItemDefinition[3];
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (giveItem)
             {
@@ -59,6 +61,13 @@ namespace AG
 
         private bool AffectInInventory(ItemDefinition item)
         {
+            if(item.itemType == ItemType.FLASHLIGHTBATTERY)
+            {
+                flashlightBatteriesNumber++;
+                PlayerUIManager.instance.playerUIHUDManager.UpdateFlashLightBatteriesNumber(flashlightBatteriesNumber);
+                return true;
+            }
+
             for (int i = 0; i < inventory.Length; i++)
             {
                 if (inventory[i] == null)

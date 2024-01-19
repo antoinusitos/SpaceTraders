@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -20,11 +21,19 @@ namespace AG
         public PlayerEffectsManager playerEffectManager = null;
         [HideInInspector]
         public PlayerFPSCamera playerFPSCamera = null;
+        [HideInInspector]
+        public PlayerInventoryManager playerInventoryManager = null;
 
         [SerializeField]
         private GameObject fpsObject = null;
         [SerializeField]
+        private GameObject fpsFlashlightObject = null;
+        [SerializeField]
         private GameObject tpsObject = null;
+        [SerializeField]
+        private GameObject tpsFlashlightObject = null;
+        [SerializeField]
+        private Transform tpsUpDownBone = null;
 
         protected override void Awake()
         {
@@ -36,6 +45,7 @@ namespace AG
             playerStatsManager = GetComponent<PlayerStatsManager>();
             playerEffectManager = GetComponent<PlayerEffectsManager>();
             playerFPSCamera = GetComponentInChildren<PlayerFPSCamera>();
+            playerInventoryManager = GetComponent<PlayerInventoryManager>();
         }
 
         private void Start()
@@ -90,6 +100,7 @@ namespace AG
         {
             if(!IsOwner)
             {
+                tpsUpDownBone.localRotation = Quaternion.Euler(playerNetworkManager.cameraUpDownAngle.Value, 0, 0);
                 return;
             }
 
@@ -123,6 +134,8 @@ namespace AG
                 playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.instance.playerUIHUDManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
 
+                playerNetworkManager.flashlightOn.OnValueChanged += playerInventoryManager.FlashLightState;
+
                 tpsObject.SetActive(false);
                 PlayerCamera.instance.cameraObject.gameObject.SetActive(false);
             }
@@ -130,6 +143,15 @@ namespace AG
             {
                 fpsObject.SetActive(false);
             }
+
+            playerNetworkManager.flashlightOn.OnValueChanged += SetFlashlightUsage;
+        }
+
+
+        private void SetFlashlightUsage(bool previousValue, bool newValue)
+        {
+            fpsFlashlightObject.SetActive(newValue);
+            tpsFlashlightObject.SetActive(newValue);
         }
 
         public void SaveGameDataToCurrentCharacterData(ref CharacterSaveData currentCharacterData)

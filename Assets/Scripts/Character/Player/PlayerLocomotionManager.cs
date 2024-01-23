@@ -86,6 +86,11 @@ namespace AG
                 return;
             }
 
+            if (player.isUsingAnInteractable)
+            {
+                return;
+            }
+
             player.animator.SetBool("IsCrouching", player.playerNetworkManager.isCrouching.Value);
 
             if (player.IsOwner)
@@ -125,6 +130,11 @@ namespace AG
         private void HandleGroundedMovement()
         {
             if (!player.canMove)
+            {
+                return;
+            }
+
+            if (player.isUsingAnInteractable)
             {
                 return;
             }
@@ -206,7 +216,7 @@ namespace AG
 
         public void HandleSprinting()
         {
-            if(player.isPerformingAction || player.isInMenu)
+            if(player.isPerformingAction || player.isInMenu || player.isUsingAnInteractable)
             {
                 player.playerNetworkManager.isSprinting.Value = false;
             }
@@ -222,7 +232,12 @@ namespace AG
                 return;
             }
 
-            if(moveAmount >= 0.5f)
+            if (player.isUsingAnInteractable)
+            {
+                return;
+            }
+
+            if (moveAmount >= 0.5f)
             {
                 player.playerNetworkManager.isSprinting.Value = true;
             }
@@ -249,7 +264,12 @@ namespace AG
                 return;
             }
 
-            if(PlayerInputManager.instance.moveAmount > 0)
+            if (player.isUsingAnInteractable)
+            {
+                return;
+            }
+
+            if (PlayerInputManager.instance.moveAmount > 0)
             {
                 rollDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticalInput;
                 rollDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput;
@@ -287,6 +307,11 @@ namespace AG
             }
 
             if(player.isInMenu)
+            {
+                return;
+            }
+
+            if (player.isUsingAnInteractable)
             {
                 return;
             }
@@ -346,6 +371,16 @@ namespace AG
 
         public void SwitchCrouchState()
         {
+            if (player.isInMenu)
+            {
+                return;
+            }
+
+            if (player.isUsingAnInteractable)
+            {
+                return;
+            }
+
             player.playerNetworkManager.isCrouching.Value = !player.playerNetworkManager.isCrouching.Value;
         }
     }

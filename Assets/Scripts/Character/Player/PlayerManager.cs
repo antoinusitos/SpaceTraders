@@ -202,6 +202,11 @@ namespace AG
 
         public void OpenCraftMenu()
         {
+            if (isUsingAnInteractable)
+            {
+                return;
+            }
+
             isInMenu = !isInMenu;
             PlayerUIManager.instance.playerUICraftManager.gameObject.SetActive(isInMenu);
             if(isInMenu)

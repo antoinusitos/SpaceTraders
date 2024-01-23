@@ -7,6 +7,14 @@ namespace AG
 {
     public class Interactable : NetworkBehaviour
     {
-        
+        public virtual bool OnInteract(PlayerInteractionManager playerUsing)
+        {
+            return false;
+        }
+
+        public virtual void OnStopInteract()
+        {
+
+        }
     }
 }

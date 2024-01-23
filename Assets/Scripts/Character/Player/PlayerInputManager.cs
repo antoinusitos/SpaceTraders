@@ -209,11 +209,6 @@ namespace AG
                 return;
             }
 
-            if(player.isInMenu)
-            {
-                return;
-            }
-            
             if (crouchInput)
             {
                 crouchInput = false;
@@ -276,13 +271,19 @@ namespace AG
             if(flashlightInput)
             {
                 flashlightInput = false;
+
+                if (player.isUsingAnInteractable)
+                {
+                    return;
+                }
+
                 player.characterNetworkManager.flashlightOn.Value = !player.characterNetworkManager.flashlightOn.Value;
             }
         }
 
         private void HandleRefillFlashLightInput()
         {
-            if(refillFlashlightInput)
+            if (refillFlashlightInput && !player.isUsingAnInteractable)
             {
                 player.playerInventoryManager.ActivateBatterieRefill();
             }

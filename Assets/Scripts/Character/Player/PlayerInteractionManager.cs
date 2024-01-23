@@ -13,6 +13,8 @@ namespace AG
         [SerializeField]
         private LayerMask interactionMask;
 
+        private Interactable lastInteractable = null;
+
         private void Awake()
         {
             player = GetComponent<PlayerManager>();
@@ -53,6 +55,12 @@ namespace AG
 
         public override void TryToInteract()
         {
+            if (player.isUsingAnInteractable)
+            {
+                StopInteract();
+                return;
+            }
+
             RaycastHit hit;
             if (Physics.Raycast(player.playerFPSCamera.playerCamera.transform.position, player.playerFPSCamera.playerCamera.transform.forward, out hit, interactionDistance, interactionMask))
             {
@@ -68,8 +76,94 @@ namespace AG
                             player.characterNetworkManager.DespawnItem(item.NetworkObject.NetworkObjectId);
                         }
                     }
+                    else
+                    {
+                        if(interactable.OnInteract(this))
+                        {
+                            lastInteractable = interactable;
+                            player.isUsingAnInteractable = true;
+                        }
+                    }
                 }
             }
         }
+
+        public void StopInteract()
+        {
+            player.isUsingAnInteractable = false;
+            if (lastInteractable)
+            {
+                lastInteractable.OnStopInteract();
+                lastInteractable = null;
+            }
+        }
+
+#region MACHINES
+        [ServerRpc]
+        private void TellServerUsingStateServerRpc(bool newState, ulong ID)
+        {
+            SetUsingStateOnMachine(newState, ID);
+        }
+
+        public void SetUsingStateOnMachine(bool newState, ulong ID)
+        {
+            if (NetworkManager.Singleton.IsServer)
+            {
+                SetUsingStateOnMachine_Implementation(newState, ID);
+            }
+            else
+            {
+                TellServerUsingStateServerRpc(newState, ID);
+            }
+        }
+
+        private void SetUsingStateOnMachine_Implementation(bool newState, ulong ID)
+        {
+            NetworkObject foundObject = null;
+            NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(ID, out foundObject);
+            if (foundObject)
+            {
+                Machine machine = foundObject.GetComponent<Machine>();
+                if (machine != null)
+                {
+                    machine.machineIsBeingUSed.Value = newState;
+                }
+            }
+        }
+
+        [ServerRpc]
+        private void TellServerIsDoneServerRpc(ulong ID)
+        {
+            SetIsDoneOnMachine(ID);
+        }
+
+        public void SetIsDoneOnMachine(ulong ID)
+        {
+            if (NetworkManager.Singleton.IsServer)
+            {
+                SetIsDoneOnMachine_Implementation(ID);
+            }
+            else
+            {
+                TellServerIsDoneServerRpc(ID);
+            }
+        }
+
+        private void SetIsDoneOnMachine_Implementation(ulong ID)
+        {
+            NetworkObject foundObject = null;
+            NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(ID, out foundObject);
+            if (foundObject)
+            {
+                Machine machine = foundObject.GetComponent<Machine>();
+                if (machine != null)
+                {
+                    machine.isDone.Value = true;
+                    machine.OnComplete();
+                }
+            }
+        }
+
+        #endregion
     }
 }

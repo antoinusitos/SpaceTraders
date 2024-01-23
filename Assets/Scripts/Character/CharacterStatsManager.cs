@@ -61,11 +61,6 @@ namespace AG
                 return;
             }
 
-            if (character.isPerformingAction)
-            {
-                return;
-            }
-
             staminaRegenerationTimer += Time.deltaTime;
 
             if (staminaRegenerationTimer >= staminaRegenerationDelay)

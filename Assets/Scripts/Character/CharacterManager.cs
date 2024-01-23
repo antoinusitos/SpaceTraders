@@ -32,6 +32,7 @@ namespace AG
         public bool isGrounded = false;
         public bool isDead = false;
         public bool isInMenu = false;
+        public bool isUsingAnInteractable = false;
 
         protected virtual void Awake()
         {

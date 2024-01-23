@@ -42,6 +42,12 @@ namespace AG
         [SerializeField]
         private UI_StatBar flashlightRefillBar = null;
 
+        [Header("Interactions")]
+        [SerializeField]
+        private GameObject interactionFeedbackTextGameObject = null;
+        [SerializeField]
+        private TextMeshProUGUI interactionFeedbackText = null;
+
         public void SetNewHealthValue(float oldValue, float newValue)
         {
             healthBar.SetStat(newValue);
@@ -158,6 +164,12 @@ namespace AG
         private void HideSeed()
         {
             seedText.gameObject.SetActive(false);
+        }
+
+        public void ShowInteractionText(bool showText, string text = "")
+        {
+            interactionFeedbackTextGameObject.SetActive(showText);
+            interactionFeedbackText.text = text;
         }
     }
 }

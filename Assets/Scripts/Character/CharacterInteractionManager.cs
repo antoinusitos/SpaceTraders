@@ -10,6 +10,11 @@ namespace AG
         [SerializeField]
         protected float interactionDistance = 2.0f;
 
+        protected virtual void Update()
+        {
+
+        }
+
         public virtual void TryToInteract()
         {
 

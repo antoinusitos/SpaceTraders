@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -10,8 +9,10 @@ namespace AG
     {
         public static WorldGameManager instance = null;
 
+        // Normal players number to start
         public int playersToStart = 4;
         public NetworkVariable<bool> networkGameStarted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private int networkRandomSeed = 0;
 
         [SerializeField]
         private AutomaticDoor startingDoor = null;
@@ -39,11 +40,11 @@ namespace AG
                 NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
 
                 //TEMP for 1 player
-                Invoke("CheckSoloPlayer", 1);
+                Invoke("CheckPlayersNumber", 1);
             }
         }
 
-        private void CheckSoloPlayer()
+        private void CheckPlayersNumber()
         {
             if (NetworkManager.Singleton.ConnectedClientsList.Count == playersToStart)
             {
@@ -66,11 +67,7 @@ namespace AG
                 return;
             }
 
-            if (NetworkManager.Singleton.ConnectedClientsList.Count == playersToStart)
-            {
-                startingDoor.SetLockState(false);
-                startingDoor.ForceOpening();
-            }
+            CheckPlayersNumber();
         }
 
         public void StartGame()
@@ -87,19 +84,35 @@ namespace AG
 
         private IEnumerator StartingGame()
         {
+            networkRandomSeed = Random.Range(1, int.MaxValue - 1);
+            Random.InitState(networkRandomSeed);
+
             yield return new WaitForSeconds(0.1f);
             
             PlayerNetworkManager[] playerNetworkManagers = FindObjectsOfType<PlayerNetworkManager>();
+
+            int traitorIndex = Random.Range(0, playerNetworkManagers.Length - 1);
+
             for (int i = 0; i < playerNetworkManagers.Length; i++)
             {
                 playerNetworkManagers[i].HideWaitingPlayerClientRpc();
-                playerNetworkManagers[i].faction.Value = Factions.CREW;
+                if(i == traitorIndex)
+                {
+                    playerNetworkManagers[i].faction.Value = Factions.TRAITOR;
+                }
+                else
+                {
+                    playerNetworkManagers[i].faction.Value = Factions.CREW;
+                }
+                playerNetworkManagers[i].SetRandomSeedClientRpc(networkRandomSeed);
             }
 
             yield return new WaitForSeconds(3);
 
             sasDoor.SetLockState(false);
             sasDoor.ForceOpening();
+
+
         }
     }
 }

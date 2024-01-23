@@ -34996,7 +34996,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3281971428775877684, guid: 385e491c04c69f54ca16dfb7f338dc4b, type: 3}
       propertyPath: m_Name
-      value: GameManager
+      value: WorldGameManager
       objectReference: {fileID: 0}
     - target: {fileID: 3281971428775877689, guid: 385e491c04c69f54ca16dfb7f338dc4b, type: 3}
       propertyPath: m_RootOrder

@@ -9,6 +9,16 @@ namespace AG
     {
         NONE,
         CREW,
-        TRAITOR
+        TRAITOR,
+        AI,
+        PNJ
+    }
+
+    [System.Serializable]
+    public enum FactionsRelations
+    {
+        ALLY,
+        ENNEMIE,
+        NEUTRAL
     }
 }

@@ -68,5 +68,15 @@ namespace AG
                 player.AddQuest(questID);
             }
         }
+
+        [ClientRpc]
+        public void SetRandomSeedClientRpc(int seed)
+        {
+            if (IsOwner)
+            {
+                Random.InitState(seed);
+                PlayerUIManager.instance.playerUIHUDManager.ShowSeed(seed);
+            }
+        }
     }
 }

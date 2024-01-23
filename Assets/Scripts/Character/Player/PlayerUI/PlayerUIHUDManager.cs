@@ -10,23 +10,31 @@ namespace AG
         [HideInInspector]
         public PlayerManager player = null;
 
+        [Header("Bars")]
         [SerializeField]
         private UI_StatBar staminaBar = null;
         [SerializeField]
         private UI_StatBar healthBar = null;
 
+        [Header("Quests")]
         [SerializeField]
         private Transform questGroup = null;
         [SerializeField]
         private GameObject questTextPrefab = null;
         private List<UI_QuestText> QuestTexts = new List<UI_QuestText>();
 
+        [Header("Factions")]
         [SerializeField]
         private TextMeshProUGUI factiontext = null;
 
+        [Header("Game State")]
         [SerializeField]
         private GameObject waitForPlayersText = null;
+        [SerializeField]
+        private TextMeshProUGUI seedText = null;
+        private float seedShowingDuration = 4;
 
+        [Header("Flashlight")]
         [SerializeField]
         private TextMeshProUGUI flashLightBatteriesNumberText = null;
         [SerializeField]
@@ -138,6 +146,18 @@ namespace AG
             }
             flashlightRefillBar.SetMaxStat(1);
             flashlightRefillBar.SetStat(currentValueRatio);
+        }
+
+        public void ShowSeed(int seed)
+        {
+            seedText.text = "Seed : " + seed.ToString();
+            seedText.gameObject.SetActive(true);
+            Invoke("HideSeed", seedShowingDuration);
+        }
+
+        private void HideSeed()
+        {
+            seedText.gameObject.SetActive(false);
         }
     }
 }

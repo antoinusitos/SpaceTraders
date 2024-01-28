@@ -76,7 +76,7 @@ namespace AG
         {
             base.Update();
 
-            if (player.isDead)
+            if (player.isDead.Value)
             {
                 return;
             }
@@ -111,7 +111,7 @@ namespace AG
 
         public void HandleAllMovement()
         {
-            if(!player.isDead)
+            if(!player.isDead.Value)
             {
                 HandleGroundedMovement();
                 HandleRotation();

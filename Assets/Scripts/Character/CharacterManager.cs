@@ -9,6 +9,9 @@ namespace AG
 {
     public class CharacterManager : NetworkBehaviour
     {
+        [Header("Status")]
+        public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
         [HideInInspector]
         public CharacterController characterController = null;
         [HideInInspector]
@@ -23,6 +26,8 @@ namespace AG
         public CharacterCraftManager characterCraftManager = null;
         [HideInInspector]
         public CharacterInteractionManager characterInteractionManager = null;
+        [HideInInspector]
+        public CharacterEffectsManager characterEffectsManager = null;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -30,7 +35,6 @@ namespace AG
         public bool canMove = true;
         public bool isJumping = false;
         public bool isGrounded = false;
-        public bool isDead = false;
         public bool isInMenu = false;
         public bool isUsingAnInteractable = false;
 
@@ -45,6 +49,7 @@ namespace AG
             characterInventoryManager = GetComponent<CharacterInventoryManager>();
             characterCraftManager = GetComponent<CharacterCraftManager>();
             characterInteractionManager = GetComponent<CharacterInteractionManager>();
+            characterEffectsManager = GetComponent<CharacterEffectsManager>();
         }
 
         public override void OnNetworkSpawn()
@@ -93,6 +98,11 @@ namespace AG
             }
         }
 
+        protected virtual void FixedUpdate()
+        {
+
+        }
+
         protected virtual void LateUpdate()
         {
 
@@ -102,7 +112,7 @@ namespace AG
         {
             characterAnimatorManager.PlayTargetActionAnimation("Death", true);
 
-            isDead = true;
+            isDead.Value = true;
             canMove = false;
             canRotate = false;
             isInMenu = false;

@@ -26,6 +26,8 @@ namespace AG
         {
             base.Update();
 
+            return;
+
             //server check
             if (!alienManager.IsOwner)
             {
@@ -39,6 +41,7 @@ namespace AG
             else
             {
                 navMeshAgent.SetDestination(targetPlayer.transform.position);
+                alienManager.characterController.Move(navMeshAgent.nextPosition);
             }
         }
     }

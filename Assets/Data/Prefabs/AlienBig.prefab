@@ -132,6 +132,7 @@ MonoBehaviour:
   isDead: 0
   isInMenu: 0
   isUsingAnInteractable: 0
+  currentState: {fileID: 11400000, guid: d2107e1b9fcf2f6489826c08107807f5, type: 2}
 --- !u!114 &2720418671414833187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +246,7 @@ Animator:
   m_GameObject: {fileID: 2720418671414833195}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fcd67c0a7f03a0243acabcb78754a5b7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -272,4 +273,4 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: -0.15, z: 0}

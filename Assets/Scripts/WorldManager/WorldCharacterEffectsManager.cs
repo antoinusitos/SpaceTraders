@@ -8,6 +8,9 @@ namespace AG
     {
         public static WorldCharacterEffectsManager instance = null;
 
+        [Header("Damage")]
+        public TakeDamageEffect takeDamageEffect = null;
+
         [SerializeField]
         private List<InstantCharacterEffect> instantEffects;
 

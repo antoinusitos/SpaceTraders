@@ -239,7 +239,9 @@ namespace AG
 
         private void NewGame()
         {
-            player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
+            player.characterNetworkManager.vitality.Value = 10;
+            player.characterNetworkManager.endurance.Value = 10;
+
             SaveGame();
             //StartCoroutine(LoadWorldScene());
             LoadWorldScene();

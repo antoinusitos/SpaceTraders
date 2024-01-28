@@ -106,7 +106,7 @@ namespace AG
 
             base.LateUpdate();
 
-            if(isDead)
+            if(isDead.Value)
             {
                 PlayerCamera.instance.HandleAllCameraActions();
             }

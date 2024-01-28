@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AG
 {
-    public class AlienManager : CharacterManager
+    public class AlienManager : AICharacterManager
     {
         
     }

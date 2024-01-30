@@ -8,6 +8,8 @@ namespace AG
     {
         private PlayerManager player = null;
 
+        public WeaponItem currentRightHandWeapon = null;
+
         private float flashLightDuration = 20.0f;
         private float currentFlashLightDuration = 0.0f;
 

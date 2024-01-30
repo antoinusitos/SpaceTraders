@@ -124,6 +124,14 @@ namespace AG
                     }
                 }
             }
+            else
+            {
+                Debug.Log("try to use a non consummable item");
+                if (inventory[itemIndex].itemType == ItemType.EQUIPPABLE)
+                {
+                    ((PlayerManager)character).playerNetworkManager.currentRightHandWeaponID.Value = inventory[itemIndex].itemID;
+                }
+            }
         }
 
         public void RemoveItemWithID(int itemID)

@@ -26,8 +26,6 @@ namespace AG
 
         [Header("PLAYER ACTION INPUT")]
         [SerializeField]
-        private bool dodgeInput = false;
-        [SerializeField]
         private bool sprintInput = false;
         [SerializeField]
         private bool crouchInput = false;
@@ -89,7 +87,6 @@ namespace AG
 
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
-                playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
                 playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
                 playerControls.PlayerActions.Crouch.performed += i => crouchInput = true;
@@ -138,7 +135,6 @@ namespace AG
         {
             HandlePlayerMovementInput();
             HandleCameraMovementInput();
-            HandleDodgeInput();
             HandleSprintInput();
             HandleCrouchInput();
             HandleJumpInput();
@@ -177,17 +173,6 @@ namespace AG
         {
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
-        }
-
-        private void HandleDodgeInput()
-        {
-            if(dodgeInput)
-            {
-                dodgeInput = false;
-
-                player.playerLocomotionManager.AttemptToPerformDodge();
-            }
-
         }
 
         private void HandleSprintInput()

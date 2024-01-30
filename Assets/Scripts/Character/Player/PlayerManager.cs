@@ -23,6 +23,8 @@ namespace AG
         public PlayerFPSCamera playerFPSCamera = null;
         [HideInInspector]
         public PlayerInventoryManager playerInventoryManager = null;
+        [HideInInspector]
+        public PlayerEquipmentManager playerEquipmentManager = null;
 
         [SerializeField]
         private GameObject fpsObject = null;
@@ -46,6 +48,7 @@ namespace AG
             playerEffectManager = GetComponent<PlayerEffectsManager>();
             playerFPSCamera = GetComponentInChildren<PlayerFPSCamera>();
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
+            playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
         }
 
         private void Start()
@@ -145,6 +148,7 @@ namespace AG
             }
 
             playerNetworkManager.flashlightOn.OnValueChanged += SetFlashlightUsage;
+            playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
         }
 
 

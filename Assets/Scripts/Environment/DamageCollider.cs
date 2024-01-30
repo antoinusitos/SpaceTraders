@@ -6,6 +6,9 @@ namespace AG
 {
     public class DamageCollider : MonoBehaviour
     {
+        [Header("Collider")]
+        protected Collider damageCollider = null;
+
         [Header("Damage")]
         public float physicalDamage = 0;
         public float fireDamage = 0;
@@ -13,8 +16,8 @@ namespace AG
         [Header("Contact Point")]
         private Vector3 contactPoint = Vector3.zero;
 
-        [Header("Contact Point")]
-        protected List<CharacterManager> characterManagers = new List<CharacterManager>();
+        [Header("Character Damaged")]
+        protected List<CharacterManager> characterDamaged = new List<CharacterManager>();
 
         private void OnTriggerEnter(Collider other)
         {
@@ -29,18 +32,29 @@ namespace AG
 
         protected virtual void DamageTarget(CharacterManager damageTarget)
         {
-            if(characterManagers.Contains(damageTarget))
+            if(characterDamaged.Contains(damageTarget))
             {
                 return;
             }
 
-            characterManagers.Add(damageTarget);
+            characterDamaged.Add(damageTarget);
 
             TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
             damageEffect.physicalDamage = physicalDamage;
             damageEffect.fireDamage = fireDamage;
 
             damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
+        }
+
+        public virtual void EnableDamageCollider()
+        {
+            damageCollider.enabled = true;
+        }
+
+        public virtual void DisableDamageCollider()
+        {
+            damageCollider.enabled = false;
+            characterDamaged.Clear();
         }
     }
 }

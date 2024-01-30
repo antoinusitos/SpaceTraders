@@ -18,6 +18,9 @@ namespace AG
         [Header("Utilities")]
         public NetworkVariable<float> cameraUpDownAngle = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Equipment")]
+        public NetworkVariable<int> currentRightHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
         protected override void Awake()
         {
             base.Awake();
@@ -77,6 +80,13 @@ namespace AG
                 Random.InitState(seed);
                 PlayerUIManager.instance.playerUIHUDManager.ShowSeed(seed);
             }
+        }
+
+        public void OnCurrentRightHandWeaponIDChange(int oldID, int newID)
+        {
+            WeaponItem newWeapon = (WeaponItem)Instantiate(WorldItemsManager.instance.GetItemWithID(newID));
+            player.playerInventoryManager.currentRightHandWeapon = newWeapon;
+            player.playerEquipmentManager.LoadRightWeapon();
         }
     }
 }

@@ -10,6 +10,8 @@ namespace AG
 
         public List<ItemDefinition> allItems;
 
+        public List<PickableItem> allPickableItems;
+
         private void Awake()
         {
             if(instance == null)
@@ -42,6 +44,11 @@ namespace AG
                 }
             }
             return null;
+        }
+
+        public PickableItem GetRandomPickableItem()
+        {
+            return allPickableItems[Random.Range(0, allPickableItems.Count)];
         }
     }
 }

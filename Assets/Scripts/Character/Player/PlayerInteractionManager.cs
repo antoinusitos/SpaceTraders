@@ -8,7 +8,8 @@ namespace AG
 {
     public class PlayerInteractionManager : CharacterInteractionManager
     {
-        private PlayerManager player = null;
+        [HideInInspector]
+        public PlayerManager player = null;
 
         [SerializeField]
         private LayerMask interactionMask;
@@ -33,7 +34,7 @@ namespace AG
                 Interactable interactable = hit.transform.GetComponent<Interactable>();
                 if (interactable)
                 {
-                    if (interactable.GetType().IsSubclassOf(typeof(Item)) || interactable.GetType() == typeof(Item))
+                    if (interactable.GetType() == typeof(PickableItem))
                     {
                         PlayerUIManager.instance.playerUIHUDManager.ShowInteractionText(true, "E to pick up " + interactable.name);
                     }
@@ -67,18 +68,17 @@ namespace AG
                 Interactable interactable = hit.transform.GetComponent<Interactable>();
                 if(interactable)
                 {
-                    if(interactable.GetType().IsSubclassOf(typeof(Item)) || interactable.GetType() == typeof(Item))
+                    if (interactable.GetType() == typeof(PickableItem))
                     {
-                        Item item = (Item)interactable;
-
-                        if (player.characterInventoryManager.AddItem(item))
+                        PickableItem pickableItem = (PickableItem) interactable;
+                        if(pickableItem)
                         {
-                            player.characterNetworkManager.DespawnItem(item.NetworkObject.NetworkObjectId);
+                            pickableItem.OnInteract(this);
                         }
                     }
                     else
                     {
-                        if(interactable.OnInteract(this))
+                        if (interactable.OnInteract(this))
                         {
                             lastInteractable = interactable;
                             player.isUsingAnInteractable = true;

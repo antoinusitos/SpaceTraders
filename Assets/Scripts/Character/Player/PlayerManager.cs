@@ -79,6 +79,8 @@ namespace AG
                     transform.position = playerStartsManager.playersStarts[2].position;
                     characterController.enabled = true;
                 }
+
+                Invoke("LoadVisual", 0.5f);
             }
         }
 
@@ -149,6 +151,7 @@ namespace AG
 
             playerNetworkManager.flashlightOn.OnValueChanged += SetFlashlightUsage;
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
+            playerNetworkManager.playerCharacterNumber.OnValueChanged += playerNetworkManager.OnPlayerCharacterChanged;
         }
 
 
@@ -217,6 +220,25 @@ namespace AG
             {
                 PlayerUIManager.instance.playerUICraftManager.UpdateCanCraft();
             }
+        }
+
+        public void RefreshPlayerCharacterVisual(int characterNumber)
+        {
+            GameObject newVisual = WorldItemsManager.instance.GetCharacterWithID(characterNumber);
+            if(newVisual)
+            {
+                GameObject instantiatedVisual = Instantiate(newVisual);
+                instantiatedVisual.transform.parent = transform;
+                instantiatedVisual.transform.position = tpsObject.transform.position;
+                Destroy(tpsObject);
+                tpsObject = instantiatedVisual;
+                playerEquipmentManager.InitializeWeaponSlot();
+            }
+        }
+
+        private void LoadVisual()
+        {
+            playerNetworkManager.playerCharacterNumber.Value = WorldSaveGameManager.instance.currentCharacterData.characterNumber;
         }
     }
 }

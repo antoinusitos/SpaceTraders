@@ -13,6 +13,9 @@ namespace AG
         [Header("Character Name")]
         public string characterName = "";
 
+        [Header("Character Name")]
+        public int characterNumber = 0;
+
         [Header("Time Played")]
         public float secondsPlayed = 0;
 

@@ -258,6 +258,7 @@ namespace AG
             };
 
             currentCharacterData = saveFileDataWriter.LoadSaveFile();
+            currentCharacterData.characterNumber = 0;
 
             //StartCoroutine(LoadWorldScene());
             LoadWorldScene();

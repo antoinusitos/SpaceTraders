@@ -4966,6 +4966,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: b10eb1e4613af2c4391f35942b5165dd, type: 2}
     - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
+      propertyPath: allCharacters.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
+      propertyPath: allCharacters.Array.data[0]
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: c038347e0dd7e3c4e9b1cdc9026855b2, type: 3}
+    - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
+      propertyPath: allCharacters.Array.data[1]
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: a15c705b2c4fcfd4ab9105f4218cb6c7, type: 3}
+    - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
       propertyPath: allPickableItems.Array.size
       value: 3
       objectReference: {fileID: 0}

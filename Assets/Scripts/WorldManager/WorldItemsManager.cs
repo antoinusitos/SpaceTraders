@@ -12,6 +12,8 @@ namespace AG
 
         public List<PickableItem> allPickableItems;
 
+        public List<GameObject> allCharacters;
+
         private void Awake()
         {
             if(instance == null)
@@ -49,6 +51,16 @@ namespace AG
         public PickableItem GetRandomPickableItem()
         {
             return allPickableItems[Random.Range(0, allPickableItems.Count)];
+        }
+
+        public GameObject GetCharacterWithID(int id)
+        {
+            if (id < 0 || id >= allCharacters.Count)
+            {
+                return null;
+            }
+
+            return allCharacters[id];
         }
     }
 }

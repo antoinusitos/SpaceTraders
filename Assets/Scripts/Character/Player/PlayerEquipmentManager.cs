@@ -31,7 +31,7 @@ namespace AG
             LoadRightWeapon();
         }
 
-        private void InitializeWeaponSlot()
+        public void InitializeWeaponSlot()
         {
             WeaponModelInstantiationSlot[] weaponSlots = GetComponentsInChildren<WeaponModelInstantiationSlot>();
             foreach(WeaponModelInstantiationSlot weaponSlot in weaponSlots)

@@ -45,6 +45,8 @@ namespace AG
         private bool flashlightInput = false;
         [SerializeField]
         private bool refillFlashlightInput = false;
+        [SerializeField]
+        private bool useItemInput = false;
 
         private void Awake()
         {
@@ -100,6 +102,7 @@ namespace AG
                 playerControls.PlayerActions.Flashlight.performed += i => flashlightInput = true;
                 playerControls.PlayerActions.RefillFlashLight.performed += i => refillFlashlightInput = true;
                 playerControls.PlayerActions.RefillFlashLight.canceled += i => refillFlashlightInput = false;
+                playerControls.PlayerActions.UseItem.performed += i => useItemInput = true;
                 
             }
 
@@ -275,6 +278,15 @@ namespace AG
             else
             {
                 player.playerInventoryManager.StopBatterieRefill();
+            }
+        }
+        private void HandleUseItemInput()
+        {
+            if(useItemInput)
+            {
+                useItemInput = false;
+
+
             }
         }
     }

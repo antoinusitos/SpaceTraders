@@ -326,6 +326,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""35a677a6-19dc-4d0e-a7aa-7bd787dcd0c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -471,6 +480,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""RefillFlashLight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""619d8448-cd02-40ae-8cdc-e65e04d18e35"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -534,6 +554,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_QuickUse3 = m_PlayerActions.FindAction("QuickUse3", throwIfNotFound: true);
         m_PlayerActions_Flashlight = m_PlayerActions.FindAction("Flashlight", throwIfNotFound: true);
         m_PlayerActions_RefillFlashLight = m_PlayerActions.FindAction("RefillFlashLight", throwIfNotFound: true);
+        m_PlayerActions_UseItem = m_PlayerActions.FindAction("UseItem", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_X = m_UI.FindAction("X", throwIfNotFound: true);
@@ -672,6 +693,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_QuickUse3;
     private readonly InputAction m_PlayerActions_Flashlight;
     private readonly InputAction m_PlayerActions_RefillFlashLight;
+    private readonly InputAction m_PlayerActions_UseItem;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -686,6 +708,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @QuickUse3 => m_Wrapper.m_PlayerActions_QuickUse3;
         public InputAction @Flashlight => m_Wrapper.m_PlayerActions_Flashlight;
         public InputAction @RefillFlashLight => m_Wrapper.m_PlayerActions_RefillFlashLight;
+        public InputAction @UseItem => m_Wrapper.m_PlayerActions_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -725,6 +748,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @RefillFlashLight.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRefillFlashLight;
                 @RefillFlashLight.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRefillFlashLight;
                 @RefillFlashLight.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRefillFlashLight;
+                @UseItem.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
+                @UseItem.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
+                @UseItem.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -759,6 +785,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @RefillFlashLight.started += instance.OnRefillFlashLight;
                 @RefillFlashLight.performed += instance.OnRefillFlashLight;
                 @RefillFlashLight.canceled += instance.OnRefillFlashLight;
+                @UseItem.started += instance.OnUseItem;
+                @UseItem.performed += instance.OnUseItem;
+                @UseItem.canceled += instance.OnUseItem;
             }
         }
     }
@@ -816,6 +845,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnQuickUse3(InputAction.CallbackContext context);
         void OnFlashlight(InputAction.CallbackContext context);
         void OnRefillFlashLight(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

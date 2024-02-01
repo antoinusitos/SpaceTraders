@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace AG
 {
@@ -55,6 +56,14 @@ namespace AG
                 rightHandSlot.LoadWeapon(rightHandWeaponModel);
                 rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();
                 rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+            }
+        }
+
+        public void TryToUSeEquipment()
+        {
+            if(player.playerInventoryManager.currentRightHandWeapon)
+            {
+                Debug.Log("Using " + player.playerInventoryManager.currentRightHandWeapon.itemName);
             }
         }
     }

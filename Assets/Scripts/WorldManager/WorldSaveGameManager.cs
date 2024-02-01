@@ -136,15 +136,12 @@ namespace AG
             };
 
             saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeinUsed(CharacterSlot.CharacterSlot_01);
-            if (!saveFileDataWriter.CheckToSeeIfFileExists())
-            {
-                currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_01;
-                currentCharacterData = new CharacterSaveData();
-                NewGame();
-                return;
-            }
 
-            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeinUsed(CharacterSlot.CharacterSlot_02);
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_01;
+            currentCharacterData = new CharacterSaveData();
+            NewGame();
+
+            /*saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeinUsed(CharacterSlot.CharacterSlot_02);
 
             if (!saveFileDataWriter.CheckToSeeIfFileExists())
             {
@@ -234,7 +231,7 @@ namespace AG
                 return;
             }
 
-            TitleScreenManager.instance.DisplayNoFreeCharacterSlotPopUp();
+            TitleScreenManager.instance.DisplayNoFreeCharacterSlotPopUp();*/
         }
 
         private void NewGame()

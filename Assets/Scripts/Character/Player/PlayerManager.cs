@@ -34,7 +34,6 @@ namespace AG
         private GameObject tpsObject = null;
         [SerializeField]
         private GameObject tpsFlashlightObject = null;
-        [SerializeField]
         private Transform tpsUpDownBone = null;
 
         protected override void Awake()
@@ -49,6 +48,9 @@ namespace AG
             playerFPSCamera = GetComponentInChildren<PlayerFPSCamera>();
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
+
+            animator = tpsObject.GetComponent<Animator>();
+            tpsUpDownBone = tpsObject.GetComponentInChildren<UpDownBone>().transform;
         }
 
         private void Start()
@@ -80,7 +82,7 @@ namespace AG
                     characterController.enabled = true;
                 }
 
-                Invoke("LoadVisual", 0.5f);
+                //Invoke("LoadVisual", 0.5f);
             }
         }
 
@@ -121,7 +123,9 @@ namespace AG
         {
             base.OnNetworkSpawn();
 
-            if(IsOwner)
+            playerNetworkManager.playerCharacterNumber.OnValueChanged += playerNetworkManager.OnPlayerCharacterChanged;
+
+            if (IsOwner)
             {
                 transform.position = Vector3.up;
 
@@ -143,6 +147,8 @@ namespace AG
 
                 tpsObject.SetActive(false);
                 PlayerCamera.instance.cameraObject.gameObject.SetActive(false);
+
+                Invoke("LoadVisual", 0.1f);
             }
             else
             {
@@ -151,7 +157,6 @@ namespace AG
 
             playerNetworkManager.flashlightOn.OnValueChanged += SetFlashlightUsage;
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
-            playerNetworkManager.playerCharacterNumber.OnValueChanged += playerNetworkManager.OnPlayerCharacterChanged;
         }
 
 
@@ -230,15 +235,29 @@ namespace AG
                 GameObject instantiatedVisual = Instantiate(newVisual);
                 instantiatedVisual.transform.parent = transform;
                 instantiatedVisual.transform.position = tpsObject.transform.position;
+                instantiatedVisual.transform.localRotation = Quaternion.identity;
                 Destroy(tpsObject);
                 tpsObject = instantiatedVisual;
+                tpsUpDownBone = tpsObject.GetComponentInChildren<UpDownBone>().transform;
+                animator = tpsObject.GetComponent<Animator>();
                 playerEquipmentManager.InitializeWeaponSlot();
             }
         }
 
-        private void LoadVisual()
+        public void LoadVisual()
         {
+            Debug.Log("LoadVisual");
             playerNetworkManager.playerCharacterNumber.Value = WorldSaveGameManager.instance.currentCharacterData.characterNumber;
+
+            PlayerManager[] players = FindObjectsOfType<PlayerManager>();
+            Debug.Log("players" + players.Length);
+            for(int i = 0; i < players.Length; i++)
+            {
+                if (players[i].IsOwner)
+                    continue;
+
+                players[i].RefreshPlayerCharacterVisual(players[i].playerNetworkManager.playerCharacterNumber.Value);
+            }
         }
     }
 }

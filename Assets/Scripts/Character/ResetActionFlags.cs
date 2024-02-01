@@ -13,7 +13,7 @@ namespace AG
         {
             if(character == null)
             {
-                character = animator.GetComponent<CharacterManager>();
+                character = animator.GetComponentInParent<CharacterManager>();
             }
 
             character.isPerformingAction = false;

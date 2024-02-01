@@ -9,10 +9,6 @@ namespace AG
     {
         public static PlayerUIManager instance = null;
 
-        [Header("Network Join")]
-        [SerializeField]
-        private bool startGameAsClient = false;
-
         [HideInInspector]
         public PlayerUIHUDManager playerUIHUDManager = null;
         [HideInInspector]
@@ -39,16 +35,6 @@ namespace AG
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
-        }
-
-        private void Update()
-        {
-            if(startGameAsClient)
-            {
-                startGameAsClient = false;
-                NetworkManager.Singleton.Shutdown();
-                NetworkManager.Singleton.StartClient();
-            }
         }
 
         public void CloseMenus()

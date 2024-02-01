@@ -25309,6 +25309,10 @@ PrefabInstance:
       value: WorldAIManager
       objectReference: {fileID: 0}
     - target: {fileID: 485829294144472364, guid: 30eaf53a10bdbb7449e12226e98b9d87, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 485829294144472364, guid: 30eaf53a10bdbb7449e12226e98b9d87, type: 3}
       propertyPath: aiCharacters.Array.size
       value: 1
       objectReference: {fileID: 0}

@@ -43,7 +43,7 @@ namespace AG
             DontDestroyOnLoad(gameObject);
 
             characterController = GetComponent<CharacterController>();
-            animator = GetComponent<Animator>();
+            animator = GetComponentInChildren<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
             characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
             characterInventoryManager = GetComponent<CharacterInventoryManager>();

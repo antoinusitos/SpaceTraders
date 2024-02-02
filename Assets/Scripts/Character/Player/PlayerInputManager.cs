@@ -286,7 +286,7 @@ namespace AG
             {
                 useItemInput = false;
 
-
+                player.playerEquipmentManager.TryToUSeEquipment();
             }
         }
     }

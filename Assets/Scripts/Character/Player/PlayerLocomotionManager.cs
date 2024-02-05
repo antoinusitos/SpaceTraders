@@ -169,7 +169,7 @@ namespace AG
 
         private void HandleJumpingMovement()
         {
-            if(player.isJumping)
+            if(player.characterNetworkManager.isJumping.Value)
             {
                 player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
             }
@@ -227,7 +227,7 @@ namespace AG
                 return;
             }
 
-            if(player.isJumping)
+            if(player.characterNetworkManager.isJumping.Value)
             {
                 return;
             }
@@ -296,7 +296,7 @@ namespace AG
                 return;
             }
 
-            if(player.isJumping)
+            if(player.characterNetworkManager.isJumping.Value)
             {
                 return;
             }
@@ -320,7 +320,7 @@ namespace AG
 
             player.playerAnimatorManager.PlayTargetActionAnimation("JumpStart", false);
 
-            player.isJumping = true;
+            player.characterNetworkManager.isJumping.Value = true;
 
             jumpDirection = player.playerFPSCamera.transform.forward * PlayerInputManager.instance.verticalInput;
             jumpDirection += player.playerFPSCamera.transform.right * PlayerInputManager.instance.horizontalInput;

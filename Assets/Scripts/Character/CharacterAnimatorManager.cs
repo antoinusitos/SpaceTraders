@@ -49,5 +49,19 @@ namespace AG
 
             character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation);
         }
+
+        public virtual void PlayTargetAttackActionAnimation(
+            string targetAnimation,
+            bool isPerformingAction,
+            bool canRotate = false,
+            bool canMove = false)
+        {
+            character.animator.CrossFade(targetAnimation, crossFadeTime);
+            character.isPerformingAction = isPerformingAction;
+            character.canRotate = canRotate;
+            character.canMove = canMove;
+
+            character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation);
+        }
     }
 }

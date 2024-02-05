@@ -19,7 +19,9 @@ namespace AG
         public NetworkVariable<float> cameraUpDownAngle = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Equipment")]
+        public NetworkVariable<int> currentWeaponBeingUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentRightHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isUsingRightHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         protected override void Awake()
         {
@@ -28,6 +30,11 @@ namespace AG
             player = GetComponent<PlayerManager>();
 
             faction.OnValueChanged += OnFactionChanged;
+        }
+        
+        public void SetCharacterActionHand()
+        {
+            isUsingRightHand.Value = true;
         }
 
         public void OnPlayerCharacterChanged(int previousIndex, int newIndex)
@@ -95,6 +102,44 @@ namespace AG
             WeaponItem newWeapon = (WeaponItem)Instantiate(WorldItemsManager.instance.GetItemWithID(newID));
             player.playerInventoryManager.currentRightHandWeapon = newWeapon;
             player.playerEquipmentManager.LoadRightWeapon();
+        }
+
+        public void OnCurrentWeaponBeingUsedIDChange(int oldID, int newID)
+        {
+            WeaponItem newWeapon = (WeaponItem)Instantiate(WorldItemsManager.instance.GetItemWithID(newID));
+            player.playerCombatManager.currentWeaponBeingUsed = newWeapon;
+        }
+
+        [ServerRpc]
+        public void NotifyTheServerOfWeaponActionServerRpc(ulong clientID, int actionID, int weaponID)
+        {
+            if(IsServer)
+            {
+                NotifyTheServerOfWeaponActionClientRpc(clientID, actionID, weaponID);
+            }
+        }
+
+        [ClientRpc]
+        private void NotifyTheServerOfWeaponActionClientRpc(ulong clientID, int actionID, int weaponID)
+        {
+            if(clientID != NetworkManager.Singleton.LocalClientId)
+            {
+                PerformWeaponBasedAction(actionID, weaponID);
+            }
+        }
+
+        private void PerformWeaponBasedAction(int actionID, int weaponID)
+        {
+            WeaponItemAction weaponAction = WorldActionManager.instance.GetWeaponItemACtionWithID(actionID);
+
+            if(weaponAction)
+            {
+                weaponAction.AttemptToPerformAction(player, WorldItemsManager.instance.GetWeaponWithID(weaponID));
+            }
+            else
+            {
+                Debug.LogError("ACTION IS NULL, CANNOT BE PERFORMED");
+            }
         }
     }
 }

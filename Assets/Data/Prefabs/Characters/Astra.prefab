@@ -1174,6 +1174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3785106320573100199}
   - component: {fileID: 7090718534843869917}
+  - component: {fileID: -656677191578973155}
   m_Layer: 0
   m_Name: Astra
   m_TagString: Untagged
@@ -1219,6 +1220,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-656677191578973155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4597250016756115997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e1817058c72a74eb19c6d061921bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4825303898872899454
 GameObject:
   m_ObjectHideFlags: 0

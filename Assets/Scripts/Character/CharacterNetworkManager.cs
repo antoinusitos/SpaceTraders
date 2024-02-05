@@ -26,6 +26,7 @@ namespace AG
 
         [Header("Flags")]
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isCrouching = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> inAirTimer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
@@ -46,6 +47,8 @@ namespace AG
         {
             character = GetComponent<CharacterManager>();
         }
+
+        //ACTION
 
         [ServerRpc]
         public void NotifyTheServerOfActionAnimationServerRpc(ulong clientID, string animationID)
@@ -71,6 +74,93 @@ namespace AG
         {
             character.animator.CrossFade(animationID, character.characterAnimatorManager.crossFadeTime);
         }
+
+        //ATTACK
+
+        [ServerRpc]
+        public void NotifyTheServerOfAttackActionAnimationServerRpc(ulong clientID, string animationID)
+        {
+            if (IsServer)
+            {
+                PlayAttackAnimationForAllClientsClientRpc(clientID, animationID);
+            }
+        }
+
+        [ClientRpc]
+        public void PlayAttackAnimationForAllClientsClientRpc(ulong clientID, string animationID)
+        {
+            if (clientID == NetworkManager.Singleton.LocalClientId)
+            {
+                return;
+            }
+
+            PerformAttackAnimationFromServer(animationID);
+        }
+
+        private void PerformAttackAnimationFromServer(string animationID)
+        {
+            character.animator.CrossFade(animationID, character.characterAnimatorManager.crossFadeTime);
+        }
+
+        //DAMAGE
+        [ServerRpc(RequireOwnership = false)]
+        public void NotifyTheServerOfCharacterDamageServerRpc(
+            ulong damagedCharacterID,
+            ulong characterCausingDamageID,
+            float physicalDamage,
+            float fireDamage,
+            float angleHitFrom,
+            float contactPointX,
+            float contactPointY,
+            float contactPointZ
+            )
+        {
+            if(IsServer)
+            {
+                NotifyTheServerOfCharacterDamageClientRpc(damagedCharacterID, characterCausingDamageID, physicalDamage, fireDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ);
+            }
+        }
+
+        [ClientRpc]
+        public void NotifyTheServerOfCharacterDamageClientRpc(
+            ulong damagedCharacterID,
+            ulong characterCausingDamageID,
+            float physicalDamage,
+            float fireDamage,
+            float angleHitFrom,
+            float contactPointX,
+            float contactPointY,
+            float contactPointZ
+            )
+        {
+            ProcessCharacterDamageFromServer(damagedCharacterID, characterCausingDamageID, physicalDamage, fireDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ);
+        }
+
+        public void ProcessCharacterDamageFromServer(
+            ulong damagedCharacterID,
+            ulong characterCausingDamageID,
+            float physicalDamage,
+            float fireDamage,
+            float angleHitFrom,
+            float contactPointX,
+            float contactPointY,
+            float contactPointZ
+            )
+        {
+            CharacterManager damagedCharacter = NetworkManager.Singleton.SpawnManager.SpawnedObjects[damagedCharacterID].gameObject.GetComponent<CharacterManager>();
+            CharacterManager characterCausingDamage = NetworkManager.Singleton.SpawnManager.SpawnedObjects[characterCausingDamageID].gameObject.GetComponent<CharacterManager>();
+
+            TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
+            damageEffect.physicalDamage = physicalDamage;
+            damageEffect.fireDamage = fireDamage;
+            damageEffect.angleHitFrom = angleHitFrom;
+            damageEffect.contactPoint = new Vector3(contactPointX, contactPointY, contactPointZ);
+            damageEffect.characterCausingDamage = characterCausingDamage;
+
+            damagedCharacter.characterEffectsManager.ProcessInstantEffect(damageEffect);
+        }
+
+        //ITEM DESPAWN
 
         [ServerRpc]
         private void DespawnItemServerRpc(ulong item)

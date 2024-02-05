@@ -13,10 +13,13 @@ namespace AG
         {
             if (character == null)
             {
-                character = animator.GetComponent<CharacterManager>();
+                character = animator.GetComponentInParent<CharacterManager>();
             }
 
-            character.isJumping = false;
+            if(character.IsOwner)
+            {
+                character.characterNetworkManager.isJumping.Value = false;
+            }
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63896aa4f267efd4c84060ded6801287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meleeDamageCollider: {fileID: 859639255566443573}
 --- !u!114 &7671007691371050657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +134,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6036406914512225131}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.009253537, y: 0.099646375, z: 0.024336016}
@@ -150,9 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bda360fb0f693449af2fa1b476d82a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageCollider: {fileID: 4902407444049537565}
   physicalDamage: 0
   fireDamage: 0
   characterCausingDamage: {fileID: 0}
+  lightAttackModifier: 0
 --- !u!1 &7461715984635117638
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,11 +25,17 @@ namespace AG
         public PlayerInventoryManager playerInventoryManager = null;
         [HideInInspector]
         public PlayerEquipmentManager playerEquipmentManager = null;
+        [HideInInspector]
+        public PlayerCombatManager playerCombatManager = null;
 
+        [Header("FPS")]
         [SerializeField]
         private GameObject fpsObject = null;
         [SerializeField]
         private GameObject fpsFlashlightObject = null;
+        public Animator fpsAnimator = null;
+
+        [Header("TPS")]
         [SerializeField]
         private GameObject tpsObject = null;
         [SerializeField]
@@ -48,6 +54,7 @@ namespace AG
             playerFPSCamera = GetComponentInChildren<PlayerFPSCamera>();
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
+            playerCombatManager = GetComponent<PlayerCombatManager>();
 
             animator = tpsObject.GetComponent<Animator>();
             tpsUpDownBone = tpsObject.GetComponentInChildren<UpDownBone>().transform;
@@ -145,7 +152,7 @@ namespace AG
 
                 playerNetworkManager.flashlightOn.OnValueChanged += playerInventoryManager.FlashLightState;
 
-                tpsObject.SetActive(false);
+                //tpsObject.SetActive(false);
                 PlayerCamera.instance.cameraObject.gameObject.SetActive(false);
 
                 Invoke("LoadVisual", 0.1f);
@@ -157,8 +164,13 @@ namespace AG
 
             playerNetworkManager.flashlightOn.OnValueChanged += SetFlashlightUsage;
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
-        }
+            playerNetworkManager.currentWeaponBeingUsed.OnValueChanged += playerNetworkManager.OnCurrentWeaponBeingUsedIDChange;
 
+            if (IsOwner && !IsServer)
+            {
+                LoadGameDataFromCurrentCharacterData(ref WorldSaveGameManager.instance.currentCharacterData);
+            }
+        }
 
         private void SetFlashlightUsage(bool previousValue, bool newValue)
         {
@@ -258,6 +270,11 @@ namespace AG
 
                 players[i].RefreshPlayerCharacterVisual(players[i].playerNetworkManager.playerCharacterNumber.Value);
             }
+        }
+
+        public GameObject GetTPSObject()
+        { 
+            return  tpsObject; 
         }
     }
 }

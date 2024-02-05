@@ -49,7 +49,7 @@ namespace AG
             }
             else
             {
-                if(!character.isJumping && !fallingVelocityHasBeenSet)
+                if(!character.characterNetworkManager.isJumping.Value && !fallingVelocityHasBeenSet)
                 {
                     fallingVelocityHasBeenSet = true;
                     yVelocity.y = fallStartYVelocity;
@@ -70,12 +70,12 @@ namespace AG
 
         protected void OnDrawGizmosSelected()
         {
-            if(!character)
+            /*if(!character)
             {
                 return;
             }
 
-            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);*/
         }
     }
 }

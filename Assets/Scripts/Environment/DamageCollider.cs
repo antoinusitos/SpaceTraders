@@ -7,21 +7,28 @@ namespace AG
     public class DamageCollider : MonoBehaviour
     {
         [Header("Collider")]
-        protected Collider damageCollider = null;
+        [SerializeField] protected Collider damageCollider = null;
 
         [Header("Damage")]
         public float physicalDamage = 0;
         public float fireDamage = 0;
 
         [Header("Contact Point")]
-        private Vector3 contactPoint = Vector3.zero;
+        protected Vector3 contactPoint = Vector3.zero;
 
         [Header("Character Damaged")]
         protected List<CharacterManager> characterDamaged = new List<CharacterManager>();
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void Awake()
         {
+
+        }
+
+        protected virtual void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("Damage Enter");
             CharacterManager damageTarget = other.GetComponent<CharacterManager>();
+
             if (damageTarget)
             {
                 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
@@ -32,13 +39,16 @@ namespace AG
 
         protected virtual void DamageTarget(CharacterManager damageTarget)
         {
-            if(characterDamaged.Contains(damageTarget))
+            Debug.Log("DamageTarget");
+
+            if (characterDamaged.Contains(damageTarget))
             {
                 return;
             }
 
             characterDamaged.Add(damageTarget);
 
+            Debug.Log("TakeDamageEffect");
             TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
             damageEffect.physicalDamage = physicalDamage;
             damageEffect.fireDamage = fireDamage;

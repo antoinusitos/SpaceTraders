@@ -21,3 +21,4 @@ MonoBehaviour:
   physicalDamage: 25
   fireDamage: 0
   baseStaminaCost: 20
+  LMB_Action: {fileID: 11400000, guid: 4350b3d8ded7a0d40b94314a8db8972a, type: 2}

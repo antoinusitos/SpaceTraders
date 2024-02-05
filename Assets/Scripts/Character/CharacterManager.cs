@@ -33,7 +33,6 @@ namespace AG
         public bool isPerformingAction = false;
         public bool canRotate = true;
         public bool canMove = true;
-        public bool isJumping = false;
         public bool isGrounded = false;
         public bool isInMenu = false;
         public bool isUsingAnInteractable = false;
@@ -84,7 +83,6 @@ namespace AG
             }
             else
             {
-
                 transform.position = Vector3.SmoothDamp(
                     transform.position, 
                     characterNetworkManager.networkPosition.Value, 

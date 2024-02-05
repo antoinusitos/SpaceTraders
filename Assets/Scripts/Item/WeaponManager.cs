@@ -6,7 +6,7 @@ namespace AG
 {
     public class WeaponManager : MonoBehaviour
     {
-        private MeleeWeaponDamageCollider meleeDamageCollider = null;
+        public MeleeWeaponDamageCollider meleeDamageCollider = null;
 
         private void Awake()
         {
@@ -18,6 +18,8 @@ namespace AG
             meleeDamageCollider.characterCausingDamage = characterWieldingWeapon;
             meleeDamageCollider.physicalDamage = weapon.physicalDamage;
             meleeDamageCollider.fireDamage = weapon.fireDamage;
+
+            meleeDamageCollider.lightAttackModifier = weapon.lightAttackModifier;
         }
     }
 }

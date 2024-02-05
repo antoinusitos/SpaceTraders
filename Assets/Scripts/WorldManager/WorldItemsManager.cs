@@ -14,6 +14,8 @@ namespace AG
 
         public List<GameObject> allCharacters;
 
+        public List<WeaponItem> allWeapons;
+
         private void Awake()
         {
             if(instance == null)
@@ -23,6 +25,11 @@ namespace AG
             else
             {
                 Destroy(gameObject);
+            }
+
+            for (int i = 0; i < allWeapons.Count; i++)
+            {
+                allItems.Add(allWeapons[i]);
             }
 
             for (int i = 0; i < allItems.Count; i++)
@@ -61,6 +68,24 @@ namespace AG
             }
 
             return allCharacters[id];
+        }
+
+        public WeaponItem GetWeaponWithID(int id)
+        {
+            if (id < 0 || id >= allWeapons.Count)
+            {
+                return null;
+            }
+
+            for (int i = 0; i < allWeapons.Count; i++)
+            {
+                if (allWeapons[i].itemID == id)
+                {
+                    return allWeapons[i];
+                }
+            }
+
+            return null;
         }
     }
 }

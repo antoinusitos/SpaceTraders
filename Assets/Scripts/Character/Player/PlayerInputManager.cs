@@ -65,10 +65,20 @@ namespace AG
             if(newScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
             {
                 instance.enabled = true;
+
+                if (playerControls != null)
+                {
+                    playerControls.Enable();
+                }
             }
             else
             {
                 instance.enabled = false;
+
+                if (playerControls != null)
+                {
+                    playerControls.Disable();
+                }
             }
         }
 
@@ -79,6 +89,10 @@ namespace AG
             SceneManager.activeSceneChanged += OnSceneChange;
 
             instance.enabled = false;
+            if(playerControls != null)
+            {
+                playerControls.Disable();
+            }
         }
 
         private void OnEnable()
@@ -146,6 +160,7 @@ namespace AG
             HandleQuickUseInput();
             HandleFlashLightInput();
             HandleRefillFlashLightInput();
+            HandleUseItemInput();
         }
 
         private void HandlePlayerMovementInput()
@@ -169,7 +184,7 @@ namespace AG
                 return;
             }
 
-            player.playerAnimatorManager.UpdateAnimatorValuesParamaters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+            player.playerAnimatorManager.UpdateAnimatorValuesParamaters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
         }
 
         private void HandleCameraMovementInput()
@@ -280,13 +295,16 @@ namespace AG
                 player.playerInventoryManager.StopBatterieRefill();
             }
         }
+
         private void HandleUseItemInput()
         {
             if(useItemInput)
             {
                 useItemInput = false;
 
-                player.playerEquipmentManager.TryToUSeEquipment();
+                //player.playerEquipmentManager.TryToUSeEquipment();
+                player.playerNetworkManager.SetCharacterActionHand();
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.LMB_Action, player.playerInventoryManager.currentRightHandWeapon);
             }
         }
     }

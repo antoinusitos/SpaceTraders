@@ -13,5 +13,10 @@ namespace AG
         [Header("Stamina Cost")]
         public float baseStaminaCost = 20;
 
+        [Header("Modifiers")]
+        public float lightAttackModifier = 1;
+
+        [Header("Actions")]
+        public WeaponItemAction LMB_Action = null;
     }
 }

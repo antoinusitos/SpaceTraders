@@ -29,4 +29,9 @@ namespace AG
         RightHand,
         LeftHand,
     }
+
+    public enum AttackType
+    {
+        LightAttack,
+    }
 }

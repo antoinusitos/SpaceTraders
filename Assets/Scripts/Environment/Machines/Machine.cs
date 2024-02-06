@@ -19,6 +19,9 @@ namespace AG
         [SerializeField]
         protected UnityEvent onCompleteEvents = null;
 
+        [SerializeField]
+        protected int cashEarnedWhenComplete = 20;
+
         public override bool OnInteract(PlayerInteractionManager playerUsing)
         {
             if (machineIsBeingUSed.Value)

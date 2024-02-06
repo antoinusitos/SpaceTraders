@@ -48,6 +48,10 @@ namespace AG
         [SerializeField]
         private TextMeshProUGUI interactionFeedbackText = null;
 
+        [Header("Cash")]
+        [SerializeField]
+        private TextMeshProUGUI cashText = null;
+
         public void SetNewHealthValue(float oldValue, float newValue)
         {
             healthBar.SetStat(newValue);
@@ -170,6 +174,25 @@ namespace AG
         {
             interactionFeedbackTextGameObject.SetActive(showText);
             interactionFeedbackText.text = text;
+        }
+
+        public void SetNewCashValue(int oldValue, int newValue)
+        {
+            StartCoroutine(AddCash(oldValue, newValue));
+        }
+
+        private IEnumerator AddCash(int oldValue, int newValue)
+        {
+            float timer = 0;
+            float currentValue = 0;
+            while (timer < 1)
+            {
+                currentValue = Mathf.Lerp(oldValue, newValue, timer);
+                cashText.text = Mathf.RoundToInt(currentValue).ToString();
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            cashText.text = newValue.ToString();
         }
     }
 }

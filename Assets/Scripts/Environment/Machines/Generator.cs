@@ -156,6 +156,7 @@ namespace AG
                 {
                     move = false;
                     player.SetIsDoneOnMachine(NetworkObject.NetworkObjectId);
+                    player.player.playerNetworkManager.cash.Value += cashEarnedWhenComplete;
                     thirdImage.color = activeStateColor;
                     player.StopInteract();
                 }

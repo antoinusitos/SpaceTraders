@@ -15,6 +15,9 @@ namespace AG
         public NetworkVariable<Factions> faction = new NetworkVariable<Factions>(Factions.NONE, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public NetworkVariable<int> playerCharacterNumber = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Runtime Values")]
+        public NetworkVariable<int> cash = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
         [Header("Utilities")]
         public NetworkVariable<float> cameraUpDownAngle = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 

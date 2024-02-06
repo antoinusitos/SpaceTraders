@@ -62,6 +62,10 @@ namespace AG
         {
             if(!IsOwner)
             {
+                if (newValue <= 0)
+                {
+                    animator.enabled = false;
+                }
                 return;
             }
 

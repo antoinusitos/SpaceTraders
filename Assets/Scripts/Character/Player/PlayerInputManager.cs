@@ -303,8 +303,11 @@ namespace AG
                 useItemInput = false;
 
                 //player.playerEquipmentManager.TryToUSeEquipment();
-                player.playerNetworkManager.SetCharacterActionHand();
-                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.LMB_Action, player.playerInventoryManager.currentRightHandWeapon);
+                if(player.playerInventoryManager.currentRightHandWeapon)
+                {
+                    player.playerNetworkManager.SetCharacterActionHand();
+                    player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.LMB_Action, player.playerInventoryManager.currentRightHandWeapon);
+                }
             }
         }
     }

@@ -150,6 +150,8 @@ namespace AG
                 playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.instance.playerUIHUDManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
 
+                playerNetworkManager.cash.OnValueChanged += PlayerUIManager.instance.playerUIHUDManager.SetNewCashValue;
+
                 playerNetworkManager.flashlightOn.OnValueChanged += playerInventoryManager.FlashLightState;
 
                 //tpsObject.SetActive(false);
@@ -219,8 +221,9 @@ namespace AG
         {
             base.OnDeath();
 
-            tpsObject.SetActive(true);
+            //tpsObject.SetActive(true);
             fpsObject.SetActive(false);
+            animator.enabled = false;
             PlayerUIManager.instance.playerUIHUDManager.gameObject.SetActive(false);
         }
 

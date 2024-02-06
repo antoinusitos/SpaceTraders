@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene_World_01.unity
     guid: efe60c3a45bb1634b9405d3abe9bc927
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/HUB.unity
     guid: 3a98bb5bffe72024599c1b2d1dc80107
+  - enabled: 1
+    path: Assets/Scenes/Prototype/HUB_Blocky.unity
+    guid: d7efa68328631354286af5a72353f11a
   m_configObjects: {}

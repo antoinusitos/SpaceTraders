@@ -12,6 +12,7 @@ namespace AG
         // Normal players number to start
         public int playersToStart = 4;
         public NetworkVariable<bool> networkGameStarted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        public NetworkVariable<bool> networkGameFinished = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private int networkRandomSeed = 0;
 
         [SerializeField]
@@ -113,6 +114,31 @@ namespace AG
             sasDoor.ForceOpening();
 
 
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void TestGameFinishedServerRpc()
+        {
+            Invoke("TestGameFinished", 1);
+        }
+
+        private void TestGameFinished()
+        {
+            PlayerManager[] players = FindObjectsOfType<PlayerManager>();
+
+            for (int i = 0; i < players.Length; i++)
+            {
+                Debug.Log("player found");
+                Debug.Log("health :" + players[i].playerNetworkManager.currentHealth.Value);
+                Debug.Log("end game :" + players[i].playerNetworkManager.endGameReached.Value);
+                if (players[i].playerNetworkManager.currentHealth.Value > 0 && !players[i].playerNetworkManager.endGameReached.Value)
+                {
+                    return;
+                }
+            }
+
+            Debug.Log("game finished");
+            networkGameFinished.Value = true;
         }
     }
 }

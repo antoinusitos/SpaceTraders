@@ -14,6 +14,7 @@ namespace AG
         public NetworkVariable<FixedString64Bytes> characterName = new NetworkVariable<FixedString64Bytes>("Character", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<Factions> faction = new NetworkVariable<Factions>(Factions.NONE, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public NetworkVariable<int> playerCharacterNumber = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> endGameReached = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Runtime Values")]
         public NetworkVariable<int> cash = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -70,6 +71,7 @@ namespace AG
             }
 
             PlayerUIManager.instance.playerUIHUDManager.ShowFaction(newFaction);
+            WorldGameManager.instance.networkGameFinished.OnValueChanged += PlayerUIManager.instance.playerUIEndGameResult.OnEndGameChanged;
         }
 
         [ClientRpc]

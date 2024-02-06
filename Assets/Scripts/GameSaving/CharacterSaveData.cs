@@ -13,7 +13,7 @@ namespace AG
         [Header("Character Name")]
         public string characterName = "";
 
-        [Header("Character Name")]
+        [Header("Character Model")]
         public int characterNumber = 1;
 
         [Header("Time Played")]

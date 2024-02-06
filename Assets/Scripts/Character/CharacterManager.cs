@@ -112,6 +112,7 @@ namespace AG
 
         protected virtual void OnDeath()
         {
+            Debug.Log("OnDeath char");
             characterAnimatorManager.PlayTargetActionAnimation("Death", true);
 
             isDead.Value = true;

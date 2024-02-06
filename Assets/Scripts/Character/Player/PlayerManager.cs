@@ -221,10 +221,13 @@ namespace AG
         {
             base.OnDeath();
 
+            Debug.Log("OnDeath player");
+
             //tpsObject.SetActive(true);
             fpsObject.SetActive(false);
             animator.enabled = false;
             PlayerUIManager.instance.playerUIHUDManager.gameObject.SetActive(false);
+            WorldGameManager.instance.TestGameFinishedServerRpc();
         }
 
         public void OpenCraftMenu()

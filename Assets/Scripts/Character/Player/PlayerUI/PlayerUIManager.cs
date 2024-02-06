@@ -15,6 +15,8 @@ namespace AG
         public PlayerUICraftManager playerUICraftManager = null;
         [HideInInspector]
         public PlayerUIInventoryManager playerUIInventoryManager = null;
+        [HideInInspector]
+        public PlayerUIEndGameResult playerUIEndGameResult = null;
 
         private void Awake()
         {
@@ -30,6 +32,7 @@ namespace AG
             playerUIHUDManager = GetComponentInChildren<PlayerUIHUDManager>();
             playerUICraftManager = GetComponentInChildren<PlayerUICraftManager>();
             playerUIInventoryManager = GetComponentInChildren<PlayerUIInventoryManager>();
+            playerUIEndGameResult = GetComponentInChildren<PlayerUIEndGameResult>();
         }
 
         private void Start()

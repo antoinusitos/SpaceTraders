@@ -126,7 +126,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   machineIsBeingUSed:
     m_InternalValue: 0
+  isDone:
+    m_InternalValue: 0
   machineUI: {fileID: 2855913027595422909}
+  onCompleteEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  cashEarnedWhenComplete: 20
   minSliderValue: -345
   maxSliderValue: 345
   valueSpeed: 1000

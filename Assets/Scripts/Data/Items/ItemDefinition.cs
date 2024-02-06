@@ -13,6 +13,8 @@ namespace AG
         public ItemType itemType = ItemType.NONE;
         public int itemQuantity = 0;
         public GameObject itemPrefab = null;
+        public float craftTime = 5;
+        public int craftPrice = 10;
     }
 
     public enum ItemType

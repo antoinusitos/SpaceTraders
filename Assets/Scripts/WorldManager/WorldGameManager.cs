@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace AG
 {
@@ -30,6 +31,7 @@ namespace AG
             {
                 Destroy(gameObject);
             }
+
         }
 
         public override void OnNetworkSpawn()
@@ -88,6 +90,8 @@ namespace AG
             networkRandomSeed = Random.Range(1, int.MaxValue - 1);
             Random.InitState(networkRandomSeed);
 
+            LoadMap();
+
             yield return new WaitForSeconds(0.1f);
             
             PlayerNetworkManager[] playerNetworkManagers = FindObjectsOfType<PlayerNetworkManager>();
@@ -112,8 +116,6 @@ namespace AG
 
             sasDoor.SetLockState(false);
             sasDoor.ForceOpening();
-
-
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -141,6 +143,8 @@ namespace AG
             networkGameFinished.Value = true;
             networkGameStarted.Value = false;
 
+            UnloadMap();
+
             StartCoroutine("GotoHUB");
         }
 
@@ -167,6 +171,16 @@ namespace AG
             yield return new WaitForSeconds(2);
 
             CheckPlayersNumber();
+        }
+
+        public void LoadMap()
+        {
+            NetworkManager.SceneManager.LoadScene("Map1", LoadSceneMode.Additive);
+        }
+
+        public void UnloadMap()
+        {
+            NetworkManager.SceneManager.UnloadScene(SceneManager.GetSceneByBuildIndex(3));
         }
     }
 }

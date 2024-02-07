@@ -318,13 +318,17 @@ namespace AG
                 characterController.enabled = true;
             }
 
-            //TODO : Empty player equipment and inventory
+            canMove = true;
+            canRotate = true;
+
             playerNetworkManager.cash.Value = 0;
             playerNetworkManager.currentWeaponBeingUsed.Value = -1;
             playerNetworkManager.currentRightHandWeaponID.Value = -1;
             playerEquipmentManager.LoadRightWeapon();
             playerInventoryManager.EmptyInventory();
             PlayerUIManager.instance.playerUIInventoryManager.EmptyInventory();
+
+            PlayerUIManager.instance.playerUIEndGameResult.CloseResults();
         }
 
         public void QuitGame()

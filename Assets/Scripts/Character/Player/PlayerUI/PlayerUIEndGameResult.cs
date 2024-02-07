@@ -45,11 +45,15 @@ namespace AG
             container.SetActive(false);
         }
 
-        internal void OnEndGameChanged(bool previousValue, bool newValue)
+        public void OnEndGameChanged(bool previousValue, bool newValue)
         {
             if(newValue)
             {
                 PullResults();
+            }
+            else
+            {
+                container.SetActive(false);
             }
         }
     }

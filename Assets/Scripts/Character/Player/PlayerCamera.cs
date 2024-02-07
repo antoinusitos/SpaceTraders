@@ -66,6 +66,11 @@ namespace AG
             cameraObject.gameObject.SetActive(true);
         }
 
+        public void StopCamera()
+        {
+            cameraObject.gameObject.SetActive(false);
+        }
+
         public void HandleAllCameraActions()
         {
             if (player == null)

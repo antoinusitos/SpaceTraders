@@ -139,6 +139,22 @@ namespace AG
 
             Debug.Log("game finished");
             networkGameFinished.Value = true;
+
+            StartCoroutine("GotoHUB");
+        }
+
+        private IEnumerator GotoHUB()
+        {
+            yield return new WaitForSeconds(3);
+
+            networkGameFinished.Value = false;
+
+            PlayerManager[] players = FindObjectsOfType<PlayerManager>();
+
+            for (int i = 0; i < players.Length; i++)
+            {
+                players[i].GoToPlayerStartClientRpc(i);
+            }
         }
     }
 }

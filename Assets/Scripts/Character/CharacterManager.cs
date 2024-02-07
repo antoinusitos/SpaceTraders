@@ -66,12 +66,20 @@ namespace AG
                 {
                     animator.enabled = false;
                 }
+                else
+                {
+                    animator.enabled = true;
+                }
                 return;
             }
 
             if(newValue <= 0)
             {
                 OnDeath();
+            }
+            else if(isDead.Value)
+            {
+                OnRevive();
             }
         }
 
@@ -112,15 +120,21 @@ namespace AG
 
         protected virtual void OnDeath()
         {
-            Debug.Log("OnDeath char");
-            characterAnimatorManager.PlayTargetActionAnimation("Death", true);
-
             isDead.Value = true;
             canMove = false;
             canRotate = false;
             isInMenu = false;
             PlayerCamera.instance.SetupCamera();
             PlayerUIManager.instance.CloseMenus();
+        }
+
+        protected virtual void OnRevive()
+        {
+            isDead.Value = false;
+            canMove = true;
+            canRotate = true;
+            isInMenu = false;
+            PlayerCamera.instance.StopCamera();
         }
     }
 }

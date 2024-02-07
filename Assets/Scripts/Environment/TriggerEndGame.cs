@@ -13,6 +13,7 @@ namespace AG
             if (playerManager && playerManager.IsOwner)
             {
                 playerManager.playerNetworkManager.endGameReached.Value = true;
+                playerManager.canMove = false;
                 WorldGameManager.instance.TestGameFinishedServerRpc();
             }
         }

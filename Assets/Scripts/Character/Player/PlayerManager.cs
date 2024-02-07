@@ -230,6 +230,18 @@ namespace AG
             WorldGameManager.instance.TestGameFinishedServerRpc();
         }
 
+        protected override void OnRevive()
+        {
+            base.OnRevive();
+
+            Debug.Log("OnRevive player");
+
+            //tpsObject.SetActive(true);
+            fpsObject.SetActive(true);
+            animator.enabled = true;
+            PlayerUIManager.instance.playerUIHUDManager.gameObject.SetActive(true);
+        }
+
         public void OpenCraftMenu()
         {
             if (isUsingAnInteractable)
@@ -281,6 +293,25 @@ namespace AG
         public GameObject GetTPSObject()
         { 
             return  tpsObject; 
+        }
+
+        [ClientRpc]
+        public void GoToPlayerStartClientRpc(int index)
+        {
+            if(!IsOwner)
+            {
+                return;
+            }
+
+            playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
+
+            WorldPlayerStartsManager playerStartsManager = FindObjectOfType<WorldPlayerStartsManager>();
+            if (playerStartsManager)
+            {
+                characterController.enabled = false;
+                transform.position = playerStartsManager.playersStarts[2].position;
+                characterController.enabled = true;
+            }
         }
     }
 }

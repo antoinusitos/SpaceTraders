@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AG
 {
-    public class Enums : MonoBehaviour
+    public class Enums
     {
 
     }
@@ -33,5 +33,12 @@ namespace AG
     public enum AttackType
     {
         LightAttack,
+    }
+
+    public enum FocusType
+    {
+        Game,
+        UI,
+        NONE,
     }
 }

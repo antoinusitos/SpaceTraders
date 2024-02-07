@@ -47,6 +47,8 @@ namespace AG
         private bool refillFlashlightInput = false;
         [SerializeField]
         private bool useItemInput = false;
+        [SerializeField]
+        private bool pauseMenuInput = false;
 
         private void Awake()
         {
@@ -117,7 +119,8 @@ namespace AG
                 playerControls.PlayerActions.RefillFlashLight.performed += i => refillFlashlightInput = true;
                 playerControls.PlayerActions.RefillFlashLight.canceled += i => refillFlashlightInput = false;
                 playerControls.PlayerActions.UseItem.performed += i => useItemInput = true;
-                
+                playerControls.PlayerActions.PauseMenu.performed += i => pauseMenuInput = true;
+
             }
 
             playerControls.Enable();
@@ -161,10 +164,18 @@ namespace AG
             HandleFlashLightInput();
             HandleRefillFlashLightInput();
             HandleUseItemInput();
+            HandlePauseMenuInput();
         }
 
         private void HandlePlayerMovementInput()
         {
+            if(player.currentFocusType != FocusType.Game)
+            {
+                verticalInput = 0;
+                horizontalInput = 0;
+                return;
+            }
+
             verticalInput = movementInput.y;
             horizontalInput = movementInput.x;
 
@@ -189,13 +200,20 @@ namespace AG
 
         private void HandleCameraMovementInput()
         {
+            if (player.currentFocusType != FocusType.Game)
+            {
+                cameraVerticalInput = 0;
+                cameraHorizontalInput = 0;
+                return;
+            }
+
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
         }
 
         private void HandleSprintInput()
         {
-            if(sprintInput)
+            if (sprintInput && player.currentFocusType == FocusType.Game)
             {
                 player.playerLocomotionManager.HandleSprinting();
             }
@@ -212,6 +230,11 @@ namespace AG
                 return;
             }
 
+            if (player.currentFocusType != FocusType.Game)
+            {
+                return;
+            }
+
             if (crouchInput)
             {
                 crouchInput = false;
@@ -222,7 +245,12 @@ namespace AG
 
         private void HandleJumpInput()
         {
-            if(jumpInput)
+            if (player.currentFocusType != FocusType.Game)
+            {
+                return;
+            }
+
+            if (jumpInput)
             {
                 jumpInput = false;
 
@@ -242,7 +270,12 @@ namespace AG
 
         private void HandleInteractionInput()
         {
-            if(interactionInput)
+            if (player.currentFocusType != FocusType.Game)
+            {
+                return;
+            }
+
+            if (interactionInput)
             {
                 interactionInput = false;
 
@@ -252,7 +285,12 @@ namespace AG
 
         private void HandleQuickUseInput()
         {
-            if(quickUsed1Input)
+            if (player.currentFocusType != FocusType.Game)
+            {
+                return;
+            }
+
+            if (quickUsed1Input)
             {
                 quickUsed1Input = false;
                 player.characterInventoryManager.TryToUseItem(0);
@@ -271,7 +309,12 @@ namespace AG
 
         private void HandleFlashLightInput()
         {
-            if(flashlightInput)
+            if (player.currentFocusType != FocusType.Game)
+            {
+                return;
+            }
+
+            if (flashlightInput)
             {
                 flashlightInput = false;
 
@@ -286,6 +329,11 @@ namespace AG
 
         private void HandleRefillFlashLightInput()
         {
+            if (player.currentFocusType != FocusType.Game)
+            {
+                return;
+            }
+
             if (refillFlashlightInput && !player.isUsingAnInteractable)
             {
                 player.playerInventoryManager.ActivateBatterieRefill();
@@ -298,7 +346,12 @@ namespace AG
 
         private void HandleUseItemInput()
         {
-            if(useItemInput)
+            if (player.currentFocusType != FocusType.Game)
+            {
+                return;
+            }
+
+            if (useItemInput)
             {
                 useItemInput = false;
 
@@ -307,6 +360,29 @@ namespace AG
                 {
                     player.playerNetworkManager.SetCharacterActionHand();
                     player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.LMB_Action, player.playerInventoryManager.currentRightHandWeapon);
+                }
+            }
+        }
+
+        private void HandlePauseMenuInput()
+        {
+            if (pauseMenuInput)
+            {
+                pauseMenuInput = false;
+
+                switch(player.currentFocusType)
+                {
+                    case FocusType.Game:
+                        {
+                            PlayerUIManager.instance.playerUIPauseManager.ShowPauseMenu();
+                            player.currentFocusType = FocusType.UI;
+                            break;
+                        }
+                    case FocusType.UI:
+                        {
+                            PlayerUIManager.instance.playerUIPauseManager.HidePauseMenu();
+                            break;
+                        }
                 }
             }
         }

@@ -335,6 +335,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""de3a3010-f99c-463e-8144-ba30d5c87f05"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -491,6 +500,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""275a89c2-0b9f-4263-aa2a-4c28a09de386"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -555,6 +575,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_Flashlight = m_PlayerActions.FindAction("Flashlight", throwIfNotFound: true);
         m_PlayerActions_RefillFlashLight = m_PlayerActions.FindAction("RefillFlashLight", throwIfNotFound: true);
         m_PlayerActions_UseItem = m_PlayerActions.FindAction("UseItem", throwIfNotFound: true);
+        m_PlayerActions_PauseMenu = m_PlayerActions.FindAction("PauseMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_X = m_UI.FindAction("X", throwIfNotFound: true);
@@ -694,6 +715,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Flashlight;
     private readonly InputAction m_PlayerActions_RefillFlashLight;
     private readonly InputAction m_PlayerActions_UseItem;
+    private readonly InputAction m_PlayerActions_PauseMenu;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -709,6 +731,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Flashlight => m_Wrapper.m_PlayerActions_Flashlight;
         public InputAction @RefillFlashLight => m_Wrapper.m_PlayerActions_RefillFlashLight;
         public InputAction @UseItem => m_Wrapper.m_PlayerActions_UseItem;
+        public InputAction @PauseMenu => m_Wrapper.m_PlayerActions_PauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -751,6 +774,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @UseItem.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
                 @UseItem.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
                 @UseItem.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
+                @PauseMenu.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnPauseMenu;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -788,6 +814,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @UseItem.started += instance.OnUseItem;
                 @UseItem.performed += instance.OnUseItem;
                 @UseItem.canceled += instance.OnUseItem;
+                @PauseMenu.started += instance.OnPauseMenu;
+                @PauseMenu.performed += instance.OnPauseMenu;
+                @PauseMenu.canceled += instance.OnPauseMenu;
             }
         }
     }
@@ -846,6 +875,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnFlashlight(InputAction.CallbackContext context);
         void OnRefillFlashLight(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

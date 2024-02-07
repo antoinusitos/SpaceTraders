@@ -63,6 +63,11 @@ namespace AG
         public void SetupCamera()
         {
             playerList = FindObjectsOfType<PlayerManager>();
+            ActivateCamera();
+        }
+
+        public void ActivateCamera()
+        {
             cameraObject.gameObject.SetActive(true);
         }
 

@@ -28,6 +28,8 @@ namespace AG
         [HideInInspector]
         public PlayerCombatManager playerCombatManager = null;
 
+        public FocusType currentFocusType = FocusType.Game;
+
         [Header("FPS")]
         [SerializeField]
         private GameObject fpsObject = null;
@@ -141,6 +143,7 @@ namespace AG
                 WorldSaveGameManager.instance.player = this;
                 PlayerUIManager.instance.playerUIHUDManager.player = this;
                 PlayerUIManager.instance.playerUICraftManager.player = this;
+                PlayerUIManager.instance.playerUIPauseManager.player = this;
                 PlayerUIManager.instance.playerUICraftManager.gameObject.SetActive(false);
 
                 playerNetworkManager.vitality.OnValueChanged += playerNetworkManager.SetNewMaxHealthValue;
@@ -223,6 +226,7 @@ namespace AG
 
             Debug.Log("OnDeath player");
 
+            currentFocusType = FocusType.Game;
             //tpsObject.SetActive(true);
             fpsObject.SetActive(false);
             animator.enabled = false;
@@ -250,6 +254,7 @@ namespace AG
             }
 
             isInMenu = !isInMenu;
+            currentFocusType = FocusType.UI;
             PlayerUIManager.instance.playerUICraftManager.gameObject.SetActive(isInMenu);
             if(isInMenu)
             {
@@ -312,6 +317,13 @@ namespace AG
                 transform.position = playerStartsManager.playersStarts[2].position;
                 characterController.enabled = true;
             }
+        }
+
+        public void QuitGame()
+        {
+            PlayerCamera.instance.ActivateCamera();
+            NetworkManager.Singleton.Shutdown();
+            SceneManager.LoadScene(0);
         }
     }
 }

@@ -34,6 +34,7 @@ namespace AG
                 return false;
             }
 
+            playerUsing.player.currentFocusType = FocusType.UI;
             playerUsing.SetUsingStateOnMachine(true, NetworkObject.NetworkObjectId);
             machineUI.SetActive(true);
 
@@ -44,6 +45,7 @@ namespace AG
         {
             if(player)
             {
+                player.player.currentFocusType = FocusType.Game;
                 player.SetUsingStateOnMachine(false, NetworkObject.NetworkObjectId);
             }
             machineUI.SetActive(false);

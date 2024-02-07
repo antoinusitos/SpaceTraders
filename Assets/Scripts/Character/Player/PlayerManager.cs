@@ -314,9 +314,17 @@ namespace AG
             if (playerStartsManager)
             {
                 characterController.enabled = false;
-                transform.position = playerStartsManager.playersStarts[2].position;
+                transform.position = playerStartsManager.playersStarts[index].position;
                 characterController.enabled = true;
             }
+
+            //TODO : Empty player equipment and inventory
+            playerNetworkManager.cash.Value = 0;
+            playerNetworkManager.currentWeaponBeingUsed.Value = -1;
+            playerNetworkManager.currentRightHandWeaponID.Value = -1;
+            playerEquipmentManager.LoadRightWeapon();
+            playerInventoryManager.EmptyInventory();
+            PlayerUIManager.instance.playerUIInventoryManager.EmptyInventory();
         }
 
         public void QuitGame()

@@ -104,5 +104,21 @@ namespace AG
                 PlayerUIManager.instance.playerUIHUDManager.UpdateFlashLightBatterie(currentFlashLightDuration, flashLightDuration);
             }
         }
+
+        public void EmptyInventory()
+        {
+            flashlightBatteriesNumber = 0;
+            PlayerUIManager.instance.playerUIHUDManager.UpdateFlashLightBatteriesNumber(flashlightBatteriesNumber);
+            currentFlashLightDuration = flashLightDuration;
+            PlayerUIManager.instance.playerUIHUDManager.UpdateFlashLightBatterie(currentFlashLightDuration, flashLightDuration);
+            usingFlashLight = false;
+
+            for(int i = 0; i < inventory.Length; i++)
+            {
+                inventory[i] = null;
+            }
+
+            scrapInventory.Clear();
+        }
     }
 }

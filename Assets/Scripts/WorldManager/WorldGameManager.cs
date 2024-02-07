@@ -139,6 +139,7 @@ namespace AG
 
             Debug.Log("game finished");
             networkGameFinished.Value = true;
+            networkGameStarted.Value = false;
 
             StartCoroutine("GotoHUB");
         }
@@ -149,12 +150,23 @@ namespace AG
 
             networkGameFinished.Value = false;
 
+            startingDoor.SetLockState(true);
+            startingDoor.ForceClosing();
+
+            sasDoor.SetLockState(true);
+            sasDoor.ForceClosing();
+
             PlayerManager[] players = FindObjectsOfType<PlayerManager>();
 
             for (int i = 0; i < players.Length; i++)
             {
+                players[i].playerNetworkManager.faction.Value = Factions.NONE;
                 players[i].GoToPlayerStartClientRpc(i);
             }
+
+            yield return new WaitForSeconds(2);
+
+            CheckPlayersNumber();
         }
     }
 }

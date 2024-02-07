@@ -29,5 +29,12 @@ namespace AG
                 item3Image.sprite = sprite;
             }
         }
+
+        public void EmptyInventory()
+        {
+            item1Image.sprite = null;
+            item2Image.sprite = null;
+            item3Image.sprite = null;
+        }
     }
 }

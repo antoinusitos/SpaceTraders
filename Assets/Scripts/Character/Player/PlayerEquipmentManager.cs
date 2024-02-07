@@ -50,10 +50,10 @@ namespace AG
 
         public void LoadRightWeapon()
         {
+            rightHandSlot.UnloadWeapon();
+
             if(player.playerInventoryManager.currentRightHandWeapon)
             {
-                rightHandSlot.UnloadWeapon();
-
                 rightHandWeaponModel = Instantiate(player.playerInventoryManager.currentRightHandWeapon.itemPrefab);
                 rightHandSlot.LoadWeapon(rightHandWeaponModel);
                 rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();

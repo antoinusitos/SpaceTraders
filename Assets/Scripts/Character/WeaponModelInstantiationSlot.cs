@@ -14,6 +14,7 @@ namespace AG
             if(currentWeaponModel)
             {
                 Destroy(currentWeaponModel);
+                currentWeaponModel = null;
             }
         }
 

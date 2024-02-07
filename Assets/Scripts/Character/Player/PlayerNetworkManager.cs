@@ -70,8 +70,16 @@ namespace AG
                 return;
             }
 
+            if(newFaction == Factions.NONE)
+            {
+                WorldGameManager.instance.networkGameFinished.OnValueChanged -= PlayerUIManager.instance.playerUIEndGameResult.OnEndGameChanged;
+            }
+            else
+            {
+                WorldGameManager.instance.networkGameFinished.OnValueChanged += PlayerUIManager.instance.playerUIEndGameResult.OnEndGameChanged;
+            }
+
             PlayerUIManager.instance.playerUIHUDManager.ShowFaction(newFaction);
-            WorldGameManager.instance.networkGameFinished.OnValueChanged += PlayerUIManager.instance.playerUIEndGameResult.OnEndGameChanged;
         }
 
         [ClientRpc]
@@ -104,6 +112,12 @@ namespace AG
 
         public void OnCurrentRightHandWeaponIDChange(int oldID, int newID)
         {
+            if(newID == -1)
+            {
+                player.playerInventoryManager.currentRightHandWeapon = null;
+                return;
+            }
+
             WeaponItem newWeapon = (WeaponItem)Instantiate(WorldItemsManager.instance.GetItemWithID(newID));
             player.playerInventoryManager.currentRightHandWeapon = newWeapon;
             player.playerEquipmentManager.LoadRightWeapon();
@@ -111,6 +125,11 @@ namespace AG
 
         public void OnCurrentWeaponBeingUsedIDChange(int oldID, int newID)
         {
+            if (newID == -1)
+            {
+                return;
+            }
+
             WeaponItem newWeapon = (WeaponItem)Instantiate(WorldItemsManager.instance.GetItemWithID(newID));
             player.playerCombatManager.currentWeaponBeingUsed = newWeapon;
         }

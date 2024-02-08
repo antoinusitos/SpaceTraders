@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AG
 {
-    [CreateAssetMenu(menuName = "Character ACtions/Weapon Actions/Test Action")]
+    [CreateAssetMenu(menuName = "Character Actions/Weapon Actions/Test Action")]
     public class WeaponItemAction : ScriptableObject
     {
         public int actionID = -1;

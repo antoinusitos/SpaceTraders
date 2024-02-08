@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AG
 {
-    [CreateAssetMenu(menuName = "Character ACtions/Weapon Actions/Light Attack Action")]
+    [CreateAssetMenu(menuName = "Character Actions/Weapon Actions/Light Attack Action")]
     public class LightAttackWeaponItemAction : WeaponItemAction
     {
         [SerializeField]
@@ -19,6 +19,7 @@ namespace AG
                 return;
             }
 
+            Debug.Log("PerformLightAttack");
             PerformLightAttack(playerPerformingAction, weaponPerformingAction);
         }
 

@@ -135,6 +135,30 @@ namespace AG
         }
 
         [ServerRpc]
+        public void NotifyTheServerOfFlareActionServerRpc(ulong clientID, int actionID, int weaponID)
+        {
+            if (IsServer)
+            {
+                PlayFlareActionForAllClientsClientRpc(clientID, actionID, weaponID);
+            }
+        }
+
+        [ClientRpc]
+        public void PlayFlareActionForAllClientsClientRpc(ulong clientID, int actionID, int weaponID)
+        {
+            if (clientID == NetworkManager.Singleton.LocalClientId)
+            {
+                return;
+            }
+
+            FlareWeaponManager flareWeaponManager = player.playerEquipmentManager.rightHandSlot.currentWeaponModel.GetComponent<FlareWeaponManager>();
+            if (!flareWeaponManager.isActive)
+            {
+                flareWeaponManager.Activate();
+            }
+        }
+
+        [ServerRpc]
         public void NotifyTheServerOfWeaponActionServerRpc(ulong clientID, int actionID, int weaponID)
         {
             if(IsServer)
@@ -156,7 +180,10 @@ namespace AG
         {
             WeaponItemAction weaponAction = WorldActionManager.instance.GetWeaponItemACtionWithID(actionID);
 
-            if(weaponAction)
+            Debug.Log("action ID " + actionID);
+            Debug.Log("weaponAction " + weaponAction.name);
+
+            if (weaponAction)
             {
                 weaponAction.AttemptToPerformAction(player, WorldItemsManager.instance.GetWeaponWithID(weaponID));
             }

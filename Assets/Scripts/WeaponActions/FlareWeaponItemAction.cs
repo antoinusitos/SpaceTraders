@@ -32,8 +32,10 @@ namespace AG
                 }
                 else
                 {
-                    flareWeaponManager.Throw(playerPerformingAction.playerFPSCamera.playerCamera.transform.forward);
+                    playerPerformingAction.playerNetworkManager.SpawnFlareOnServerRpc(playerPerformingAction.playerFPSCamera.playerCamera.transform.forward, playerPerformingAction.transform.position + playerPerformingAction.transform.forward);
                     playerPerformingAction.playerNetworkManager.currentWeaponBeingUsed.Value = -1;
+                    playerPerformingAction.playerNetworkManager.currentRightHandWeaponID.Value = -1;
+                    playerPerformingAction.playerEquipmentManager.LoadRightWeapon();
                 }
             }
         }

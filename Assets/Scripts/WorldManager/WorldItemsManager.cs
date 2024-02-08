@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace AG
@@ -15,6 +16,8 @@ namespace AG
         public List<GameObject> allCharacters;
 
         public List<WeaponItem> allWeapons;
+
+        public NetworkObject flareNetworkedPrefab = null;
 
         private void Awake()
         {

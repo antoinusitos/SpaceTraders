@@ -2927,6 +2927,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
+      propertyPath: flareNetworkedPrefab
+      value: 
+      objectReference: {fileID: 3872137824210540044, guid: 50298030501f4634f91b27a74f5aa06a, type: 3}
+    - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
       propertyPath: allItems.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: 394a65a6212cf3f4b805669dbb124dbb, type: 2}
@@ -3648,6 +3652,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[4].Prefab
+      value: 
+      objectReference: {fileID: 8054162753956120346, guid: 50298030501f4634f91b27a74f5aa06a, type: 3}
     - target: {fileID: 6627812288056202965, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
       propertyPath: m_RootOrder
       value: 2

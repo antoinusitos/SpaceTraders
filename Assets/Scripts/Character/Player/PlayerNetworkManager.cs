@@ -115,6 +115,7 @@ namespace AG
             if(newID == -1)
             {
                 player.playerInventoryManager.currentRightHandWeapon = null;
+                player.playerEquipmentManager.LoadRightWeapon();
                 return;
             }
 
@@ -191,6 +192,15 @@ namespace AG
             {
                 Debug.LogError("ACTION IS NULL, CANNOT BE PERFORMED");
             }
+        }
+
+        [ServerRpc]
+        public void SpawnFlareOnServerRpc(Vector3 cameraDirection, Vector3 position)
+        {
+            NetworkObject no = Instantiate(WorldItemsManager.instance.flareNetworkedPrefab);
+            no.transform.position = position;
+            no.Spawn();
+            no.GetComponent<FlareNetworked>().Throw(cameraDirection);
         }
     }
 }

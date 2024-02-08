@@ -9,10 +9,6 @@ namespace AG
     {
         public bool isActive = false;
 
-        private bool isLaunched = false;
-        private float strengh = 10;
-        private Rigidbody addedRigidBody = null;
-
         protected override void Awake()
         {
         }
@@ -22,25 +18,6 @@ namespace AG
             GetComponentInChildren<ParticleSystem>().Play();
             GetComponentInChildren<Light>().enabled = true;
             isActive = true;
-        }
-
-        public void Throw(Vector3 dir)
-        {
-            transform.parent = null;
-            GetComponentInChildren<Collider>().isTrigger = false;
-            isLaunched = true;
-            addedRigidBody = gameObject.AddComponent<Rigidbody>();
-            addedRigidBody.velocity = dir * strengh;
-        }
-
-        private void Update()
-        {
-            if(!isLaunched)
-            {
-                return;
-            }
-
-
         }
     }
 }

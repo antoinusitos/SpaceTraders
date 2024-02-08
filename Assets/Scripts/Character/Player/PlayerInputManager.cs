@@ -355,7 +355,6 @@ namespace AG
             {
                 useItemInput = false;
 
-                //player.playerEquipmentManager.TryToUSeEquipment();
                 if(player.playerInventoryManager.currentRightHandWeapon)
                 {
                     player.playerNetworkManager.SetCharacterActionHand();

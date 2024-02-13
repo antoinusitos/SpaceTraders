@@ -15,8 +15,6 @@ namespace AG
             {
                 playerPerformingAction.playerNetworkManager.currentWeaponBeingUsed.Value = weaponPerformingAction.itemID;
             }
-
-            Debug.Log("The action is fired");
         }
     }
 }

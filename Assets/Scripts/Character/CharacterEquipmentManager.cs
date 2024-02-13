@@ -6,6 +6,8 @@ namespace AG
 {
     public class CharacterEquipmentManager : MonoBehaviour
     {
+        protected int currentEquipmentIndex = 0;
+
         protected virtual void Awake()
         {
 
@@ -14,6 +16,21 @@ namespace AG
         protected virtual void Start()
         {
 
+        }
+
+        public void SetCurrentSlotUsed(int newSlot)
+        {
+            currentEquipmentIndex = newSlot;
+        }
+
+        public int GetCurrentSlotUsed()
+        {
+            return currentEquipmentIndex;
+        }
+
+        public virtual void LoadRightWeapon()
+        {
+            Debug.Log("char LoadRightWeapon");
         }
     }
 }

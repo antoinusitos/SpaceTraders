@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace AG
 {
@@ -34,21 +33,19 @@ namespace AG
 
         public void InitializeWeaponSlot()
         {
-            Debug.Log("InitializeWeaponSlot");
             WeaponModelInstantiationSlot[] weaponSlots = GetComponentsInChildren<WeaponModelInstantiationSlot>();
             foreach(WeaponModelInstantiationSlot weaponSlot in weaponSlots)
             {
                 switch(weaponSlot.weaponModelSlot)
                 {
                     case WeaponModelSlot.RightHand:
-                        Debug.Log("found");
                         rightHandSlot = weaponSlot;
                         break;
                 }
             }
         }
 
-        public void LoadRightWeapon()
+        public override void LoadRightWeapon()
         {
             rightHandSlot.UnloadWeapon();
 
@@ -60,15 +57,6 @@ namespace AG
                 rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
             }
         }
-
-        /*public void TryToUSeEquipment()
-        {
-            if(player.playerInventoryManager.currentRightHandWeapon)
-            {
-                Debug.Log("Using " + player.playerInventoryManager.currentRightHandWeapon.itemName);
-                player.characterAnimatorManager.PlayTargetActionAnimation(player.playerInventoryManager.currentRightHandWeapon.animationToPlay, false, true, true);
-            }
-        }*/
 
         public void OpenDamageCollider()
         {
@@ -83,6 +71,14 @@ namespace AG
             if (player.playerNetworkManager.isUsingRightHand.Value)
             {
                 rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
+            }
+        }
+
+        public void EmptyCurrentSlot()
+        {
+            if(currentEquipmentIndex != -1 && currentEquipmentIndex < player.playerInventoryManager.inventory.Length)
+            {
+                PlayerUIManager.instance.playerUIInventoryManager.EmptySlot(currentEquipmentIndex);
             }
         }
     }

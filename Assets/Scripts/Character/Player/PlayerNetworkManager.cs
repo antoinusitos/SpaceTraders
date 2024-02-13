@@ -22,11 +22,6 @@ namespace AG
         [Header("Utilities")]
         public NetworkVariable<float> cameraUpDownAngle = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-        [Header("Equipment")]
-        public NetworkVariable<int> currentWeaponBeingUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<int> currentRightHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<bool> isUsingRightHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-
         protected override void Awake()
         {
             base.Awake();
@@ -112,7 +107,7 @@ namespace AG
 
         public void OnCurrentRightHandWeaponIDChange(int oldID, int newID)
         {
-            if(newID == -1)
+            if (newID == -1)
             {
                 player.playerInventoryManager.currentRightHandWeapon = null;
                 player.playerEquipmentManager.LoadRightWeapon();

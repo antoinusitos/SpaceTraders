@@ -15,11 +15,19 @@ namespace AG
 
         public void OpenDamageCollider()
         {
+            if(!player)
+            {
+                return;
+            }
             player.OpenDamageCollider();
         }
 
         public void CloseDamageCollider()
         {
+            if (!player)
+            {
+                return;
+            }
             player.CloseDamageCollider();
         }
     }

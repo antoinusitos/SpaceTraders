@@ -19,7 +19,6 @@ namespace AG
                 return;
             }
 
-            Debug.Log("PerformLightAttack");
             PerformLightAttack(playerPerformingAction, weaponPerformingAction);
         }
 

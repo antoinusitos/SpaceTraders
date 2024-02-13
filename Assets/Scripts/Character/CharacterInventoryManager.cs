@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace AG
 {
@@ -22,6 +24,8 @@ namespace AG
         private bool giveItem = false;
         [SerializeField]
         private bool useItem = false;
+
+        public WeaponItem currentRightHandWeapon = null;
 
         protected virtual void Awake()
         {
@@ -73,6 +77,10 @@ namespace AG
                 if (inventory[i] == null)
                 {
                     inventory[i] = item;
+                    if(i == character.characterEquipmentManager.GetCurrentSlotUsed())
+                    {
+                        UseItemWithID(i);
+                    }
                     PlayerUIManager.instance.playerUIInventoryManager.AffectSpriteToItem(item.itemSprite, i);
                     return true;
                 }
@@ -118,7 +126,7 @@ namespace AG
                         item.itemOwner = character;
                         item.itemDefinition = inventory[itemIndex];
                         item.UseItem();
-                        PlayerUIManager.instance.playerUIInventoryManager.AffectSpriteToItem(null, itemIndex);
+                        PlayerUIManager.instance.playerUIInventoryManager.EmptySlot(itemIndex);
                         inventory[itemIndex] = null;
                         Destroy(spawnedPrefab);
                     }
@@ -129,6 +137,8 @@ namespace AG
                 if (inventory[itemIndex].itemType == ItemType.EQUIPPABLE)
                 {
                     ((PlayerManager)character).playerNetworkManager.currentRightHandWeaponID.Value = inventory[itemIndex].itemID;
+                    character.characterEquipmentManager.SetCurrentSlotUsed(itemIndex);
+                    PlayerUIManager.instance.playerUIInventoryManager.SetUsedSlot(itemIndex);
                 }
             }
         }
@@ -143,6 +153,11 @@ namespace AG
                     return;
                 }
             }
+        }
+
+        public void RemoveItemFromSlot(int slot)
+        {
+            inventory[slot] = null;
         }
 
         public void RemoveScrapWithID(int itemID, int quantity)
@@ -175,8 +190,13 @@ namespace AG
 
         public void TryToUseItem(int index)
         {
+            PlayerUIManager.instance.playerUIInventoryManager.SetUsedSlot(index);
             if (inventory[index] == null)
             {
+                character.characterNetworkManager.currentWeaponBeingUsed.Value = -1;
+                character.characterNetworkManager.currentRightHandWeaponID.Value = -1;
+                character.characterInventoryManager.currentRightHandWeapon = null;
+                character.characterEquipmentManager.LoadRightWeapon();
                 return;
             }
 

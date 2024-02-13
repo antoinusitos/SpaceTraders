@@ -36,6 +36,8 @@ namespace AG
                     playerPerformingAction.playerNetworkManager.currentWeaponBeingUsed.Value = -1;
                     playerPerformingAction.playerNetworkManager.currentRightHandWeaponID.Value = -1;
                     playerPerformingAction.playerEquipmentManager.LoadRightWeapon();
+                    playerPerformingAction.playerEquipmentManager.EmptyCurrentSlot();
+                    playerPerformingAction.playerInventoryManager.RemoveItemFromSlot(playerPerformingAction.playerEquipmentManager.GetCurrentSlotUsed());
                 }
             }
         }

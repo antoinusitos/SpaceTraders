@@ -28,6 +28,8 @@ namespace AG
         public CharacterInteractionManager characterInteractionManager = null;
         [HideInInspector]
         public CharacterEffectsManager characterEffectsManager = null;
+        [HideInInspector]
+        public CharacterEquipmentManager characterEquipmentManager = null;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -49,6 +51,7 @@ namespace AG
             characterCraftManager = GetComponent<CharacterCraftManager>();
             characterInteractionManager = GetComponent<CharacterInteractionManager>();
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
+            characterEquipmentManager = GetComponent<CharacterEquipmentManager>();
         }
 
         public override void OnNetworkSpawn()

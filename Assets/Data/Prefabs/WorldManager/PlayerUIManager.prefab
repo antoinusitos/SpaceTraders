@@ -6919,8 +6919,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item1Image: {fileID: 4054584589301355531}
+  item1Background: {fileID: 2369504314233589432}
   item2Image: {fileID: 4082756699058496956}
+  item2Background: {fileID: 8999152632362252852}
   item3Image: {fileID: 876177855176300994}
+  item3Background: {fileID: 4357766408033840217}
 --- !u!1 &9176415125618804069
 GameObject:
   m_ObjectHideFlags: 0

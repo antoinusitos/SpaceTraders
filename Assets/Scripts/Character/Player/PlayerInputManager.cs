@@ -290,6 +290,11 @@ namespace AG
                 return;
             }
 
+            if(player.isPerformingAction)
+            {
+                return;
+            }
+
             if (quickUsed1Input)
             {
                 quickUsed1Input = false;

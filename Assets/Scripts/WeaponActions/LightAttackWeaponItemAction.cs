@@ -26,7 +26,7 @@ namespace AG
         {
             if(playerPerformingAction.playerNetworkManager.isUsingRightHand.Value)
             {
-                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(attackWeaponAnimation, false, true, true);
+                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(attackWeaponAnimation, true, true, true);
             }
         }
     }

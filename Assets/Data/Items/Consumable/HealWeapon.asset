@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061197c69de45cc478d6e139c90166c8, type: 3}
+  m_Name: HealWeapon
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemName: Health Pack
+  itemSprite: {fileID: 21300000, guid: 65f0e363b74cf5845ab8c3fbc14f39ac, type: 3}
+  itemType: 2
+  itemQuantity: 1
+  itemPrefab: {fileID: 8162054982966370348, guid: f7a3dbc2ca11b7545b472bbe61b8b27f, type: 3}
+  craftTime: 5
+  craftPrice: 10
+  physicalDamage: 0
+  fireDamage: 0
+  baseStaminaCost: 0
+  lightAttackModifier: 0
+  LMB_Action: {fileID: 11400000, guid: a0ee562b540c46c4cb01682a290519bf, type: 2}

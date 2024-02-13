@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10e9116b27290a44841f69c198fa88d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableName: Wrench
 --- !u!114 &4898107239065814803
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2931,6 +2931,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3872137824210540044, guid: 50298030501f4634f91b27a74f5aa06a, type: 3}
     - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
+      propertyPath: allItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b3d794083526ff645a312a7b179096c9, type: 2}
+    - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
       propertyPath: allItems.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: 394a65a6212cf3f4b805669dbb124dbb, type: 2}
@@ -2956,7 +2960,7 @@ PrefabInstance:
       objectReference: {fileID: 4427900060605614548, guid: b92846ab607b53e42ad48fe62f140f21, type: 3}
     - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
       propertyPath: allPickableItems.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
       propertyPath: allPickableItems.Array.data[0]
@@ -2970,6 +2974,10 @@ PrefabInstance:
       propertyPath: allPickableItems.Array.data[2]
       value: 
       objectReference: {fileID: 4898107239065814800, guid: abf015c7373fe6148b2edbf070ade620, type: 3}
+    - target: {fileID: 910271786963724581, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
+      propertyPath: allPickableItems.Array.data[3]
+      value: 
+      objectReference: {fileID: -6945725312608717604, guid: 5c5817a4acf00134c9e1d2334f802fb6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25a7ea2969497574eae2bdc5e92492bf, type: 3}
 --- !u!1001 &3183620231191522430
@@ -3528,7 +3536,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4299210135779550376, guid: cc444018794d8bf4ca653ee6a5650771, type: 3}
       propertyPath: weaponItemActions.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4299210135779550376, guid: cc444018794d8bf4ca653ee6a5650771, type: 3}
       propertyPath: weaponItemActions.Array.data[1]
@@ -3538,6 +3546,10 @@ PrefabInstance:
       propertyPath: weaponItemActions.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: ed6595a60b12a164eaf485d830d83ecd, type: 2}
+    - target: {fileID: 4299210135779550376, guid: cc444018794d8bf4ca653ee6a5650771, type: 3}
+      propertyPath: weaponItemActions.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: a0ee562b540c46c4cb01682a290519bf, type: 2}
     - target: {fileID: 5569659519986326149, guid: cc444018794d8bf4ca653ee6a5650771, type: 3}
       propertyPath: m_Name
       value: WorldActionManager
@@ -3654,12 +3666,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[4].Prefab
       value: 
       objectReference: {fileID: 8054162753956120346, guid: 50298030501f4634f91b27a74f5aa06a, type: 3}
+    - target: {fileID: 6627812288056202964, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[5].Prefab
+      value: 
+      objectReference: {fileID: 8162054982966370348, guid: 5c5817a4acf00134c9e1d2334f802fb6, type: 3}
     - target: {fileID: 6627812288056202965, guid: 35c208dceab74ba4f8d4335e3864a6e2, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3722,8 +3738,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: cd35dc42fcd48fe4fbb63917f47aa9c2, type: 2}
     - target: {fileID: 7165278811326104064, guid: c9c154b1239c4ce439547880a542fd60, type: 3}
+      propertyPath: refillHealthEffect
+      value: 
+      objectReference: {fileID: 11400000, guid: f2d2cc15dddee2f46a6fb69a47abecc4, type: 2}
+    - target: {fileID: 7165278811326104064, guid: c9c154b1239c4ce439547880a542fd60, type: 3}
       propertyPath: instantEffects.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7165278811326104064, guid: c9c154b1239c4ce439547880a542fd60, type: 3}
       propertyPath: instantEffects.Array.data[1]
@@ -3733,6 +3753,10 @@ PrefabInstance:
       propertyPath: instantEffects.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: cd35dc42fcd48fe4fbb63917f47aa9c2, type: 2}
+    - target: {fileID: 7165278811326104064, guid: c9c154b1239c4ce439547880a542fd60, type: 3}
+      propertyPath: instantEffects.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: f2d2cc15dddee2f46a6fb69a47abecc4, type: 2}
     - target: {fileID: 7165278811326104065, guid: c9c154b1239c4ce439547880a542fd60, type: 3}
       propertyPath: m_Name
       value: WorldCharacterEffectsManager

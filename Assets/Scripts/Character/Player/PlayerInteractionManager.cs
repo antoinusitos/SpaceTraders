@@ -36,11 +36,11 @@ namespace AG
                 {
                     if (interactable.GetType() == typeof(PickableItem))
                     {
-                        PlayerUIManager.instance.playerUIHUDManager.ShowInteractionText(true, "E to pick up " + interactable.name);
+                        PlayerUIManager.instance.playerUIHUDManager.ShowInteractionText(true, "Pick up " + interactable.interactableName);
                     }
                     else
                     {
-                        PlayerUIManager.instance.playerUIHUDManager.ShowInteractionText(true, "E to use " + interactable.name);
+                        PlayerUIManager.instance.playerUIHUDManager.ShowInteractionText(true, "Use " + interactable.interactableName);
                     }
                 }
                 else

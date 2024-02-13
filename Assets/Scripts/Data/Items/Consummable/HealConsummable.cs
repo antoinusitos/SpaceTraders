@@ -6,17 +6,6 @@ namespace AG
 {
     public class HealConsummable : Consumable
     {
-        [SerializeField]
-        private int healAmount = 25;
-
-        public override void UseItem()
-        {
-            base.UseItem();
-
-            if(itemOwner)
-            {
-                itemOwner.characterNetworkManager.currentHealth.Value += healAmount;
-            }
-        }
+        public int healAmount = 25;
     }
 }

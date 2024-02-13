@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881a84045f12ce043a15d8c27702ea33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableName: 3D Printer
   machineIsBeingUSed:
     m_InternalValue: 0
   isDone:
@@ -291,6 +292,8 @@ MonoBehaviour:
     m_InternalValue: 0
   itemIsReady:
     m_InternalValue: 0
+  currentItemID:
+    m_InternalValue: -1
   progressionSlider: {fileID: 1753621308217933772}
 --- !u!65 &5518554461400357157
 BoxCollider:

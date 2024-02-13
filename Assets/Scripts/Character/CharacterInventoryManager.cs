@@ -115,31 +115,11 @@ namespace AG
                 return;
             }
 
-            if (inventory[itemIndex].itemType == ItemType.CONSUMABLE)
+            if (inventory[itemIndex].itemType == ItemType.EQUIPPABLE)
             {
-                GameObject spawnedPrefab = Instantiate(inventory[itemIndex].itemPrefab);
-                if (spawnedPrefab)
-                {
-                    Item item = spawnedPrefab.GetComponent<Item>();
-                    if (item)
-                    {
-                        item.itemOwner = character;
-                        item.itemDefinition = inventory[itemIndex];
-                        item.UseItem();
-                        PlayerUIManager.instance.playerUIInventoryManager.EmptySlot(itemIndex);
-                        inventory[itemIndex] = null;
-                        Destroy(spawnedPrefab);
-                    }
-                }
-            }
-            else
-            {
-                if (inventory[itemIndex].itemType == ItemType.EQUIPPABLE)
-                {
-                    ((PlayerManager)character).playerNetworkManager.currentRightHandWeaponID.Value = inventory[itemIndex].itemID;
-                    character.characterEquipmentManager.SetCurrentSlotUsed(itemIndex);
-                    PlayerUIManager.instance.playerUIInventoryManager.SetUsedSlot(itemIndex);
-                }
+                ((PlayerManager)character).playerNetworkManager.currentRightHandWeaponID.Value = inventory[itemIndex].itemID;
+                character.characterEquipmentManager.SetCurrentSlotUsed(itemIndex);
+                PlayerUIManager.instance.playerUIInventoryManager.SetUsedSlot(itemIndex);
             }
         }
 

@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117e1d5aa9706424eacaca8bf060ea34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableName: Generator
   machineIsBeingUSed:
     m_InternalValue: 0
   isDone:

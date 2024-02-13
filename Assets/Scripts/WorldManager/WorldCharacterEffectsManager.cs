@@ -11,6 +11,9 @@ namespace AG
         [Header("Damage")]
         public TakeDamageEffect takeDamageEffect = null;
 
+        [Header("Heal")]
+        public RefillHealthCharacterEffect refillHealthEffect = null;
+
         [SerializeField]
         private List<InstantCharacterEffect> instantEffects;
 

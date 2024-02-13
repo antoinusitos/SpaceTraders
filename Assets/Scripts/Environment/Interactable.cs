@@ -7,6 +7,8 @@ namespace AG
 {
     public class Interactable : NetworkBehaviour
     {
+        public string interactableName = "UNKNOWN";
+
         public virtual bool OnInteract(PlayerInteractionManager playerUsing)
         {
             return false;

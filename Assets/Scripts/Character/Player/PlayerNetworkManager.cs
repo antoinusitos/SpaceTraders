@@ -14,6 +14,7 @@ namespace AG
         public NetworkVariable<FixedString64Bytes> characterName = new NetworkVariable<FixedString64Bytes>("Character", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<Factions> faction = new NetworkVariable<Factions>(Factions.NONE, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public NetworkVariable<int> playerCharacterNumber = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<Color> playerColor = new NetworkVariable<Color>(Color.white, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public NetworkVariable<bool> endGameReached = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Runtime Values")]
@@ -29,8 +30,18 @@ namespace AG
             player = GetComponent<PlayerManager>();
 
             faction.OnValueChanged += OnFactionChanged;
+            playerColor.OnValueChanged += OnPlayerColorChanged;
         }
-        
+
+        private void OnPlayerColorChanged(Color previousValue, Color newValue)
+        {
+            Renderer[] mats = player.GetTPSObject().GetComponentsInChildren<Renderer>();
+            for (int i = 0; i < mats.Length; i++)
+            {
+                mats[i].material.color = newValue;
+            }
+        }
+
         public void SetCharacterActionHand()
         {
             isUsingRightHand.Value = true;
@@ -38,10 +49,10 @@ namespace AG
 
         public void OnPlayerCharacterChanged(int previousIndex, int newIndex)
         {
-            if(!IsOwner)
-            {
+            //if(!IsOwner)
+            //{
                 player.RefreshPlayerCharacterVisual(newIndex);
-            }
+            //}
         }
 
         public void SetNewMaxHealthValue(int oldVitality, int newVitality)

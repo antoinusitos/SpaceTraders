@@ -51077,7 +51077,7 @@ PrefabInstance:
       objectReference: {fileID: 1343393045319698900}
     - target: {fileID: 3281971428775877690, guid: 385e491c04c69f54ca16dfb7f338dc4b, type: 3}
       propertyPath: playersToStart
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3281971428775877691, guid: 385e491c04c69f54ca16dfb7f338dc4b, type: 3}
       propertyPath: GlobalObjectIdHash

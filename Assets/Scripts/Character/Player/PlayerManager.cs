@@ -114,11 +114,10 @@ namespace AG
 
         protected override void LateUpdate()
         {
-            if(!IsOwner)
-            {
+            //if(!IsOwner)
+            //{
                 tpsUpDownBone.localRotation = Quaternion.Euler(playerNetworkManager.cameraUpDownAngle.Value, 0, 0);
-                return;
-            }
+           // }
 
             base.LateUpdate();
 
@@ -132,11 +131,19 @@ namespace AG
         {
             base.OnNetworkSpawn();
 
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallbak;
+
             playerNetworkManager.playerCharacterNumber.OnValueChanged += playerNetworkManager.OnPlayerCharacterChanged;
+
 
             if (IsOwner)
             {
-                transform.position = Vector3.up;
+                //playerNetworkManager.playerCharacterNumber.Value = WorldSaveGameManager.instance.currentCharacterData.characterNumber;
+                //TEMP FIX
+                //TODO : Set the character in backend
+                playerNetworkManager.playerCharacterNumber.Value = 0;
+
+                //transform.position = Vector3.up;
 
                 PlayerCamera.instance.player = this;
                 PlayerInputManager.instance.player = this;
@@ -160,7 +167,7 @@ namespace AG
                 //tpsObject.SetActive(false);
                 PlayerCamera.instance.cameraObject.gameObject.SetActive(false);
 
-                Invoke("LoadVisual", 0.1f);
+                //Invoke("LoadVisual", 0.1f);
             }
             else
             {
@@ -174,6 +181,24 @@ namespace AG
             if (IsOwner && !IsServer)
             {
                 LoadGameDataFromCurrentCharacterData(ref WorldSaveGameManager.instance.currentCharacterData);
+            }
+        }
+
+        private void OnClientConnectedCallbak(ulong clientID)
+        {
+            WorldGameSessionManager.instance.AddPlayerToActivePlayersList(this);
+
+            // don't sync on server as we are the host and players will connect on it
+            if(!IsServer && IsOwner)
+            {
+                for(int i = 0; i < WorldGameSessionManager.instance.players.Count; i++)
+                {
+                    PlayerManager player = WorldGameSessionManager.instance.players[i];
+                    if (player != this)
+                    {
+                        player.LoadOtherPlayerCharacterWhenJoiningServer();
+                    }
+                }
             }
         }
 
@@ -279,7 +304,7 @@ namespace AG
             }
         }
 
-        public void LoadVisual()
+       /* public void LoadVisual()
         {
             Debug.Log("LoadVisual");
             playerNetworkManager.playerCharacterNumber.Value = WorldSaveGameManager.instance.currentCharacterData.characterNumber;
@@ -293,7 +318,7 @@ namespace AG
 
                 players[i].RefreshPlayerCharacterVisual(players[i].playerNetworkManager.playerCharacterNumber.Value);
             }
-        }
+        }*/
 
         public GameObject GetTPSObject()
         { 
@@ -336,6 +361,15 @@ namespace AG
             PlayerCamera.instance.ActivateCamera();
             NetworkManager.Singleton.Shutdown();
             SceneManager.LoadScene(0);
+        }
+
+        public void LoadOtherPlayerCharacterWhenJoiningServer()
+        {
+            // Sync Weapon
+            playerNetworkManager.OnCurrentRightHandWeaponIDChange(-1, playerNetworkManager.currentRightHandWeaponID.Value);
+
+            // Sync Character Visual
+            playerNetworkManager.OnPlayerCharacterChanged(-1, playerNetworkManager.playerCharacterNumber.Value);
         }
     }
 }

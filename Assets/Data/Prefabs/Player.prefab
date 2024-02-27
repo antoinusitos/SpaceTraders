@@ -193,6 +193,7 @@ MonoBehaviour:
   fpsObject: {fileID: 3694494309956016473}
   fpsFlashlightObject: {fileID: 4328007081531821434}
   fpsAnimator: {fileID: 0}
+  fpsAnimatorController: {fileID: 9100000, guid: 7360d05230019ab4e81c8e6eda552286, type: 2}
   tpsObject: {fileID: 4033146534699957834}
   tpsFlashlightObject: {fileID: 5525667565765996372}
 --- !u!114 &-2750498004255283751
@@ -321,6 +322,8 @@ MonoBehaviour:
     m_InternalValue: 0
   playerCharacterNumber:
     m_InternalValue: -1
+  playerColor:
+    m_InternalValue: {r: 1, g: 1, b: 1, a: 1}
   endGameReached:
     m_InternalValue: 0
   cash:

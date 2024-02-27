@@ -19,6 +19,8 @@ namespace AG
         public PlayerUIEndGameResult playerUIEndGameResult = null;
         [HideInInspector]
         public PlayerUIPauseManager playerUIPauseManager = null;
+        [HideInInspector]
+        public PlayerUISettingsManager playerUISettingsManager = null;
 
         private void Awake()
         {
@@ -36,6 +38,7 @@ namespace AG
             playerUIInventoryManager = GetComponentInChildren<PlayerUIInventoryManager>();
             playerUIEndGameResult = GetComponentInChildren<PlayerUIEndGameResult>();
             playerUIPauseManager = GetComponentInChildren<PlayerUIPauseManager>();
+            playerUISettingsManager = GetComponentInChildren<PlayerUISettingsManager>();
         }
 
         private void Start()

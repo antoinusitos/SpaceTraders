@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,6 +37,7 @@ namespace AG
         [SerializeField]
         private GameObject fpsFlashlightObject = null;
         public Animator fpsAnimator = null;
+        public AnimatorController fpsAnimatorController = null;
 
         [Header("TPS")]
         [SerializeField]
@@ -301,6 +303,10 @@ namespace AG
                 tpsUpDownBone = tpsObject.GetComponentInChildren<UpDownBone>().transform;
                 animator = tpsObject.GetComponent<Animator>();
                 playerEquipmentManager.InitializeWeaponSlot();
+                /*if(IsOwner)
+                {
+                    animator.runtimeAnimatorController = fpsAnimatorController;
+                }*/
             }
         }
 

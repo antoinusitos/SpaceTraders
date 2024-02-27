@@ -216,9 +216,10 @@ namespace AG
 
         public void HandleSprinting()
         {
-            if(player.isPerformingAction || player.isInMenu || player.isUsingAnInteractable)
+            if(player.isPerformingAction || player.isInMenu || player.isUsingAnInteractable || player.playerNetworkManager.isCrouching.Value)
             {
                 player.playerNetworkManager.isSprinting.Value = false;
+                return;
             }
 
             if(player.playerNetworkManager.currentStamina.Value <= 0)
@@ -358,12 +359,14 @@ namespace AG
                 targetPos = Vector3.up * crouchDetectionSize;
                 targetSize.y  = crouchDetectionSize;
                 characterController.height = characterControllersCrouchDetectionSize;
+                characterController.center = Vector3.up * 0.5f;
             }
             else
             {
                 targetPos = Vector3.up * standingDetectionSize;
                 targetSize.y = standingDetectionSize;
                 characterController.height = characterControllerstandingDetectionSize;
+                characterController.center = Vector3.up * 0.9f;
             }
             detectionObject.transform.localPosition = targetPos;
             detectionObject.transform.localScale = targetSize;

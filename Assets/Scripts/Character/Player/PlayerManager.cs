@@ -137,6 +137,8 @@ namespace AG
 
             playerNetworkManager.playerCharacterNumber.OnValueChanged += playerNetworkManager.OnPlayerCharacterChanged;
 
+            playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
+            playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged += playerNetworkManager.OnLockOnTargetIDChanged;
 
             if (IsOwner)
             {
@@ -303,6 +305,7 @@ namespace AG
                 tpsUpDownBone = tpsObject.GetComponentInChildren<UpDownBone>().transform;
                 animator = tpsObject.GetComponent<Animator>();
                 playerEquipmentManager.InitializeWeaponSlot();
+                characterCombatManager.lockOnTransform = GetComponentInChildren<LockOnTarget>().transform;
                 /*if(IsOwner)
                 {
                     animator.runtimeAnimatorController = fpsAnimatorController;
@@ -376,6 +379,11 @@ namespace AG
 
             // Sync Character Visual
             playerNetworkManager.OnPlayerCharacterChanged(-1, playerNetworkManager.playerCharacterNumber.Value);
+
+            if(playerNetworkManager.isLockedOn.Value)
+            {
+                playerNetworkManager.OnLockOnTargetIDChanged(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
+            }
         }
     }
 }

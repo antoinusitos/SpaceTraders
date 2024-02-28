@@ -10,6 +10,15 @@ namespace AG
         [SerializeField]
         private AIState currentState = null;
 
+        public AICharacterCombatManager aICharacterCombatManager = null;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            aICharacterCombatManager = GetComponent<AICharacterCombatManager>();
+        }
+
         protected override void FixedUpdate()
         {
             ProcessStateMachine();

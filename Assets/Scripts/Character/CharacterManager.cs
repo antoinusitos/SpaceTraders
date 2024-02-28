@@ -30,6 +30,8 @@ namespace AG
         public CharacterEffectsManager characterEffectsManager = null;
         [HideInInspector]
         public CharacterEquipmentManager characterEquipmentManager = null;
+        //[HideInInspector]
+        public CharacterCombatManager characterCombatManager = null;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -41,7 +43,7 @@ namespace AG
 
         protected virtual void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
 
             characterController = GetComponent<CharacterController>();
             animator = GetComponentInChildren<Animator>();
@@ -52,6 +54,7 @@ namespace AG
             characterInteractionManager = GetComponent<CharacterInteractionManager>();
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
             characterEquipmentManager = GetComponent<CharacterEquipmentManager>();
+            characterCombatManager = GetComponent<CharacterCombatManager>();
         }
 
         public override void OnNetworkSpawn()

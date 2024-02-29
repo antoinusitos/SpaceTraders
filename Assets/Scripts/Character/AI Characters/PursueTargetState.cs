@@ -29,8 +29,7 @@ namespace AG
             aICharacter.navMeshAgent.CalculatePath(aICharacter.aICharacterCombatManager.currentTarget.transform.position, path);
             aICharacter.navMeshAgent.SetPath(path);
 
-            //aICharacter.transform.position = Vector3.Lerp(aICharacter.transform.position, aICharacter.navMeshAgent.transform.position, Time.deltaTime);
-            aICharacter.transform.position = aICharacter.navMeshAgent.transform.position;// + Vector3.up * 1.7f;
+            aICharacter.transform.position = aICharacter.navMeshAgent.transform.position;
             aICharacter.transform.rotation = aICharacter.navMeshAgent.transform.rotation;
 
             return this;

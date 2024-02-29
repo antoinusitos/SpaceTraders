@@ -11,10 +11,8 @@ GameObject:
   - component: {fileID: 2720418671414833194}
   - component: {fileID: 2720418671414833196}
   - component: {fileID: 2720418671414833185}
-  - component: {fileID: 2720418671414833187}
   - component: {fileID: 2720418671414833197}
   - component: {fileID: 2720418671414833184}
-  - component: {fileID: 483361372}
   - component: {fileID: 527408287510194180}
   - component: {fileID: -5908658730860651878}
   - component: {fileID: 9127920908523964724}
@@ -92,65 +90,6 @@ MonoBehaviour:
   navMeshAgent: {fileID: 0}
   idle: {fileID: 11400000, guid: d2107e1b9fcf2f6489826c08107807f5, type: 2}
   pursueTarget: {fileID: 11400000, guid: 2637eaffa0d512544bb257cedbdfebd2, type: 2}
---- !u!114 &2720418671414833187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2720418671414833195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11b0e8a1c64edab45a9a83085ab7e516, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isMoving:
-    m_InternalValue: 0
-  networkPosition:
-    m_InternalValue: {x: 0, y: 0, z: 0}
-  networkPositionVelocity: {x: 0, y: 0, z: 0}
-  networkPositionSmoothTime: 0.1
-  networkRotation:
-    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
-  networkRotationSmoothTime: 0.1
-  horizontalMovement:
-    m_InternalValue: 0
-  verticalMovement:
-    m_InternalValue: 0
-  moveAmount:
-    m_InternalValue: 0
-  isLockedOn:
-    m_InternalValue: 0
-  isSprinting:
-    m_InternalValue: 0
-  isJumping:
-    m_InternalValue: 0
-  isCrouching:
-    m_InternalValue: 0
-  inAirTimer:
-    m_InternalValue: 0
-  currentTargetNetworkObjectID:
-    m_InternalValue: 0
-  endurance:
-    m_InternalValue: 1
-  vitality:
-    m_InternalValue: 1
-  currentStamina:
-    m_InternalValue: 0
-  maxStamina:
-    m_InternalValue: 0
-  currentHealth:
-    m_InternalValue: 0
-  maxHealth:
-    m_InternalValue: 0
-  flashlightOn:
-    m_InternalValue: 0
-  currentWeaponBeingUsed:
-    m_InternalValue: -1
-  currentRightHandWeaponID:
-    m_InternalValue: -1
-  isUsingRightHand:
-    m_InternalValue: 0
 --- !u!114 &2720418671414833197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,26 +126,6 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!95 &483361372
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2720418671414833195}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fcd67c0a7f03a0243acabcb78754a5b7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!143 &527408287510194180
 CharacterController:
   m_ObjectHideFlags: 0
@@ -454,3 +373,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7a9bd9a36e1bd5845b450863ff5990da, type: 3}
   m_PrefabInstance: {fileID: 63053908}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &919132149218483461 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7a9bd9a36e1bd5845b450863ff5990da, type: 3}
+  m_PrefabInstance: {fileID: 63053908}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &277374677056757869
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149218483461}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a8e9935388777dd43a94452ef8c4bbfd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

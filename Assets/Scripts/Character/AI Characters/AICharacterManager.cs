@@ -32,6 +32,7 @@ namespace AG
             aICharacterNetworkManager = GetComponent<AICharacterNetworkManager>();
 
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+            animator = GetComponentInChildren<Animator>();
 
             idle = Instantiate(idle);
             pursueTarget = Instantiate(pursueTarget);
@@ -63,16 +64,19 @@ namespace AG
 
                 if(remainingDistance > navMeshAgent.stoppingDistance)
                 {
+                    Debug.Log("lol");
                     aICharacterNetworkManager.isMoving.Value = true;
                 }
                 else
                 {
+                    Debug.Log("lol1");
                     aICharacterNetworkManager.isMoving.Value = false;
                 }
             }
             else
             {
-                    aICharacterNetworkManager.isMoving.Value = false;
+                    Debug.Log("lol2");
+                aICharacterNetworkManager.isMoving.Value = false;
             }
         }
     }

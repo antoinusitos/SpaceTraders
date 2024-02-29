@@ -27,22 +27,6 @@ namespace AG
             base.Update();
 
             return;
-
-            //server check
-            if (!alienManager.IsOwner)
-            {
-                return;
-            }
-
-            if(!targetPlayer)
-            {
-                targetPlayer= FindObjectOfType<PlayerManager>();
-            }
-            else
-            {
-                navMeshAgent.SetDestination(targetPlayer.transform.position);
-                alienManager.characterController.Move(navMeshAgent.nextPosition);
-            }
         }
     }
 }

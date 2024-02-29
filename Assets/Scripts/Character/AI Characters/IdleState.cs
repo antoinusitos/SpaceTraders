@@ -11,13 +11,11 @@ namespace AG
         {
             if(aICharacter.characterCombatManager.currentTarget != null)
             {
-                Debug.Log("We have a target");
-                return this;
+                return SwitchState(aICharacter, aICharacter.pursueTarget);
             }
             else
             {
                 aICharacter.aICharacterCombatManager.FindATargetViaLineOfSight(aICharacter);
-                Debug.Log("Searching a target");
                 return this;
             }
         }

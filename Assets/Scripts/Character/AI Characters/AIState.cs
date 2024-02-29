@@ -10,5 +10,16 @@ namespace AG
         {
             return this;
         }
+
+        protected virtual AIState SwitchState(AICharacterManager aICharacter, AIState newState)
+        {
+            ResetStateFlags(aICharacter);
+            return newState;
+        }
+
+        protected virtual void ResetStateFlags(AICharacterManager aICharacter)
+        {
+
+        }
     }
 }

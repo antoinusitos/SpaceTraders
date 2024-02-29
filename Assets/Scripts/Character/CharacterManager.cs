@@ -62,6 +62,8 @@ namespace AG
             base.OnNetworkSpawn();
 
             characterNetworkManager.currentHealth.OnValueChanged += OnCurrentHealthChange;
+
+            characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
         }
 
         private void OnCurrentHealthChange(float previousValue, float newValue)

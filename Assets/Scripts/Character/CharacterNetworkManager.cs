@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using System.Linq;
+using System;
 
 namespace AG
 {
@@ -11,6 +12,7 @@ namespace AG
         private CharacterManager character = null;
 
         [Header("Position")]
+        public NetworkVariable<bool> isMoving = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>(Vector3.zero, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public Vector3 networkPositionVelocity = Vector3.zero;
         public float networkPositionSmoothTime = 0.1f;
@@ -71,6 +73,11 @@ namespace AG
             {
                 character.characterCombatManager.currentTarget = null;
             }
+        }
+
+        public void OnIsMovingChanged(bool previousValue, bool newValue)
+        {
+            character.animator.SetBool("IsMoving", isMoving.Value);
         }
 
         //ACTION

@@ -195,6 +195,15 @@ namespace AG
                 return;
             }
 
+            if(moveAmount != 0)
+            {
+                player.playerNetworkManager.isMoving.Value = true;
+            }
+            else
+            {
+                player.playerNetworkManager.isMoving.Value = false;
+            }
+
             player.playerAnimatorManager.UpdateAnimatorValuesParamaters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
         }
 

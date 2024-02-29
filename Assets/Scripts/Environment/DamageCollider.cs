@@ -53,7 +53,10 @@ namespace AG
             damageEffect.physicalDamage = physicalDamage;
             damageEffect.fireDamage = fireDamage;
 
-            damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
+            if(damageTarget.characterEffectsManager)
+            {
+                damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
+            }
         }
 
         public virtual void EnableDamageCollider()

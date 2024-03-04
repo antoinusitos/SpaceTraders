@@ -22,6 +22,8 @@ namespace AG
         [Header("States")]
         public IdleState idle = null;
         public PursueTargetState pursueTarget = null;
+        public CombatStanceState combatStance = null;
+        public AttackState attack = null;
 
 
         protected override void Awake()
@@ -40,9 +42,21 @@ namespace AG
             currentState = idle;
         }
 
+        protected override void Update()
+        {
+            base.Update();
+
+            aICharacterCombatManager.HandleActionRecovery(this);
+        }
+
         protected override void FixedUpdate()
         {
-            ProcessStateMachine();
+            base.FixedUpdate();
+
+            if(IsOwner)
+            {
+                ProcessStateMachine();
+            }
         }
 
         private void ProcessStateMachine()
@@ -57,6 +71,13 @@ namespace AG
             navMeshAgent.transform.localPosition = Vector3.zero;
             navMeshAgent.transform.localRotation = Quaternion.identity;
 
+            if(aICharacterCombatManager.currentTarget != null)
+            {
+                aICharacterCombatManager.targetDirection = aICharacterCombatManager.currentTarget.transform.position - transform.position;
+                aICharacterCombatManager.viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, aICharacterCombatManager.targetDirection);
+                aICharacterCombatManager.distanceFromTarget = Vector3.Distance(transform.position, aICharacterCombatManager.currentTarget.transform.position);
+            }
+
             if (navMeshAgent.enabled)
             {
                 Vector3 agentDestination = navMeshAgent.destination;
@@ -64,18 +85,15 @@ namespace AG
 
                 if(remainingDistance > navMeshAgent.stoppingDistance)
                 {
-                    Debug.Log("lol");
                     aICharacterNetworkManager.isMoving.Value = true;
                 }
                 else
                 {
-                    Debug.Log("lol1");
                     aICharacterNetworkManager.isMoving.Value = false;
                 }
             }
             else
             {
-                    Debug.Log("lol2");
                 aICharacterNetworkManager.isMoving.Value = false;
             }
         }

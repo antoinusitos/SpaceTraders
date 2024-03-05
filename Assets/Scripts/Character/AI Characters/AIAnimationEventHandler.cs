@@ -6,16 +6,17 @@ namespace AG
 {
     public class AIAnimationEventHandler : MonoBehaviour
     {
-        private AudioSource audioSource = null;
-
-        private void Awake()
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
+        public AudioSource audioSourceFootStep = null;
+        public AudioSource audioSourceRoar = null;
 
         public void PlayFootStep()
         {
-            audioSource.Play();
+            audioSourceFootStep.Play();
+        }
+
+        public void PlayRoar()
+        {
+            audioSourceRoar.Play();
         }
     }
 }

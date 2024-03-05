@@ -10,7 +10,9 @@ namespace AG
     {
         public override AIState Tick(AICharacterManager aICharacter)
         {
-            if(aICharacter.isPerformingAction)
+            aICharacter.navMeshAgent.speed = 3.5f;
+
+            if (aICharacter.isPerformingAction)
             {
                 return this;
             }

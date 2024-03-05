@@ -24,6 +24,8 @@ namespace AG
         public PursueTargetState pursueTarget = null;
         public CombatStanceState combatStance = null;
         public AttackState attack = null;
+        public RoarState roarState = null;
+        public PatrolState patrolState = null;
 
 
         protected override void Awake()

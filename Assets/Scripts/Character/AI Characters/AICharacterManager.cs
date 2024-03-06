@@ -27,6 +27,9 @@ namespace AG
         public RoarState roarState = null;
         public PatrolState patrolState = null;
 
+        public float walkingSpeed = 2.0f;
+        public float runninngSpeed = 4.0f;
+
 
         protected override void Awake()
         {

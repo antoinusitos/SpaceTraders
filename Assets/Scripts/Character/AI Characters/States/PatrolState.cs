@@ -15,7 +15,7 @@ namespace AG
 
         public override AIState Tick(AICharacterManager aICharacter)
         {
-            aICharacter.navMeshAgent.speed = 1.75f;
+            aICharacter.navMeshAgent.speed = aICharacter.walkingSpeed;
 
             aICharacter.aICharacterNetworkManager.isMoving.Value = true;
 
